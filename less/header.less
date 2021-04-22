@@ -14,6 +14,7 @@ header {
         padding-top: 20px;
         padding-bottom: 20px;
 
+
         .shop-logo {
             width: auto;
             float: left;
@@ -69,6 +70,21 @@ header {
                 }
             }
         }
+
+
+        @media @responsive-second-size {
+            .shop-logo, .header-search-bar {
+                width: 100%;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .shop-logo {
+                img {
+                    margin: 0 auto;
+                }
+            }
+        }
     }
 
     nav {
@@ -80,16 +96,17 @@ header {
         width: 100%;
         height: @nav-height;
 
-        .sf-menu {
+        .menu-content {
             margin: 0;
             background: none;
 
+
             li {
-                height: @nav-height;
+                height: @nav-height !important;
                 background-color: transparent;
                 outline: none;
                 border: none;
-                color: @color-font;
+                color: @color-font !important;
 
                 display: flex;
                 flex-direction: row;
@@ -97,6 +114,7 @@ header {
 
                 a {
                     text-shadow: none !important;
+                    color: @color-font;
                 }
 
                 &:hover, &:focus {
@@ -106,11 +124,13 @@ header {
                     ul {
                         top: @nav-height !important;
                         left: 2px;
+                        display: block;
                     }
                 }
 
                 a:hover, a:focus, a:active {
                     background: none !important;
+                    color: @color-font !important;
                 }
 
                 ul {

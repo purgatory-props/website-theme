@@ -1,6 +1,7 @@
 {if $MENU != ''}
     <nav>
-        <div class="header-wrapper sf-contener wrapper">
+        <div class="header-wrapper wrapper">
+            <div class="cat-title">{l s='Menu' mod='blocktopmenu'}</div>
             <ul class="sf-menu clearfix menu-content">
                 {$MENU}
                 {if $MENU_SEARCH}
