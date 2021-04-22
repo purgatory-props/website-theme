@@ -12,7 +12,6 @@
   .tm-hp h2:before {
     content: "";
     display: block;
-    border-top: solid 1px #ddd;
     width: 100%;
     position: absolute;
     top: 50%;
@@ -38,3 +37,4 @@
   .home-featured {
       padding-bottom: 10px;
   }
+
