@@ -1,0 +1,130 @@
+// out: false
+@import "variables.less";
+
+
+header {
+    width: 100%;
+    background-color: #211f1f;
+
+    .header-wrapper {
+        width: 80%;
+        margin: 0 auto;
+
+        @media @responsive-first-size {
+            width: 100%;
+        }
+    }
+
+    .header-top {
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        .shop-logo {
+            width: auto;
+            float: left;
+            margin-right: 20px;
+        }
+
+        .header-search-bar {
+            width: 33.3%;
+            float: left;
+
+            text-align: left;
+
+            height: 71px;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            form {
+                width: 100%;
+            }
+
+            .searchbox {
+                padding: 10px;
+                outline: none;
+                border: none;
+
+                height: @search-height;
+                width: 80%;
+
+                &:hover {
+                    outline: 2px solid @color-accent-secondary;
+                    cursor: text;
+                }
+            }
+
+            .searchbtn {
+                height: @search-height;
+                background: none;
+                border: none;
+                outline: none;
+                color: @color-font;
+
+                border-top: 1px solid white;
+                border-right: 1px solid white;
+                border-bottom: 1px solid white;
+
+                margin-left: -6px;
+
+                &:hover {
+                    background-color: @color-accent-secondary;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    nav {
+        display: block;
+        clear: both;
+
+        background-color: @color-nav-bg;
+
+        width: 100%;
+        height: @nav-height;
+
+        .sf-menu {
+            margin: 0;
+            background: none;
+
+            li {
+                height: @nav-height;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                color: @color-font;
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                a {
+                    text-shadow: none !important;
+                }
+
+                &:hover, &:focus {
+                    cursor: pointer;
+                    background-color: @color-accent-secondary;
+
+                    ul {
+                        top: @nav-height !important;
+                        left: 2px;
+                    }
+                }
+
+                a:hover, a:focus, a:active {
+                    background: none !important;
+                }
+
+                ul {
+                    background-color: @color-nav-bg;
+                    outline: 2px solid @color-accent-secondary;
+                }
+            }
+        }
+    }
+
+
+}

@@ -1,0 +1,39 @@
+@import "fonts.less";
+@import "variables.less";
+
+body {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1rem;
+
+    background-color: @color-bg;
+    color: @color-font;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+a {
+    color: @color-accent-primary;
+    text-decoration: none;
+
+    &:hover, &:focus {
+        color: @color-accent-secondary;
+    }
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.clearfix {
+    clear: both;
+}
+
+@import "header.less";
