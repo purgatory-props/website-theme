@@ -1,6 +1,6 @@
 {if $MENU != ''}
     <nav>
-        <div class="header-wrapper sf-contener clearfix col-lg-12">
+        <div class="header-wrapper sf-contener wrapper">
             <ul class="sf-menu clearfix menu-content">
                 {$MENU}
                 {if $MENU_SEARCH}

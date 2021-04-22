@@ -13,7 +13,6 @@ body {
     padding: 0;
 }
 
-
 a {
     color: @color-accent-primary;
     text-decoration: none;
@@ -36,4 +35,25 @@ textarea {
     clear: both;
 }
 
+
+.wrapper {
+    width: 80%;
+
+    &.slightly-smaller {
+        width: 78%;
+    }
+
+    @media @responsive-first-size {
+        width: 100% !important;
+    }
+}
+
+
+
+.main-container {
+    margin: 0 auto;
+}
+
 @import "header.less";
+@import "footer.less";
+@import "media.less";

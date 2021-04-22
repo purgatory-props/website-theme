@@ -53,8 +53,7 @@
         <script src="{$tpl_uri|escape:'htmlall':'UTF-8'}js/vendor/picturefill-mutation.min.js" data-keepinline async></script>
     </head>
     <body {if isset($page_name)}id="{$page_name|escape:'html':'UTF-8'}"{/if} class="{if isset($page_name)}{$page_name|escape:'html':'UTF-8'}{/if}{if isset($body_classes) && $body_classes|@count} {implode value=$body_classes separator=' '}{/if}">
-
-    {if !isset($content_only) || !$content_only}
+{if !isset($content_only) || !$content_only}
 
     <!-- Banner -->
     {capture name='displayBanner'}{hook h='displayBanner'}{/capture}
@@ -66,7 +65,7 @@
 
     <!-- Header -->
     <header>
-        <div class="header-wrapper header-top">
+        <div class="header-wrapper header-top wrapper">
             <div class="shop-logo">
                 <a href="{$link->getPageLink('index', true)|escape:'html':'UTF-8'}" title="{$shop_name|escape:'html':'UTF-8'}">
                     <img class="img-responsive center-block" src="{$logo_url}" alt="{$shop_name|escape:'html':'UTF-8'}" title="{$shop_name|escape:'html':'UTF-8'}"{if isset($logo_image_width) && $logo_image_width} width="{$logo_image_width}"{/if}{if isset($logo_image_height) && $logo_image_height} height="{$logo_image_height}"{/if}>
@@ -75,10 +74,14 @@
 
             {hook h='displayTop' mod='blocksearch'}
 
+            <div class="header-right">
+            </div>
+
             <div class="clearfix"></div>
         </div>
 
         {hook h='displayNav' mod='blocktopmenu'}
-
     </header>
+
+    <main class="wrapper slightly-smaller main-container">
 {/if}
