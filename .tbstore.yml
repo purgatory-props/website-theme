@@ -1,0 +1,26 @@
+theme_name: Welcome the Darkness
+compatible_versions: 1.0.0+
+author: thirty bees
+category: themes
+tags:
+- dark theme
+- simple theme
+description_short: Simple and Plain theme for stores
+description: description.md
+images:
+- image-1.png
+license: AFL
+compatible_browsers:
+- IE 9
+- IE 10
+- IE 11
+- Edge
+- Firefox
+- Safari
+- Chrome
+- Opera
+responsive: yes
+technology:
+- bootstrap 3
+- fontawesome 4
+- bx slider
