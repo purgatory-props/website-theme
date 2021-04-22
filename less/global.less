@@ -13,14 +13,24 @@ body {
     padding: 0;
 }
 
-a {
-    color: @color-accent-primary;
-    text-decoration: none;
+* {
+    box-sizing: border-box;
+}
 
-    &:hover, &:focus {
-        color: @color-accent-secondary;
+a {
+    text-decoration: none;
+    color: @color-font;
+}
+
+a.link, p a {
+    color: @color-accent-secondary;
+
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
     }
 }
+
 
 input,
 button,
@@ -48,15 +58,31 @@ textarea {
     }
 }
 
+.center {
+    margin: 0 auto;
+}
+
 .img-responsive {
     display: block;
     max-width: 100%;
     height: auto;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .main-container {
     margin: 0 auto;
 }
+
+.tm-home {
+    background-color: @color-nav-bg;
+    border-top: 1px solid @color-nav-bg;
+    border-bottom: 1px solid @color-nav-bg;
+}
+
+@import "product-list.less";
 
 @import "header.less";
 @import "footer.less";

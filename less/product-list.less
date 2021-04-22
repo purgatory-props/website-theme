@@ -1,0 +1,108 @@
+@import "variables.less";
+
+.product_list {
+    list-style: none;
+    padding-left: 0;
+
+    @media @responsive-second-size {
+        padding: 10px;
+    }
+
+
+    .product-list-item {
+        display: inline-block;
+        vertical-align: top;
+        float: none;
+
+        width: 25%;
+
+        @media @responsive-first-size {
+            width: 50%;
+        }
+
+        @media @responsive-second-size {
+            width: 100%;
+        }
+
+        .product-list-item-container {
+            padding: 15px;
+            position: relative;
+
+            &:hover {
+                outline: 1px solid @color-accent-secondary;
+                cursor: pointer;
+
+                .product-title {
+                    color: @color-accent-secondary;
+                }
+            }
+
+
+            .product-img {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .product-title {
+                text-align: center;
+            }
+
+
+            .product-price {
+                text-align: center;
+            }
+
+            .product-description {
+                display: none;
+            }
+
+            .product-labels {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                &:after {
+                    clear: both;
+                }
+
+                .product-label {
+                    padding: 2px 5px;
+                    margin: 8px 0 0 8px;
+                    float: left;
+
+                    font-size: 0.9em;
+
+                    background-color: @color-label-bg;
+                    color: @color-label-fg;
+
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
+                }
+
+
+                /* Labels */
+                .product-label-comingsoon {
+                    background-color: @color-label-comingsoon-bg;
+                    color: @color-label-comingsoon-fg;
+                }
+
+                .product-label-new {
+                    color: #fff;
+                }
+
+                .product-label-sale {
+                    background: #ff6f61;
+                }
+
+                .product-label-discount {
+                    background-color: #ff6f61;
+                }
+
+                .product-label-online {
+                    background-color: orange;
+                }
+            }
+        }
+    }
+}
