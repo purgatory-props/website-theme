@@ -1,0 +1,45 @@
+// out: ../../../css/modules/blockcart/
+@import "../../variables.less";
+
+#blockcart-container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 0 5px;
+
+    position: relative;
+
+    &:hover {
+        background-color: @color-accent-secondary;
+        cursor: pointer;
+
+        #blockcart-dropdown {
+            display: block !important;
+        }
+    }
+
+    #blockcart-header {
+        text-align: center;
+
+        .blockcart-icon {
+            margin-bottom: 10px;
+
+            i {
+                display: block;
+                font-size: 1.5em;
+            }
+        }
+
+        span {
+            font-size: 1em;
+        }
+    }
+
+
+    #blockcart-dropdown {
+        position: absolute;
+        top: 100%;
+    }
+}

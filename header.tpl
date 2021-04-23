@@ -73,8 +73,9 @@
             </div>
 
             {hook h='displayTop' mod='blocksearch'}
-
             <div class="header-right">
+                {hook h='displayNav' mod='blockuserinfo'}
+                {hook h='displayNav' mod='blockcart'}
             </div>
 
             <div class="clearfix"></div>

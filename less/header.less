@@ -1,24 +1,40 @@
 // out: false
 @import "variables.less";
-
+@header-height: 100px;
 
 header {
     width: 100%;
     background-color: @color-header-bg;
+
+    .header-center {
+        height: @header-height;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
     .header-wrapper {
         margin: 0 auto;
     }
 
     .header-top {
-        padding-top: 20px;
-        padding-bottom: 20px;
+        //padding-top: 20px;
+        //padding-bottom: 20px;
 
 
         .shop-logo {
             width: auto;
             float: left;
             margin-right: 20px;
+
+            .header-center;
+        }
+
+        .header-right {
+            width: auto;
+            float: right;
+
+            .header-center;
         }
 
         .header-search-bar {
@@ -27,11 +43,7 @@ header {
 
             text-align: left;
 
-            height: 71px;
-
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+            .header-center;
 
             form {
                 width: 100%;
@@ -123,6 +135,10 @@ header {
                     cursor: pointer;
                     background-color: @color-accent-secondary;
 
+                    & > a {
+                        background-color: @color-accent-secondary !important;
+                    }
+
                     ul {
                         top: @nav-height !important;
                         left: 2px;
@@ -145,4 +161,7 @@ header {
     }
 
 
+    .sf-sub-indicator {
+        display: none !important;
+    }
 }
