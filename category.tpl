@@ -25,7 +25,6 @@
         <div class="bg-color-light subcategory-container">
             <div class="wrapper slightly-smaller center category-container">
                     <section class="category-subcategories">
-                        <h2 class="section-title">{l s='Categories'}</h2>
                         {include file='./subcategory-list.tpl'}
                     </section>
             </div>
@@ -36,7 +35,7 @@
         <div class="products-container{if empty($subcategories)} bg-color-light{/if}">
             <div class="category-container">
                 <section class="category-products">
-                    <h2 class="section-title">{l s='Products'}</h2>
+                    {if !empty($subcategories)}<h2 class="section-title">{l s='Products'}</h2>{/if}
                     {include file="./product-list.tpl" products=$products}
                 </section>
             </div>

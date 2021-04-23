@@ -1,3 +1,4 @@
+// out: false
 @import "variables.less";
 
 .product_list {
@@ -57,53 +58,6 @@
                 display: none;
             }
 
-            .product-labels {
-                position: absolute;
-                top: 0;
-                left: 0;
-
-                &:after {
-                    clear: both;
-                }
-
-                .product-label {
-                    padding: 2px 5px;
-                    margin: 8px 0 0 8px;
-                    float: left;
-
-                    font-size: 0.9em;
-
-                    background-color: @color-label-bg;
-                    color: @color-label-fg;
-
-                    &:last-of-type {
-                        margin-right: 0;
-                    }
-                }
-
-
-                /* Labels */
-                .product-label-comingsoon {
-                    background-color: @color-label-comingsoon-bg;
-                    color: @color-label-comingsoon-fg;
-                }
-
-                .product-label-new {
-                    color: #fff;
-                }
-
-                .product-label-sale {
-                    background: #ff6f61;
-                }
-
-                .product-label-discount {
-                    background-color: #ff6f61;
-                }
-
-                .product-label-online {
-                    background-color: orange;
-                }
-            }
         }
     }
 }

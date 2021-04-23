@@ -63,6 +63,7 @@ textarea {
 
     @media @responsive-first-size {
         width: 100% !important;
+        padding: 0 5px;
     }
 }
 
@@ -97,7 +98,7 @@ textarea {
 
 .spooky-font {
     font-family: 'Creepster', Verdana, Arial, sans-serif;
-    .noselect;
+    line-height: 1em;
 }
 
 
@@ -142,7 +143,22 @@ textarea {
 }
 
 
+.no-desktop {
+    display: none !important;
+}
 
+@media @responsive-second-size {
+    .no-desktop {
+        display: inherit !important;
+    }
+
+    .no-mobile {
+        display: none !important;
+    }
+}
+
+
+@import "product-labels.less";
 @import "product-list.less";
 
 @import "header.less";

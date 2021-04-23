@@ -1,4 +1,4 @@
-<div class="header-search-bar">
+<div class="header-search-bar no-mobile">
     <form method="get" action="{$link->getPageLink('search', true)}" id="searchbox">
         <label for="search_query_top"><!-- image on background --></label>
         <input type="hidden" name="controller" value="search">

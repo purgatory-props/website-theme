@@ -73,7 +73,7 @@
             </div>
 
             {hook h='displayTop' mod='blocksearch'}
-            <div class="header-right">
+            <div class="header-right no-mobile">
                 {hook h='displayNav' mod='blockuserinfo'}
                 {hook h='displayNav' mod='blockcart'}
             </div>

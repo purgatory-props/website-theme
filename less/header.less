@@ -8,6 +8,8 @@ header {
     width: 100%;
     background-color: @color-header-bg;
 
+    margin-bottom: 10px;
+
     .header-center {
         height: @header-height;
         display: flex;
@@ -110,9 +112,35 @@ header {
         width: 100%;
         height: @nav-height;
 
+        &.expand {
+            height: auto !important;
+            .close-btn {
+                display: block !important;
+            }
+
+            .open-btn {
+                display: none;
+            }
+        }
+
+        @media @responsive-second-size {
+            margin-top: 10px;
+        }
+
         .menu-content {
             margin: 0;
             background: none;
+            padding-left: 0;
+
+            * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            > li {
+                position: relative;
+            }
 
             li {
                 height: @nav-height !important;
@@ -125,11 +153,18 @@ header {
                 flex-direction: row;
                 align-items: center;
 
+                float: left;
+
+
                 a {
                     text-shadow: none !important;
                     color: @color-font;
                     font-size: 1.2em;
                     text-transform: uppercase;
+                    display: block;
+                    padding: 10px 20px;
+                    letter-spacing: 3px;
+                    font-weight: 600;
                 }
 
                 &:hover, &:focus {
@@ -142,9 +177,7 @@ header {
 
                     ul {
                         top: @nav-height !important;
-                        left: 2px;
-                        display: block;
-                        margin-top: 2px;
+                        display: block !important;
                     }
                 }
 
@@ -158,6 +191,99 @@ header {
                     display: none;
                     background-color: @color-nav-bg;
                     outline: 2px solid @color-accent-secondary;
+                    z-index: 99;
+
+                    position: absolute;
+                    margin-top: 2px;
+                    left: 2px;
+
+                    width: 150%;
+
+                    li {
+                        width: 100%;
+
+                        a {
+                            font-size: 1em !important;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .mobile-menu-btn {
+            width: 100%;
+            height: @nav-height;
+
+            cursor: pointer;
+
+
+            .close-btn {
+                display: none;
+            }
+
+
+            .mobile-menu-btn-wrapper {
+                width: 100%;
+                height: @nav-height;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+
+                margin: 0 auto;
+            }
+
+            &:hover {
+                background-color: @color-accent-secondary;
+            }
+
+            .left {
+                padding-left: 10px;
+                font-size: 1.5em;
+            }
+            .right {
+                text-align: right;
+                padding-right: 10px;
+
+                i {
+                    font-size: 2em;
+                }
+            }
+        }
+
+        #mobile-menu {
+            display: none;
+
+            background-color: @color-header-bg;
+            border-bottom: 2px solid @color-nav-bg;
+
+            padding: 0;
+
+            .mobile-menu-content {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    padding: 10px 20px;
+                    font-size: 1.2em;
+
+                    &.no-hover {
+                        &:hover {
+                            background-color: unset !important;
+                            cursor: default !important;
+                        }
+                    }
+
+                    &:hover {
+                        background-color: @color-accent-secondary;
+                        cursor: pointer;
+                    }
+
+                    ul {
+                        display: none !important;
+                    }
                 }
             }
         }

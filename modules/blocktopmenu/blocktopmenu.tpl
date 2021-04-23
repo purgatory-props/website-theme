@@ -1,23 +1,53 @@
 {if $MENU != ''}
-    <nav>
-        <div class="header-wrapper wrapper">
-            <div class="cat-title">{l s='Menu' mod='blocktopmenu'}</div>
-            <ul class="sf-menu clearfix menu-content">
+    <nav id="menu">
+        <!-- Desktop Menu -->
+        <div class="header-wrapper wrapper no-mobile">
+            <ul class="clearfix menu-content">
                 {$MENU}
-                {if $MENU_SEARCH}
-                    <li class="sf-search noBack" style="float:right">
-                        <form id="searchbox" action="{$link->getPageLink('search')|escape:'html':'UTF-8'}" method="get">
-                            <p>
-                                <input type="hidden" name="controller" value="search">
-                                <input type="hidden" value="position" name="orderby">
-                                <input type="hidden" value="desc" name="orderway">
-                                <input type="text" name="search_query"
-                                        value="{if isset($smarty.get.search_query)}{$smarty.get.search_query|escape:'html':'UTF-8'}{/if}">
-                            </p>
-                        </form>
-                    </li>
-                {/if}
             </ul>
         </div>
+
+        <!-- Mobile Menu -->
+        <div class="header-wrapper wrapper no-desktop mobile-menu-btn" id="mobile-menu-button" onclick="showMobileMenu()">
+            <div class="mobile-menu-btn-wrapper">
+                <div class="left">{l s='MENU' mod='blocktopmenu'}</div>
+                <div class="right">
+                    <i class="fa fa-bars open-btn"></i>
+                    <i class="fa fa-times close-btn"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-wrapper wrapper mobile-menu" id="mobile-menu">
+             <ul class="clearfix mobile-menu-content">
+                {$MENU}
+
+                <li class="no-hover"><hr/></li>
+                <li>
+                    <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">
+                        {if $is_logged}{l s='Your Account'}{else}{l s='Login/Signup'}{/if}
+                    </a>
+                </li>
+                <li>
+                    <a href="{$link->getPageLink('olrder', true)|escape:'html':'UTF-8'}">
+                        Cart ({$cart_qties} items)
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <script type="text/javascript">
+            function showMobileMenu() {
+                var menu = document.getElementById('menu');
+                var x = document.getElementById("mobile-menu");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                    menu.classList.remove('expand');
+                } else {
+                    x.style.display = "block";
+                    menu.classList.add('expand');
+                }
+            }
+        </script>
     </nav>
 {/if}
