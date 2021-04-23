@@ -45,9 +45,17 @@ textarea {
     clear: both;
 }
 
+.bg-color-light {
+    background-color: @color-nav-bg;
+}
+
+.bg-color-dark {
+    background-color: @color-header-bg;
+}
 
 .wrapper {
     width: 80%;
+    max-width: @max-screen-width !important;
 
     &.slightly-smaller {
         width: 78%;
@@ -90,6 +98,47 @@ textarea {
 .spooky-font {
     font-family: 'Creepster', Verdana, Arial, sans-serif;
     .noselect;
+}
+
+
+.list-grid {
+    list-style: none;
+    display: block;
+    padding: 0;
+
+    .noselect;
+
+
+    .grid-item {
+        padding: 15px;
+        position: relative;
+        width: 25%;
+
+        display: inline-block;
+        vertical-align: top;
+        float: none;
+
+        .noselect;
+
+
+        @media @responsive-first-size {
+            width: 50%;
+        }
+
+        @media @responsive-second-size {
+            width: 100%;
+        }
+
+        &:hover {
+            outline: 1px solid @color-accent-secondary;
+            cursor: pointer;
+        }
+    }
+}
+
+.section-title {
+    font-size: 3em;
+    .spooky-font;
 }
 
 

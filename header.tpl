@@ -84,5 +84,5 @@
         {hook h='displayNav' mod='blocktopmenu'}
     </header>
 
-    <main class="wrapper slightly-smaller main-container">
+    <main class="wrapper slightly-smaller main-container center">
 {/if}
