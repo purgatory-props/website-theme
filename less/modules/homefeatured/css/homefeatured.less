@@ -1,0 +1,49 @@
+// out: ../../../../css/modules/homefeatured/css/homefeatured.css
+@import "../../../variables.less";
+
+.tm-home {
+    background-color: @color-nav-bg;
+    border-top: 1px solid @color-nav-bg;
+    border-bottom: 1px solid @color-nav-bg;
+}
+
+.tm-hp {
+    margin-bottom: 40px;
+}
+
+.tm-hp h2 {
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: capitalize;
+    position: relative;
+}
+
+.tm-hp h2:before {
+    content: "";
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+
+.tm-hp h2 .tm-over {
+    display: inline-block;
+    background: #fff;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.tm-hp h2 span {
+    font-style: italic;
+    font-weight: 300;
+}
+
+
+.home-featured {
+    padding-bottom: 10px;
+}
+
