@@ -1,6 +1,8 @@
 // out: false
 @import "variables.less";
+
 @header-height: 100px;
+@header-small-height: 71px;
 
 header {
     width: 100%;
@@ -20,7 +22,6 @@ header {
     .header-top {
         //padding-top: 20px;
         //padding-bottom: 20px;
-
 
         .shop-logo {
             width: auto;
@@ -92,9 +93,13 @@ header {
             }
 
             .shop-logo {
-                img {
+                img, a {
                     margin: 0 auto;
                 }
+            }
+
+            .shop-logo, .header-right, .header-search-bar {
+                height: @header-small-height;
             }
         }
     }
@@ -111,7 +116,6 @@ header {
         .menu-content {
             margin: 0;
             background: none;
-
 
             li {
                 height: @nav-height !important;
@@ -153,6 +157,7 @@ header {
                 }
 
                 ul {
+                    display: none;
                     background-color: @color-nav-bg;
                     outline: 2px solid @color-accent-secondary;
                 }
