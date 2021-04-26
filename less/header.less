@@ -53,6 +53,7 @@ header {
                 padding: 10px;
                 outline: none;
                 border: none;
+                margin-top: 1px;
 
                 height: @search-height;
                 width: 80%;
@@ -165,6 +166,8 @@ header {
                     padding: 10px 20px;
                     letter-spacing: 3px;
                     font-weight: 600;
+                    height: 100%;
+                    line-height: 2em;
                 }
 
                 &:hover, &:focus {
@@ -205,6 +208,7 @@ header {
                         a {
                             font-size: 1em !important;
                             width: 100%;
+                            letter-spacing: 1px;
                         }
                     }
                 }
@@ -266,7 +270,6 @@ header {
                 margin: 0;
 
                 li {
-                    padding: 10px 20px;
                     font-size: 1.2em;
 
                     &.no-hover {
@@ -283,6 +286,13 @@ header {
 
                     ul {
                         display: none !important;
+                    }
+
+                    a {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        padding: 10px 20px;
                     }
                 }
             }

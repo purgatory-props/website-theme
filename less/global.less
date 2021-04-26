@@ -4,7 +4,7 @@
 body {
     font-family: Verdana, Arial, sans-serif;
     font-size: 1rem;
-    line-height: 1rem;
+    line-height: 1em;
 
     background-color: @color-bg;
     color: @color-font;
@@ -15,6 +15,20 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+h1, h2, h3, h4 {
+    line-height: 1em;
+
+    &.no-margin {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    &.small-margin {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
 
 a {
@@ -31,6 +45,9 @@ a.link, p a {
     }
 }
 
+.accent-color {
+    color: @color-accent-secondary;
+}
 
 input,
 button,
@@ -157,6 +174,45 @@ textarea {
     }
 }
 
+
+.ui-tag {
+    &:first-of-type {
+        margin-top: 0px !important;
+    }
+
+    padding: 10px;
+    margin-top: 5px;
+
+    cursor: default;
+
+    .ui-tag-title {
+        font-weight: bold;
+    }
+
+    b {
+        font-weight: 600;
+    }
+
+    .email {
+        font-size: 1.3em;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+
+
+.form-control {
+    padding: 6px 12px;
+    font-size: 1em;
+    line-height: 1em;
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #555;
+}
 
 @import "product-labels.less";
 @import "product-list.less";

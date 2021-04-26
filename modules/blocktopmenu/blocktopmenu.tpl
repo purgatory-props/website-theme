@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{$link->getPageLink('olrder', true)|escape:'html':'UTF-8'}">
+                    <a href="{$link->getPageLink('cart', true)|escape:'html':'UTF-8'}">
                         Cart ({$cart_qties} items)
                     </a>
                 </li>
