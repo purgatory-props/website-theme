@@ -62,6 +62,10 @@ textarea {
     clear: both;
 }
 
+.hidden {
+    display: none;
+}
+
 .bg-color-light {
     background-color: @color-nav-bg;
 }
@@ -118,9 +122,12 @@ textarea {
     line-height: 1em;
 }
 
+.list-unstyled {
+    list-style: none;
+}
 
 .list-grid {
-    list-style: none;
+    .list-unstyled;
     display: block;
     padding: 0;
 

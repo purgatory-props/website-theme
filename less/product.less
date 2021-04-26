@@ -29,8 +29,45 @@
                 display: block;
 
                 margin-bottom: 20px;
+
+
+
+                .fullImageLink {
+                    cursor: pointer;
+
+                    .magnify-image {
+                        display: none;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+
+
+                        .magnify-image-container {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            cursor: pointer;
+
+                            background-color: fade(@color-nav-bg, 40%);
+                        }
+
+                        i {
+                            font-size: 3em;
+                        }
+                    }
+
+                    &:hover {
+                        .magnify-image {
+                            display: flex;
+                        }
+
+                    }
+                }
             }
         }
+
 
         .product-header-right {
             width: 59%;
@@ -147,6 +184,25 @@
                 }
             }
         }
+
+
+        .images-list {
+            .thumbnail-link {
+                display: inline-block;
+                height: 100%;
+                cursor: pointer;
+
+                &:hover {
+                    outline: 2px solid @color-accent-secondary;
+                }
+            }
+
+            .image-preload {
+                display: none;
+                width: 0;
+                height: 0;
+            }
+        }
     }
 
     .service-contact-container {
@@ -213,6 +269,8 @@
 
             @media @responsive-third-size {
                 width: 100%;
+
+                border-bottom: 2px solid darken(@color-header-bg, 5%);
             }
         }
 
@@ -223,6 +281,8 @@
         .tab-switch:checked + .tab-label {
             background:  @tab-selected-color;
             color: @color-font;
+
+            border: none;
         }
 
         .product-tab {
@@ -247,6 +307,7 @@
         .attachment-link {
             cursor: pointer;
             font-size: 1.2em;
+            display: block;
 
             .attachment-size {
                 font-size: 0.8em;

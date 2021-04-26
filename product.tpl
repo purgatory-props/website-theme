@@ -9,6 +9,10 @@
 {/if}
 {assign var='cartDefaultWidth' value={getWidthSize|intval type='cart'}}
 {assign var='cartDefaultHeight' value={getHeightSize|intval type='cart'}}
+
+{assign var='mediumDefaultWidth' value={getWidthSize|intval type='home'}}
+{assign var='mediumDefaultHeight' value={getHeightSize|intval type='home'}}
+
 {assign var='largeDefaultWidth' value={getWidthSize|intval type='large'}}
 {assign var='largeDefaultHeight' value={getHeightSize|intval type='large'}}
 
@@ -43,34 +47,78 @@
                 </div>
 
                 {if $have_image}
-                    <a class="fancybox" data-fancybox-group="product" id="view_full_size" href="{$link->getProductLink($product)|escape:'html':'UTF-8'}" onclick="return false;">
-                         <picture id="bigpic">
-                            <!--[if IE 9]><video style="display: none;"><![endif]-->
-                            {if !empty($webp)}
-                                <source class="img-responsive center-block product-image"
-                                    itemprop="image"
-                                    src="{$link->getImageLink($product->link_rewrite, $cover.id_image, 'large', 'webp', ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
-                                    title="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
-                                    type="image/webp"
-                                >
-                            {/if}
+                    <a href="{$link->getImageLink($product->link_rewrite, $cover.id_image, '', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
+                        id="fullImageLink"
+                        class="fullImageLink"
+                        target="_blank"
+                        title="{l s='View Full Image'}"
+                    >
+                            <div class="magnify-image">
+                                <div class="magnify-image-container center" style="width: {$largeDefaultWidth|intval}px; height: {$largeDefaultHeight|intval}px">
+                                    <i class="fa fa-search center"></i>
+                                </div>
+                            </div>
+
                             <!--[if IE 9]></video><![endif]-->
-                            <img class="img-responsive center-block product-image"
+                            <img class="img-responsive center-block product-image center"
                                 itemprop="image"
                                 src="{$link->getImageLink($product->link_rewrite, $cover.id_image, 'large', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
                                 title="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
                                 alt="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
                                 width="{$largeDefaultWidth|intval}"
-                                height="{$largeDefaultHeight|intval}"
+                                height="{$largeDefaultWidth|intval}"
+                                id="productImage"
                             >
-                        </picture>
                     </a>
+
                 {else}
                     Uhhhh...
                 {/if}
             </div>
 
-            <!-- TODO: List of images -->
+            {* Other Images *}
+            <div class="images-list clearfix{if isset($images) && count($images) < 2} hidden{/if}">
+                <div class="thumbnail_list">
+                    <ul class="list-unstyled">
+                        {if isset($images)}
+                            {foreach from=$images item=image name=thumbnails}
+                                {assign var=imageIds value="`$product->id`-`$image.id_image`"}
+                                {if !empty($image.legend)}
+                                    {assign var=imageTitle value=$image.legend|escape:'html':'UTF-8'}
+                                {else}
+                                    {assign var=imageTitle value=$product->name|escape:'html':'UTF-8'}
+                                {/if}
+
+                                {assign var=imageURL value=$link->getImageLink($product->link_rewrite, $imageIds, 'large', null, ImageManager::retinaSupport())}
+                                {assign var=imageFullURL value=$link->getImageLink($product->link_rewrite, $imageIds, '', null, ImageManager::retinaSupport())}
+
+                                <li data-slide-num="{$smarty.foreach.thumbnails.iteration|intval}" id="thumbnail_{$image.id_image|intval}" style="display: inline-block">
+                                    <a data-image="{$imageURL}"
+                                        data-fullImage="{$imageFullURL}"
+                                        class="thumbnail thumbnail-link fancybox{if $image.id_image == $cover.id_image} shown{/if}"
+                                        title="{$imageTitle|escape:'htmlall':'UTF-8'}"
+                                        onclick="changeBigPictureForProduct(event); return false;"
+                                    >
+                                        <img src="{$link->getImageLink($product->link_rewrite, $imageIds, 'cart', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
+                                            data-image="{$imageURL}"
+                                            data-fullImage="{$imageFullURL}"
+                                            alt="{$imageTitle}"
+                                            title="{$imageTitle}"
+                                            itemprop="image"
+                                            width="{$cartDefaultWidth|intval}"
+                                            height="{$cartDefaultHeight|intval}"
+                                            onclick="return false;"
+                                        >
+                                    </a>
+
+                                    <img src="{$imageURL}" class="image-preload" > {* Preload full image so it loads fast when selected *}
+                                </li>
+                            {/foreach}
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
         <div class="product-header-right">
@@ -108,6 +156,7 @@
                 {/foreach}
             </div>
 
+            <!-- Add To Cart and Stuff -->
             <div class="product-actions">
                 {if $isService}
                     <!-- Service Starting Price and Contact Button -->
