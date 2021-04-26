@@ -6,6 +6,7 @@
                     itemprop="image"
                     width="{getWidthSize|intval type='home'}"
                     height="{getHeightSize|intval type='home'}"
+                    loading="lazy"
                     />
             </picture>
 

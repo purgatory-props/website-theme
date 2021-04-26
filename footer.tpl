@@ -10,5 +10,6 @@
                 </div>
             </div>
         </footer>
+        {include file="$tpl_dir./global.tpl"}
     </body>
 </html>
