@@ -154,10 +154,8 @@
         margin-bottom: 10px;
 
         .service-contact-btn {
-            padding: 6px 12px;
+            padding: 15px 12px;
             font-size: 1.2em;
-
-            height: 40px;
 
             border: none;
             outline: none;
@@ -179,6 +177,85 @@
 
         .service-price {
             font-size: 1.5em;
+        }
+    }
+
+
+    .product-tabs {
+        display: flex;
+        flex-wrap: wrap;
+
+        @tab-selected-color: @color-nav-bg;
+
+        .tab-switch {
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            z-index: -1;
+        }
+
+        .tab-label {
+            width: auto;
+            padding: 20px 30px;
+            background: @color-header-bg;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: @color-font;
+
+            &:hover {
+                background: @color-accent-secondary;
+            }
+
+            &:active {
+                background:  @tab-selected-color;
+            }
+
+            @media @responsive-third-size {
+                width: 100%;
+            }
+        }
+
+        .tab-switch:focus + .tab-label {
+            z-index: 1;
+        }
+
+        .tab-switch:checked + .tab-label {
+            background:  @tab-selected-color;
+            color: @color-font;
+        }
+
+        .product-tab {
+            display: none;
+            padding: 20px 30px 30px;
+            width: 100%;
+
+            background:  @tab-selected-color;
+
+            @media @responsive-third-size-min {
+                order: 99;
+            }
+
+        }
+
+        .tab-switch:checked + .tab-label + .product-tab {
+            display: block;
+        }
+    }
+
+    .downloads-tab {
+        .attachment-link {
+            cursor: pointer;
+            font-size: 1.2em;
+
+            .attachment-size {
+                font-size: 0.8em;
+            }
+
+            &:hover {
+                color: @color-accent-secondary;
+                text-decoration: underline;
+            }
         }
     }
 }

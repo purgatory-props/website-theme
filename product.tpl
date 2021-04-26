@@ -100,12 +100,16 @@
                             <span class="ui-tag-title">{$t['title']}</span>
                             <div class="ui-tag-desc">{$t['body']}</div>
                         </div>
+
+                        {if $t['key'] == '--service'}
+                            {assign var=isService value=true}
+                        {/if}
                     {/if}
                 {/foreach}
             </div>
 
             <div class="product-actions">
-                 {if $product->is_service}
+                {if $isService}
                     <!-- Service Starting Price and Contact Button -->
                     <div class="service-price-container" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                         {l s='Starting at'} <span id="our_price_display" class="price service-price accent-color">{convertPrice price=$productPrice|floatval}</span>
@@ -276,6 +280,64 @@
         </div>
     </div>
 
-
     <div class="clearfix"></div>
+
+    {if !$content_only}
+        <div class="product-tabs">
+            {if isset($product) && $product->description}
+                {assign var=tabID value="tab-description"}
+                <input name="product-tabs" type="radio" id="{$tabID}" checked="checked" class="tab-switch" autocomplete="off"/>
+                <label for="{$tabID}" class="tab-label noselect">{l s='Details'}</label>
+
+                <div class="product-tab description-tab">
+                    {$product->description}
+                </div>
+            {/if}
+
+            {if isset($features) && $features}
+                {assign var=tabID value="tab-specs"}
+                <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
+                <label for="{$tabID}" class="tab-label noselect">{l s='Specs'}</label>
+
+                <div class="product-tab specs-tab">
+                    <table class="table-data-sheet">
+                        {foreach from=$features item=feature}
+                            <tr class="{cycle values="odd,even"}">
+                                {if isset($feature.value)}
+                                    <td class="row-label" style="font-weight: bold; padding: 5.5px 30px 10px 0">{$feature.name|escape:'html':'UTF-8'}</td>
+                                    <td class="row-data">{$feature.value|escape:'html':'UTF-8'}</td>
+                                {/if}
+                            </tr>
+                        {/foreach}
+                    </table>
+                </div>
+            {/if}
+
+            {if isset($attachments) && $attachments}
+                {assign var=tabID value="tab-downloads"}
+                <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
+                <label for="{$tabID}" class="tab-label noselect">{l s='Downloads'}</label>
+
+                <div class="product-tab downloads-tab">
+                    {foreach from=$attachments item=attachment name=attachment}
+                        <a href="{$link->getPageLink('attachment', true, NULL, "id_attachment={$attachment.id_attachment}")|escape:'html':'UTF-8'}" class="attachment-link" target="_blank" title="{$attachment.name}">
+                            <i class="fa fa-download"></i> {$attachment.name} <span class="attachment-size">({Tools::formatBytes($attachment.file_size, 2)})</span>
+                        </a>
+                    {/foreach}
+                </div>
+            {/if}
+
+            {if isset($accessories) && $accessories}
+                {assign var=tabID value="tab-accessories"}
+                <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
+                <label for="{$tabID}" class="tab-label noselect">{l s='Accessories'}</label>
+
+                <div class="product-tab accessories-tab">
+                    {include file="$tpl_dir./product-list.tpl" products=$accessories}
+                </div>
+            {/if}
+        </div>
+    {/if}
+
+
 </div>
