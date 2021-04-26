@@ -1,7 +1,7 @@
 <ul class="list-grid row">
     {foreach from=$subcategories item=subcategory}
         <li class="subcategory-item grid-item">
-            <a href="{$link->getCategoryLink($subcategory.id_category, $subcategory.link_rewrite)|escape:'html':'UTF-8'}" title="{$subcategory.name|escape:'html':'UTF-8'}">
+            <a class="grid-item-wrapper" href="{$link->getCategoryLink($subcategory.id_category, $subcategory.link_rewrite)|escape:'html':'UTF-8'}" title="{$subcategory.name|escape:'html':'UTF-8'}">
                 <div class="subcategory-picture">
                     <img class="img-responsive center-block subcategory-img"
                                 src="{Link::getGenericImageLink(

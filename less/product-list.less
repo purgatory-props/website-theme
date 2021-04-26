@@ -26,38 +26,32 @@
             width: 100%;
         }
 
-        .product-list-item-container {
-            padding: 15px;
-            position: relative;
 
-            &:hover {
-                outline: 1px solid @color-accent-secondary;
-                cursor: pointer;
-
-                .product-title {
-                    color: @color-accent-secondary;
-                }
-            }
-
-
-            .product-img {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
+        &:hover {
             .product-title {
-                text-align: center;
+                color: @color-accent-secondary;
             }
-
-
-            .product-price {
-                text-align: center;
-            }
-
-            .product-description {
-                display: none;
-            }
-
         }
+
+
+        .product-img {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product-title {
+            text-align: center;
+        }
+
+
+        .product-price {
+            text-align: center;
+        }
+
+        .product-description {
+            display: none;
+        }
+
+
     }
 }
