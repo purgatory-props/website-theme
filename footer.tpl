@@ -1,5 +1,6 @@
             </main>
 
+        <div class="clearfix"></div>
         <footer>
             <div class="footer-wrapper wrapper center">
                 {hook h='displayFooter' mod='tbhtmlblock'}

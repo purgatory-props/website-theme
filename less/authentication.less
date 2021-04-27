@@ -1,0 +1,99 @@
+@import "variables.less";
+
+.authentication-container {
+    margin-bottom: 50px;
+
+    .form-group {
+        margin-bottom: 10px;
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    }
+
+    sup.required {
+        color: @color-accent-secondary;
+    }
+
+    .form-control {
+        width: 50%;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 1em;
+        cursor: pointer;
+
+        outline: none;
+        border: none;
+
+        background-color: @color-accent-secondary;
+        color: @color-font;
+
+        &:hover {
+            background-color: @color-font;
+            color: @color-accent-secondary;
+        }
+    }
+
+    .lostpassword {
+        cursor: pointer;
+
+        font-size: 0.8em;
+        margin: 10px 0;
+
+        &:hover {
+            color: @color-accent-secondary;
+            text-decoration: underline;
+        }
+    }
+
+    .login-col {
+        width: 50%;
+        float: left;
+    }
+
+    .signup-col {
+        width: 50%;
+        float: right;
+    }
+
+    #account-creation_form {
+        .form-control {
+            width: 80%;
+        }
+
+        #createFormErrors {
+            color: @color-error;
+            margin-bottom: 10px;
+        }
+    }
+
+    #create_account_error {
+        margin-bottom: 10px;
+    }
+
+    .help-block {
+        font-size: 0.8em;
+    }
+
+    @media @responsive-second-size {
+        .login-col, .signup-col {
+            display: block;
+            width: 100%;
+            float: none;
+
+            text-align: center;
+        }
+
+        .signup-col {
+            margin-top: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+    }
+}
