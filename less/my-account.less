@@ -1,0 +1,46 @@
+@import "variables.less";
+
+.my-account-wrapper {
+    #my-account-menu {
+        margin-bottom: 15px;
+
+        .col-sm-6 {
+            width: 50%;
+            float: left;
+            position: relative;
+
+            padding-right: 15px;
+        }
+
+        .nav {
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style: none;
+
+            li {
+                margin-bottom: 5px;
+                float: none;
+                position: relative;
+                display: block;
+
+                a {
+                    background-color: @color-nav-bg;
+
+                    position: relative;
+                    display: block;
+                    padding: 10px 15px;
+
+                    color: @color-font;
+
+                    text-decoration: none;
+
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: @color-accent-secondary;
+                    }
+                }
+            }
+        }
+    }
+}

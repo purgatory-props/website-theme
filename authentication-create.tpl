@@ -1,4 +1,4 @@
-<form method="post" id="account-creation_form" class="std box">
+<form action="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" method="post" id="account-creation_form" class="std box">
   {$HOOK_CREATE_ACCOUNT_TOP}
 
   <div class="account_creation">
@@ -9,32 +9,32 @@
 
     <div class="required form-group">
       <label for="customer_firstname">{l s='First Name'} <sup class="required">*</sup></label>
-      <input onkeyup="$('#firstname').val(this.value);" type="text" class="is_required validate form-control" data-validate="isName" id="customer_firstname" name="customer_firstname" value="{if isset($smarty.post.customer_firstname)}{$smarty.post.customer_firstname}{/if}" required>
+      <input onkeyup="$('#firstname').val(this.value);" type="text" class="is_required validate form-control" data-validate="isName" id="customer_firstname" name="customer_firstname" value="{if isset($smarty.post.customer_firstname)}{$smarty.post.customer_firstname}{/if}" autocomplete="given-name" required>
     </div>
     <div class="required form-group">
       <label for="customer_lastname">{l s='Last Name'} <sup class="required">*</sup></label>
-      <input onkeyup="$('#lastname').val(this.value);" type="text" class="is_required validate form-control" data-validate="isName" id="customer_lastname" name="customer_lastname" value="{if isset($smarty.post.customer_lastname)}{$smarty.post.customer_lastname}{/if}" required>
+      <input onkeyup="$('#lastname').val(this.value);" type="text" class="is_required validate form-control" data-validate="isName" id="customer_lastname" name="customer_lastname" value="{if isset($smarty.post.customer_lastname)}{$smarty.post.customer_lastname}{/if}" autocomplete="family-name" required>
     </div>
     <div class="required form-group">
       <label for="email">{l s='Email'} <sup class="required">*</sup></label>
-      <input type="email" class="is_required validate form-control" data-validate="isEmail" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email}{/if}" required>
+      <input type="email" class="is_required validate form-control" data-validate="isEmail" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email}{/if}" autocomplete="email" required>
     </div>
     <div class="required password form-group">
       <label for="passwd">{l s='Password'} <sup class="required">*</sup></label>
-      <input type="password" class="is_required validate form-control" data-validate="isPasswd" name="passwd" id="passwd" required>
+      <input type="password" class="is_required validate form-control" data-validate="isPasswd" name="passwd" id="passwd" autocomplete="current-password" required>
     </div>
     <div class="required password form-group">
       <label for="passwd_confirm">{l s='Confirm Password'} <sup class="required">*</sup></label>
-      <input type="password" class="is_required validate form-control" data-validate="isPasswd" name="passwd_confirm" id="passwd_confirm" required>
+      <input type="password" class="is_required validate form-control" data-validate="isPasswd" name="passwd_confirm" id="passwd_confirm" autocomplete="new-password" required>
       <p class="help-block">{l s='(Five characters minimum)'}</p>
     </div>
     <div class="form-group date-select">
       <label>{l s='Date of Birth'} <sup class="required">*</sup></label>
-      <input type="date" class="form-control validate" name="dob" id="dob" required>
+      <input type="date" class="form-control validate" name="dob" id="dob" autocomplete="bday" required>
 
-      <input type="hidden" name="days" id="dob-day">
-      <input type="hidden" name="months" id="dob-month">
-      <input type="hidden" name="years" id="dob-year">
+      <input type="hidden" name="days" id="dob-day" autocomplete="bday-day">
+      <input type="hidden" name="months" id="dob-month" autocomplete="bday-month">
+      <input type="hidden" name="years" id="dob-year" autocomplete="bday-year">
     </div>
     {if isset($newsletter) && $newsletter}
       <div class="checkbox">
@@ -64,7 +64,7 @@
       <h3 class="page-subheading">{l s='Your company information'}</h3>
       <div class="form-group">
         <label for="">{l s='Company'}</label>
-        <input type="text" class="form-control" id="company" name="company" value="{if isset($smarty.post.company)}{$smarty.post.company}{/if}">
+        <input type="text" class="form-control" id="company" name="company" value="{if isset($smarty.post.company)}{$smarty.post.company}{/if}" autocomplete="organization">
       </div>
       <div class="form-group">
         <label for="siret">{l s='SIRET'}</label>
@@ -89,7 +89,7 @@
           {if !$b2b_enable}
             <div class="form-group">
               <label for="company">{l s='Company'}{if in_array($field_name, $required_fields)} <sup class="required">*</sup>{/if}</label>
-              <input type="text" class="form-control" id="company" name="company" value="{if isset($smarty.post.company)}{$smarty.post.company}{/if}"{if in_array($field_name, $required_fields)} required{/if}>
+              <input type="text" class="form-control" id="company" name="company" value="{if isset($smarty.post.company)}{$smarty.post.company}{/if}"{if in_array($field_name, $required_fields)} required{/if} autocomplete="organization">
             </div>
           {/if}
         {elseif $field_name eq "vat_number"}
@@ -122,35 +122,35 @@
         {elseif $field_name eq "firstname"}
           <div class="required form-group">
             <label for="firstname">{l s='First name'} <sup class="required">*</sup></label>
-            <input type="text" class="form-control" id="firstname" name="firstname" value="{if isset($smarty.post.firstname)}{$smarty.post.firstname}{/if}" required>
+            <input type="text" class="form-control" id="firstname" name="firstname" value="{if isset($smarty.post.firstname)}{$smarty.post.firstname}{/if}" autocomplete="given-name" required>
           </div>
         {elseif $field_name eq "lastname"}
           <div class="required form-group">
             <label for="lastname">{l s='Last name'} <sup class="required">*</sup></label>
-            <input type="text" class="form-control" id="lastname" name="lastname" value="{if isset($smarty.post.lastname)}{$smarty.post.lastname}{/if}" required>
+            <input type="text" class="form-control" id="lastname" name="lastname" value="{if isset($smarty.post.lastname)}{$smarty.post.lastname}{/if}" autocomplete="family-name" required>
           </div>
         {elseif $field_name eq "address1"}
           <div class="required form-group">
             <label for="address1">{l s='Address'} <sup class="required">*</sup></label>
-            <input type="text" class="form-control" name="address1" id="address1" value="{if isset($smarty.post.address1)}{$smarty.post.address1}{/if}" required>
+            <input type="text" class="form-control" name="address1" id="address1" value="{if isset($smarty.post.address1)}{$smarty.post.address1}{/if}" autocomplete="address-line1" required>
             <p class="help-block">{l s='Street address, P.O. Box, Company name, etc.'}</p>
           </div>
         {elseif $field_name eq "address2"}
           <div class="form-group is_customer_param">
             <label for="address2">{l s='Address (Line 2)'}{if in_array($field_name, $required_fields)} <sup class="required">*</sup>{/if}</label>
-            <input type="text" class="form-control" name="address2" id="address2" value="{if isset($smarty.post.address2)}{$smarty.post.address2}{/if}"{if in_array($field_name, $required_fields)} required{/if}>
+            <input type="text" class="form-control" name="address2" id="address2" value="{if isset($smarty.post.address2)}{$smarty.post.address2}{/if}"{if in_array($field_name, $required_fields)} autocomplete="address-line2" required{/if}>
             <p class="help-block">{l s='Apartment, suite, unit, building, floor, etc...'}</p>
           </div>
         {elseif $field_name eq "postcode"}
           {assign var='postCodeExist' value=true}
           <div class="required postcode form-group">
             <label for="postcode">{l s='Zip/Postal Code'} <sup class="required">*</sup></label>
-            <input type="text" class="validate form-control" name="postcode" id="postcode" data-validate="isPostCode" value="{if isset($smarty.post.postcode)}{$smarty.post.postcode}{/if}">
+            <input type="text" class="validate form-control" name="postcode" id="postcode" data-validate="isPostCode" value="{if isset($smarty.post.postcode)}{$smarty.post.postcode}{/if}" autocomplete="postal-code">
           </div>
         {elseif $field_name eq "city"}
           <div class="required form-group">
             <label for="city">{l s='City'} <sup class="required">*</sup></label>
-            <input type="text" class="form-control" name="city" id="city" value="{if isset($smarty.post.city)}{$smarty.post.city}{/if}" required>
+            <input type="text" class="form-control" name="city" id="city" value="{if isset($smarty.post.city)}{$smarty.post.city}{/if}" autocomplete="address-level2" required>
           </div>
           {* if customer hasn't update his layout address, country has to be verified but it's deprecated *}
         {elseif $field_name eq "Country:name" || $field_name eq "country"}

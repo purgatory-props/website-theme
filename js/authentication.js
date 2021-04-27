@@ -1,6 +1,6 @@
 function setCreateFormErrors(error) {
     var errContainter = document.getElementById('createFormErrors');
-    if (error.trim().length > 0) {
+    if (error.trim().length == 0) {
         errContainter.style['display'] = 'none';
         errContainter.innerHTML = '';
     }
@@ -27,30 +27,30 @@ function onAccountCreateFormShown() {
   // Validate FULL account creation form
   var fullAccountCreateForm = document.getElementById('account-creation_form');
   if (fullAccountCreateForm != null) {
-      fullAccountCreateForm.addEventListener('submit', function(e) {
-          var isValid = true;
-          var errors = "";
+        fullAccountCreateForm.addEventListener('submit', function(e) {
+            var isValid = true;
+            var errors = "";
 
-          // Split the DOB into each value
-          var dobInput = document.getElementById('dob');
+            // Split the DOB into each value
+            var dobInput = document.getElementById('dob');
 
-          var dobDay = document.getElementById('dob-day');
-          var dobMonth = document.getElementById('dob-month');
-          var dobYear = document.getElementById('dob-year');
+            var dobDay = document.getElementById('dob-day');
+            var dobMonth = document.getElementById('dob-month');
+            var dobYear = document.getElementById('dob-year');
 
-          var currentDOB = new Date(dobInput.value);
+            var currentDOB = new Date(dobInput.value);
 
-          dobDay.value = currentDOB.getDate() + 1;
-          dobMonth.value = currentDOB.getMonth() + 1;
-          dobYear.value = currentDOB.getFullYear();
+            dobDay.value = currentDOB.getDate() + 1;
+            dobMonth.value = currentDOB.getMonth() + 1;
+            dobYear.value = currentDOB.getFullYear();
 
 
-          // Verify passwords are the same
-          var password = document.getElementById('passwd');
-          var passwordConfirm = document.getElementById('passwd_confirm');
+            // Verify passwords are the same
+            var password = document.getElementById('passwd');
+            var passwordConfirm = document.getElementById('passwd_confirm');
 
-          clearInvalid(password);
-          clearInvalid(passwordConfirm);
+            clearInvalid(password);
+            clearInvalid(passwordConfirm);
 
             if (password != null && passwordConfirm != null) {
                 if (password.value != passwordConfirm.value) {
@@ -58,20 +58,34 @@ function onAccountCreateFormShown() {
                     makeInvalid(passwordConfirm);
 
                     password.focus();
+                    password.select();
+
                     isValid = false;
 
                     passwordConfirm.value = '';
 
                     errors += ((errors.length > 0) ? '<br/>' : '') + 'Passwords do not match.';
                 }
+
+                if (password.value.length < 5) {
+                    makeInvalid(password);
+                    password.focus();
+                    password.select();
+
+                    passwordConfirm.value = '';
+
+                    isValid = false;
+
+                    errors += ((errors.length > 0) ? '<br/>' : '') + 'Password must at least 5 characters long.';
+                }
             }
 
-          setCreateFormErrors(errors);
-          if (!isValid)
-              e.preventDefault();
+            setCreateFormErrors(errors);
+            if (!isValid)
+                e.preventDefault();
 
-          return isValid;
-      });
+            return isValid;
+        });
   }
 }
 
