@@ -8,7 +8,7 @@
  <nav>
     <ul class="pager" style="margin-top: 0;">
         <li class="previous">
-            <a href="{$link->getPageLink('order-history', true)|escape:'html':'UTF-8'}" style="margin-left: 0;" class="textlink-nostyle">
+            <a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}" style="margin-left: 0;" class="textlink-nostyle">
                 {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Order History'}
             </a>
         </li>
@@ -16,6 +16,8 @@
 </nav>
 
 <div class="order-detail-container">
+    {include file="$tpl_dir./errors.tpl"}
+
     {if isset($order)}
         {* Order Summary and Reorder *}
         <div id="order-info-summary" class="box clearfix bg-color-dark">
@@ -28,7 +30,7 @@
                 </form>
             {/if}
 
-            <div class="order-reference"><h2>{l s='Order %s' sprintf=$order->getUniqReference()}</h2></div>
+            <div class="order-reference color-accent"><h2>{l s='Order %s' sprintf=$order->getUniqReference()}</h2></div>
             <div class="order-date">{l s='Placed on'} {dateFormat date=$order->date_add full=0}</div>
 
             <div class="order-payment">

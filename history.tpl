@@ -37,7 +37,7 @@
                             {if isset($order.invoice) && $order.invoice && isset($order.virtual) && $order.virtual}
                                 <img class="icon" src="{$img_dir}icon/download_product.gif" alt="{l s='Products to download'}" title="{l s='Products to download'}">
                             {/if}
-                            <a class="color-myaccount" href="javascript:showOrder(1, {$order.id_order|intval}, '{$link->getPageLink('order-detail', true, NULL, "id_order={$order.id_order|intval}")|escape:'html':'UTF-8'}');">
+                            <a class="textlink-nostyle" href="{$link->getPageLink('order-detail', true, NULL, "id_order={$order.id_order|intval}")|escape:'html':'UTF-8'}">
                                 {Order::getUniqReferenceOf($order.id_order)}
                             </a>
                         </td>
@@ -97,8 +97,8 @@
 
     <nav>
         <ul class="pager">
-            <li class="previous">
-                <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" class="btn" style="margin-left: 0;">
+            <li class="previous list-nostyle">
+                <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" class="textlink-nostyle" style="margin-left: 0;">
                     {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Account'}
                 </a>
             </li>
