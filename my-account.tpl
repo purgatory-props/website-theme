@@ -1,7 +1,7 @@
 <div class="my-account-wrapper">
     {capture name=path}{l s='My account'}{/capture}
 
-    <h1 class="page-heading">{l s='Your account'}</h1>
+    <h1 class="page-heading">{l s='Your Account'}</h1>
 
     {if isset($account_created)}
         <div class="alert alert-success">{l s='Your account has been created.'}</div>
@@ -10,7 +10,7 @@
     {hook h='displayMyAccountTop'}
     <p>{l s='Welcome to your account. Here you can manage all of your personal information and orders.'}</p>
 
-    <div id="my-account-menu" class="row">
+    <div id="my-account-menu" class="row clearfix">
         <div class="col-sm-6">
             <ul class="nav nav-pills nav-stacked stacked-menu">
                 {if $has_customer_an_address}
@@ -29,7 +29,7 @@
             <div class="col-sm-6">
                 <ul class="nav nav-pills nav-stacked stacked-menu">
                     {if $voucherAllowed}
-                    <li><a href="{$link->getPageLink('discount', true)|escape:'html':'UTF-8'}" title="{l s='Vouchers'}"><i class="icon icon-barcode"></i> <span>{l s='My vouchers'}</span></a></li>
+                    <li><a href="{$link->getPageLink('discount', true)|escape:'html':'UTF-8'}" title="{l s='Vouchers'}"><i class="icon icon-barcode"></i> <span>{l s='Vouchers'}</span></a></li>
                     {/if}
                     {$HOOK_CUSTOMER_ACCOUNT}
                 </ul>

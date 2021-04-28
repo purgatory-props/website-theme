@@ -1,6 +1,12 @@
 @import "fonts.less";
 @import "variables.less";
 
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Verdana, Arial, sans-serif;
     font-size: 1rem;
@@ -9,8 +15,17 @@ body {
     background-color: @color-bg;
     color: @color-font;
 
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+
+#page-content {
+    flex: 1;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 * {
@@ -34,6 +49,20 @@ h1, h2, h3, h4 {
 a {
     text-decoration: none;
     color: @color-font;
+    cursor: pointer;
+
+    &.textlink, &.textlink-nostyle {
+        text-decoration: underline;
+
+        &:hover {
+            color: @color-accent-secondary;
+        }
+    }
+
+    &.textlink-nostyle {
+
+        text-decoration: none;
+    }
 }
 
 a.link, p a {
@@ -62,14 +91,26 @@ input[data-invalid='true'] {
     outline: 2px solid @color-error;
 }
 
+
 .clearfix {
     clear: both;
+
+    &::after {
+        content: " ";
+        display: block;
+        height: 0;
+        clear: both;
+    }
 }
 
-.clearfix-after::after {
+.clearfix-after::after{
     content: " ";
     display: block;
     height: 0;
+    clear: both;
+}
+
+main {
     .clearfix;
 }
 
@@ -82,11 +123,11 @@ input[data-invalid='true'] {
 }
 
 .bg-color-light {
-    background-color: @color-nav-bg;
+    background-color: @color-dark-2;
 }
 
 .bg-color-dark {
-    background-color: @color-header-bg;
+    background-color: @color-dark-1;
 }
 
 .wrapper {
@@ -139,6 +180,7 @@ input[data-invalid='true'] {
 
 .list-unstyled {
     list-style: none;
+    padding-left: 0;
 }
 
 .list-grid {
@@ -229,6 +271,9 @@ input[data-invalid='true'] {
     }
 }
 
+.bold {
+    font-weight: bold;
+}
 
 
 .form-control {
@@ -260,20 +305,58 @@ input[data-invalid='true'] {
     }
 }
 
-.alert {
+
+
+.table-responsive {
+    overflow-x: auto;
+    min-height: 0.01%;
+}
+
+.table-bordered {
+    border: 1px solid @color-dark-2;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+.btn {
+    display: inline-block;
+    border: 2px solid @color-font;
     padding: 10px;
-    .noselect;
+    margin: 5px;
 
-    &.alert-danger {
-        background-color: @color-error;
-        color: white;
-
-        outline: 2px solid darken(@color-error, 10%);
+    &:hover {
+        cursor: pointer;
+        border-color: @color-accent-secondary-darkened;
+        background-color: @color-accent-secondary;
+        color: @color-font;
     }
+}
+
+.btn-inverse {
+    background-color: @color-accent-secondary;
+    border-color: @color-accent-secondary-darkened;
+
+    &:hover {
+        background-color: transparent;
+        border-color: @color-font;
+    }
+}
+
+.pager {
+    .list-unstyled;
 }
 
 @import "product-labels.less";
 @import "product-list.less";
+@import "alerts.less";
 
 @import "header.less";
 @import "footer.less";

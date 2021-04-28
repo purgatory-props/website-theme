@@ -1,7 +1,7 @@
 </main>
 
 <div class="tm-home clearfix col-xs-12">
-    <div class="wrapper home-featured center">
+    <div class="wrapper slightly-smaller home-featured center">
         {if isset($products) && $products}
             <div class="tm-hp text-center">
                 <h2 class="section-title">{l s='featured' mod='homefeatured'} {l s='products' mod='homefeatured'}</h2>

@@ -1,0 +1,15 @@
+// out: false
+@import "variables.less";
+
+
+.alert {
+    padding: 10px;
+    .noselect;
+
+    &.alert-danger {
+        background-color: @color-error;
+        color: white;
+
+        outline: 2px solid darken(@color-error, 10%);
+    }
+}

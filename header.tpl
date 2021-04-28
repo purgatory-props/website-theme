@@ -31,6 +31,9 @@
             {/foreach}
         {/if}
 
+        <script type="text/javascript" src="{$tpl_uri|escape:'htmlall':'UTF-8'}/js/polyfills.js"></script>
+        <script type="text/javascript" src="{$tpl_uri|escape:'htmlall':'UTF-8'}/js/utils.js"></script>
+
         {if isset($js_defer) && !$js_defer && isset($js_files) && isset($js_def)}
             {$js_def}
             {foreach from=$js_files item=js_uri}
@@ -54,7 +57,6 @@
     </head>
     <body {if isset($page_name)}id="{$page_name|escape:'html':'UTF-8'}"{/if} class="{if isset($page_name)}{$page_name|escape:'html':'UTF-8'}{/if}{if isset($body_classes) && $body_classes|@count} {implode value=$body_classes separator=' '}{/if}">
 {if !isset($content_only) || !$content_only}
-
     <!-- Banner -->
     {capture name='displayBanner'}{hook h='displayBanner'}{/capture}
     {if $smarty.capture.displayBanner}
@@ -84,5 +86,6 @@
         {hook h='displayNav' mod='blocktopmenu'}
     </header>
 
-    <main class="wrapper slightly-smaller main-container center">
+    <div id="page-content" class="clearfix">
+        <main class="wrapper slightly-smaller main-container center">
 {/if}

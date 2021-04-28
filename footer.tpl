@@ -1,8 +1,8 @@
             </main>
+        </div>
 
-        <div class="clearfix"></div>
         <footer>
-            <div class="footer-wrapper wrapper center">
+            <div class="footer-wrapper wrapper center clearfix">
                 {hook h='displayFooter' mod='tbhtmlblock'}
                 {hook h='displayFooter' mod='blocksocial'}
 
@@ -11,6 +11,7 @@
                 </div>
             </div>
         </footer>
+
         {include file="$tpl_dir./global.tpl"}
     </body>
 </html>

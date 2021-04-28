@@ -1,0 +1,57 @@
+@import "variables.less";
+
+#order-history-container {
+    #order-list {
+        width: 100%;
+
+        .footable-sort-indicator {
+            cursor: pointer;
+
+            &:hover {
+                color: @color-accent-secondary;
+            }
+        }
+
+        th {
+            font-weight: bold;
+
+            background-color: @color-dark-2;
+            border: 1px solid rgb(184, 184, 184);
+            border-bottom-width: 3px;
+
+            vertical-align: bottom;
+
+            padding: 15px;
+
+            font-size: 1.2em;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid rgb(184, 184, 184);
+
+            &.history_link {
+                a {
+                    color: @color-accent-secondary;
+                    cursor: pointer;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &.history_state {
+                .label {
+                    padding: 5px;
+                    font-size: 0.8em;
+                    cursor: default;
+                }
+            }
+
+
+        }
+    }
+}
+
+@import "order-detail.less";
