@@ -5,17 +5,19 @@
         {assign var=shippedWith value=$carrier->name}
     {/if}
 {/if}
- <nav>
-    <ul class="pager" style="margin-top: 0;">
-        <li class="previous">
-            <a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}" style="margin-left: 0;" class="textlink-nostyle">
-                {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Order History'}
-            </a>
-        </li>
-    </ul>
-</nav>
+
 
 <div class="order-detail-container">
+    <nav>
+        <ul class="pager" style="margin-top: 0;">
+            <li class="previous">
+                <a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}" style="margin-left: 0;" class="textlink-nostyle">
+                    {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Order History'}
+                </a>
+            </li>
+        </ul>
+    </nav>
+
     {include file="$tpl_dir./errors.tpl"}
 
     {if isset($order)}
@@ -74,8 +76,10 @@
                 </div>
             </main>
 
-            <div id="order-contents-container" class="bg-color-light">
+            <div id="order-contents-container" class="bg-color-light order-detail-container">
                 <div class="wrapper slightly-smaller center">
+                    <h2 class="order-details-title">{l s='Order Contents'}</h2>
+
                     {if !$is_guest}<form action="{$link->getPageLink('order-follow', true)|escape:'html':'UTF-8'}" method="post">{/if}
 
                     {* Order Contents *}
@@ -391,6 +395,8 @@
 
         {* Shipping/Billing Address *}
         <div id="order-address-summary" class="adresses_bloc clearfix">
+            <h2 class="order-details-title">{l s='Shipping'}</h2>
+
             <div class="shipping-address bg-color-dark"{if $order->isVirtual()} style="display:none;"{/if}>
                 <ul class="address box">
                     <li>
@@ -443,30 +449,30 @@
         {assign var='carriers' value=$order->getShipping()}
         {if $carriers|count > 0 && isset($carriers[0].carrier_name) && $carriers[0].carrier_name}
             <div class="table-responsive">
-            <table class="table table-bordered footab order-details-table">
-                <thead>
-                <tr>
-                <th>{l s='Date'}</th>
-                <th data-sort-ignore="true">{l s='Carrier'}</th>
-                <th data-hide="phone">{l s='Weight'}</th>
-                <th data-hide="phone">{l s='Shipping cost'}</th>
-                <th data-hide="phone" data-sort-ignore="true">{l s='Tracking number'}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {foreach from=$carriers item=line}
-                <tr>
-                    <td data-value="{$line.date_add|regex_replace:"/[\-\:\ ]/":""}">{dateFormat date=$line.date_add full=0}</td>
-                    <td>{$line.carrier_name}</td>
-                    <td data-value="{if $line.weight > 0}{$line.weight|string_format:"%.3f"}{else}0{/if}">{if $line.weight > 0}{$line.weight|string_format:"%.3f"} {Configuration::get('PS_WEIGHT_UNIT')}{else}-{/if}</td>
-                    <td data-value="{if $order->getTaxCalculationMethod() == $smarty.const.PS_TAX_INC}{$line.shipping_cost_tax_incl}{else}{$line.shipping_cost_tax_excl}{/if}">{if $order->getTaxCalculationMethod() == $smarty.const.PS_TAX_INC}{displayPrice price=$line.shipping_cost_tax_incl currency=$currency->id}{else}{displayPrice price=$line.shipping_cost_tax_excl currency=$currency->id}{/if}</td>
-                    <td>
-                    <span class="shipping_number_show">{if $line.tracking_number}{if $line.url && $line.tracking_number}<a href="{$line.url|replace:'@':$line.tracking_number}">{$line.tracking_number}</a>{else}{$line.tracking_number}{/if}{else}-{/if}</span>
-                    </td>
-                </tr>
-                {/foreach}
-                </tbody>
-            </table>
+                <table class="table table-bordered footab order-details-table">
+                    <thead>
+                    <tr>
+                    <th>{l s='Date'}</th>
+                    <th data-sort-ignore="true">{l s='Carrier'}</th>
+                    <th data-hide="phone">{l s='Weight'}</th>
+                    <th data-hide="phone">{l s='Shipping cost'}</th>
+                    <th data-hide="phone" data-sort-ignore="true">{l s='Tracking number'}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach from=$carriers item=line}
+                    <tr>
+                        <td data-value="{$line.date_add|regex_replace:"/[\-\:\ ]/":""}">{dateFormat date=$line.date_add full=0}</td>
+                        <td>{$line.carrier_name}</td>
+                        <td data-value="{if $line.weight > 0}{$line.weight|string_format:"%.3f"}{else}0{/if}">{if $line.weight > 0}{$line.weight|string_format:"%.3f"} {Configuration::get('PS_WEIGHT_UNIT')}{else}-{/if}</td>
+                        <td data-value="{if $order->getTaxCalculationMethod() == $smarty.const.PS_TAX_INC}{$line.shipping_cost_tax_incl}{else}{$line.shipping_cost_tax_excl}{/if}">{if $order->getTaxCalculationMethod() == $smarty.const.PS_TAX_INC}{displayPrice price=$line.shipping_cost_tax_incl currency=$currency->id}{else}{displayPrice price=$line.shipping_cost_tax_excl currency=$currency->id}{/if}</td>
+                        <td>
+                        <span class="shipping_number_show">{if $line.tracking_number}{if $line.url && $line.tracking_number}<a href="{$line.url|replace:'@':$line.tracking_number}">{$line.tracking_number}</a>{else}{$line.tracking_number}{/if}{else}-{/if}</span>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
             </div>
         {/if}
 
@@ -475,10 +481,10 @@
                 </div>
             </main>
 
-            <div id="order-status-history-container" class="bg-color-light">
+            <div id="order-status-history-container" class="bg-color-light order-detail-container">
                 <div class="wrapper slightly-smaller center">
                     <div id="order-history-summary">
-                        <h2>{l s='Order Status'}</h2>
+                        <h2 class="order-details-title">{l s='Order Status'}</h2>
                         <div class="table_block table-responsive">
                             <table class="detail_step_by_step table table-bordered">
                                 <thead>
@@ -508,73 +514,76 @@
         {* Messages *}
         {if !$is_guest}
             {if count($messages)}
-            <h3 class="page-heading">{l s='Messages'}</h3>
-            <div class="table_block table-responsive">
-                <table class="detail_step_by_step table table-bordered">
-                <thead>
-                <tr>
-                    <th style="width:150px;">{l s='From'}</th>
-                    <th>{l s='Message'}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {foreach from=$messages item=message name="messageList"}
+                <h2 class="page-heading order-details-title">{l s='Messages'}</h2>
+                <div class="table_block table-responsive">
+                    <table class="detail_step_by_step table table-bordered order-details-table">
+                    <thead>
                     <tr>
-                    <td>
-                        <strong>
-                        {if isset($message.elastname) && $message.elastname}
-                            {$message.efirstname|escape:'html':'UTF-8'} {$message.elastname|escape:'html':'UTF-8'}
-                        {elseif $message.clastname}
-                            {$message.cfirstname|escape:'html':'UTF-8'} {$message.clastname|escape:'html':'UTF-8'}
-                        {else}
-                            {$shop_name|escape:'html':'UTF-8'}
-                        {/if}
-                        </strong>
-                        <br>
-                        {dateFormat date=$message.date_add full=1}
-                    </td>
-                    <td>{$message.message|escape:'html':'UTF-8'|nl2br}</td>
+                        <th style="width:150px;">{l s='From'}</th>
+                        <th>{l s='Message'}</th>
                     </tr>
-                {/foreach}
-                </tbody>
-                </table>
-            </div>
+                    </thead>
+                    <tbody>
+                    {foreach from=$messages item=message name="messageList"}
+                        <tr>
+                        <td>
+                            <strong>
+                                {if isset($message.elastname) && $message.elastname}
+                                    {$message.efirstname|escape:'html':'UTF-8'} {$message.elastname|escape:'html':'UTF-8'}
+                                {elseif $message.clastname}
+                                    {$message.cfirstname|escape:'html':'UTF-8'} {$message.clastname|escape:'html':'UTF-8'}
+                                {else}
+                                    {$shop_name|escape:'html':'UTF-8'}
+                                {/if}
+                            </strong>
+                            <br>
+                            <span class="time small">{dateFormat date=$message.date_add full=1}</span>
+                        </td>
+                        <td>{$message.message|escape:'html':'UTF-8'|nl2br}</td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                    </table>
+                </div>
             {/if}
+
             {if isset($errors) && $errors}
-            <div class="alert alert-danger">
-                <p>{if $errors|@count > 1}{l s='There are %d errors' sprintf=$errors|@count}{else}{l s='There is %d error' sprintf=$errors|@count}{/if}</p>
-                <ol>
-                {foreach from=$errors key=k item=error}
-                    <li>{$error}</li>
-                {/foreach}
-                </ol>
-            </div>
+                <div class="alert alert-danger">
+                    <p>{if $errors|@count > 1}{l s='There are %d errors' sprintf=$errors|@count}{else}{l s='There is %d error' sprintf=$errors|@count}{/if}</p>
+                    <ol>
+                    {foreach from=$errors key=k item=error}
+                        <li>{$error}</li>
+                    {/foreach}
+                    </ol>
+                </div>
             {/if}
+
             {if isset($message_confirmation) && $message_confirmation}
-            <div class="alert alert-success">
-                {l s='Message successfully sent'}
-            </div>
+                <div class="alert alert-success">
+                    {l s='Message successfully sent'}
+                </div>
             {/if}
+
             <form action="{$link->getPageLink('order-detail', true)|escape:'html':'UTF-8'}" method="post" class="std" id="sendOrderMessage">
-            <h3 class="page-heading">{l s='Add a message'}</h3>
-            <p>{l s='If you would like to add a comment about your order, please write it in the field below.'}</p>
-            <div class="form-group">
-                <label for="id_product">{l s='Product'}</label>
-                <select name="id_product" class="form-control">
-                <option value="0">{l s='-- Choose --'}</option>
-                {foreach from=$products item=product name=products}
-                    <option value="{$product.product_id}">{$product.product_name}</option>
-                {/foreach}
-                </select>
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" cols="67" rows="3" name="msgText"></textarea>
-            </div>
-            <div class="submit">
-                <input type="hidden" name="id_order" value="{$order->id|intval}">
-                <input type="submit" class="unvisible" name="submitMessage" value="{l s='Send'}">
-                <button type="submit" name="submitMessage" class="btn btn-lg btn-success"><span>{l s='Send'} <i class="icon icon-chevron-right"></i></span></button>
-            </div>
+                <h3 class="page-heading">{l s='Add a Message'}</h3>
+                <p>{l s='If you would like to add a comment about your order, please write it in the field below.'}</p>
+                <div class="form-group">
+                    <label for="id_product" style="display: block">{l s='Product'}</label>
+                    <select name="id_product" class="form-control">
+                    <option value="0">{l s='-- Choose --'}</option>
+                    {foreach from=$products item=product name=products}
+                        <option value="{$product.product_id}">{$product.product_name}</option>
+                    {/foreach}
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 10px">
+                    <textarea class="form-control" cols="67" rows="3" name="msgText" style="width: 100%"></textarea>
+                </div>
+                <div class="submit">
+                    <input type="hidden" name="id_order" value="{$order->id|intval}">
+                    <input type="submit" class="unvisible" name="submitMessage" value="{l s='Send'}">
+                    <button type="submit" name="submitMessage" class="btn btn-lg btn-success" style="margin-left: 0"><span>{l s='Send'} <i class="icon icon-chevron-right"></i></span></button>
+                </div>
             </form>
         {else}
             <div class="alert alert-info"><i class="icon icon-info-sign"></i> {l s='You cannot return merchandise with a guest account'}</div>

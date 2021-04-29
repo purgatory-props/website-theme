@@ -64,7 +64,7 @@ a {
     }
 }
 
-a.link, p a {
+a.link {
     color: @color-accent-primary;
 
     &:hover {
@@ -137,6 +137,8 @@ main {
 .wrapper {
     width: 80%;
     max-width: @max-screen-width !important;
+
+    padding-top: 0.1px;
 
     &.slightly-smaller {
         width: 78%;
@@ -336,12 +338,31 @@ main {
     padding: 10px;
     margin: 5px;
 
+    color: @color-font;
+
     &:hover {
         cursor: pointer;
         border-color: @color-accent-primary-darkened;
         background-color: @color-accent-primary;
         color: @color-font;
     }
+}
+
+.btn-danger {
+    background-color: @color-error;
+    color: @color-font;
+
+    border-color: lighten(@color-error, 20%);
+
+    &:hover {
+        background-color: @color-error-darkened;
+        border-color: lighten(@color-error, 10%);
+    }
+}
+
+button.btn {
+    background-color: transparent;
+    margin-left: 0;
 }
 
 .btn-inverse {
@@ -358,9 +379,23 @@ main {
     .list-unstyled;
 }
 
+.unvisible {
+    display: none;
+}
+
+sup {
+    &.required {
+        color: @color-accent-primary !important;
+    }
+}
+
 @import "product-labels.less";
 @import "product-list.less";
 @import "alerts.less";
+
+/* Pages that don't auto-include styling  (MUST BE SCOPED -- DO NOT MESS WITH GLOBAL SCOPE IN THESE FILES)*/
+@import "address.less";
+
 
 @import "header.less";
 @import "footer.less";

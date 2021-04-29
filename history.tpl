@@ -7,7 +7,18 @@
 {/capture}
 
 <div id="order-history-container" class="clearfix">
+     <nav>
+        <ul class="pager">
+            <li class="previous list-nostyle">
+                <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" class="textlink-nostyle" style="margin-left: 0;">
+                    {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Account'}
+                </a>
+            </li>
+        </ul>
+    </nav>
+
     {include file="$tpl_dir./errors.tpl"}
+
     <h1 class="page-heading">{l s='Order History'}</h1>
     <p><b>{l s='Here are the orders you\'ve placed since your account was created.'}</b></p>
 
@@ -95,14 +106,6 @@
     {/if}
     </div>
 
-    <nav>
-        <ul class="pager">
-            <li class="previous list-nostyle">
-                <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" class="textlink-nostyle" style="margin-left: 0;">
-                    {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Account'}
-                </a>
-            </li>
-        </ul>
-    </nav>
+
 </div>
 
