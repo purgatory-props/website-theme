@@ -1,6 +1,23 @@
 // out: false
 @import "variables.less";
 
+.table-responsive {
+    overflow-x: auto;
+    min-height: 0.01%;
+}
+
+.table-bordered {
+    border: 1px solid @color-dark-2;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
 table {
     &.other-color {
@@ -38,6 +55,7 @@ table {
     tbody {
         tr {
             border-right: 1px solid rgb(184, 184, 184);
+
             &:nth-of-type(even) {
                 background-color: @color-dark-3;
             }

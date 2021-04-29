@@ -1,0 +1,57 @@
+// out: false
+@import "variables.less";
+
+
+.btn {
+    display: inline-block;
+    border: 2px solid @color-font;
+    padding: 10px;
+    margin: 5px;
+
+    color: @color-font;
+
+    cursor: pointer;
+
+    &:hover {
+        border-color: @color-accent-primary-darkened;
+        background-color: @color-accent-primary;
+        color: @color-font;
+    }
+}
+
+.btn-success {
+    border-color: @color-success;
+    color: @color-success;
+
+    &:hover {
+        background-color: @color-success;
+        border-color: darken(@color-success, 10%);
+        color: @color-dark-1;
+    }
+}
+
+.btn-danger {
+    border-color: @color-error;
+    color: @color-error;
+
+    &:hover {
+        background-color: @color-error;
+        border-color: darken(@color-error, 10%);
+    }
+}
+
+.btn-inverse {
+    background-color: @color-accent-primary;
+    border-color: @color-accent-primary-darkened;
+
+    &:hover {
+        background-color: transparent;
+        border-color: @color-font;
+    }
+}
+
+
+button.btn {
+    background-color: transparent;
+    margin-left: 0;
+}

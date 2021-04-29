@@ -134,25 +134,6 @@ main {
     background-color: @color-dark-1;
 }
 
-.wrapper {
-    width: 80%;
-    max-width: @max-screen-width !important;
-
-    padding-top: 0.1px;
-
-    &.slightly-smaller {
-        width: 78%;
-    }
-
-    @media @responsive-first-size {
-        width: 100% !important;
-        padding: 0 5px;
-    }
-}
-
-.center {
-    margin: 0 auto;
-}
 
 .img-responsive {
     display: block;
@@ -162,6 +143,22 @@ main {
 
 .text-center {
     text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-error {
+    color: @color-error;
+}
+
+.text-success {
+    color: @color-success;
 }
 
 .main-container {
@@ -177,11 +174,16 @@ main {
           -ms-user-select: none; /* Internet Explorer/Edge */
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
-  }
+}
 
 .spooky-font {
     font-family: 'Creepster', Verdana, Arial, sans-serif;
     line-height: 1em;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
 }
 
 .list-unstyled {
@@ -305,67 +307,6 @@ main {
 
 
 
-.table-responsive {
-    overflow-x: auto;
-    min-height: 0.01%;
-}
-
-.table-bordered {
-    border: 1px solid @color-dark-2;
-}
-
-.table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-    background-color: transparent;
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-
-.btn {
-    display: inline-block;
-    border: 2px solid @color-font;
-    padding: 10px;
-    margin: 5px;
-
-    color: @color-font;
-
-    &:hover {
-        cursor: pointer;
-        border-color: @color-accent-primary-darkened;
-        background-color: @color-accent-primary;
-        color: @color-font;
-    }
-}
-
-.btn-danger {
-    background-color: @color-error;
-    color: @color-font;
-
-    border-color: lighten(@color-error, 20%);
-
-    &:hover {
-        background-color: @color-error-darkened;
-        border-color: lighten(@color-error, 10%);
-    }
-}
-
-button.btn {
-    background-color: transparent;
-    margin-left: 0;
-}
-
-.btn-inverse {
-    background-color: @color-accent-primary;
-    border-color: @color-accent-primary-darkened;
-
-    &:hover {
-        background-color: transparent;
-        border-color: @color-font;
-    }
-}
 
 .pager {
     .list-unstyled;
@@ -381,15 +322,94 @@ sup {
     }
 }
 
+
+
+.nav {
+    padding-left: 0;
+    list-style: none;
+
+    &.nav-justified {
+        width: 100%;
+
+        li {
+            display: table-cell;
+            width: 1%;
+
+            float: none;
+
+            a {
+                margin-bottom: 0;
+                text-align: center;
+            }
+        }
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        position: relative;
+        cursor: pointer;
+
+        a {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+        }
+    }
+
+    &.nav-pills {
+        li {
+
+            &:hover {
+                background-color: @color-dark-2;
+            }
+
+            &.active {
+                a {
+                    background-color: @color-accent-primary;
+                    color: white;
+                }
+
+                &:hover {
+                    background-color: @color-accent-primary;
+                }
+            }
+
+            &.completed {
+                background-color: @color-dark-3; //#8a8a8ae3;
+            }
+
+            a {
+                border-radius: 0;
+            }
+
+        }
+    }
+}
+
+.box {
+    padding: 10px;
+    margin: 0 0 20px;
+    background-color: @color-dark-2;
+    outline: 2px solid lighten(@color-dark-2, 10%);
+}
+
+
+@import "template.less";
+
 @import "product-labels.less";
 @import "product-list.less";
 @import "alerts.less";
 
 @import "forms.less";
 @import "tables.less";
+@import "buttons.less";
 
 /* Pages that don't auto-include styling  (MUST BE SCOPED -- DO NOT MESS WITH GLOBAL SCOPE IN THESE FILES)*/
-
+@import "cart.less";
 
 @import "header.less";
 @import "footer.less";

@@ -1,0 +1,80 @@
+// out: false
+@import "variables.less";
+
+.cart_quantity_delete {
+    font-size: 1.5em;
+
+    &:hover {
+        color: @color-error;
+    }
+}
+
+
+#order-page, #order-address-page {
+    .address {
+        padding: 10px;
+        margin: 10px;
+        margin-left: 0;
+
+
+        li {
+            line-height: 1.2em;
+        }
+
+        ul {
+            margin-top: 0;
+            margin-bottom: 0;
+
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        .address_update {
+            margin-top: 10px;
+
+            .btn {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+#order-carrier-page {
+    .delivery_options {
+        td {
+            line-height: 1.1em;
+        }
+    }
+}
+
+#order-payment-page {
+    #HOOK_PAYMENT {
+        .col-xs-12.col-md-12 {
+            .template-full-width;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    .payment_module.paypal {
+        a {
+            display: block;
+            padding: 10px;
+            font-size: 1.25em;
+            font-weight: bold;
+            position: relative;
+            color: @color-dark-1;
+
+            img {
+                vertical-align: middle;
+            }
+
+            &:hover {
+                outline: 2px solid @color-accent-primary;
+                background-color: darken(#FBFBFB, 10%);
+            }
+        }
+    }
+}

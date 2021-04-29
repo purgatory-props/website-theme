@@ -18,6 +18,22 @@
     color: #555;
 
     width: 100%;
+
+    &.half-width {
+        width: 50%;
+    }
+
+    &.quarter-width {
+        width: 25%;
+    }
+}
+
+.invisible-input {
+    background-color: transparent !important;
+    border: none;
+    outline: none;
+    color: @color-font !important;
+    font-size: 1.5em;
 }
 
 input {
@@ -26,6 +42,27 @@ input {
             border-color: @color-accent-primary;
         }
     }
+}
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+
+    + .label-text::before {
+        font-family: "FontAwesome";
+        content: "\f10c";
+        cursor: pointer;
+    }
+
+    &:checked  + .label-text::before {
+        content: "\f192";
+        color: @color-accent-primary;
+    }
+
+    + .label-text {
+        cursor: pointer;
+    }
+
 }
 
 .form-group {
