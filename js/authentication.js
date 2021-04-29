@@ -31,19 +31,6 @@ function onAccountCreateFormShown() {
             var isValid = true;
             var errors = "";
 
-            // Split the DOB into each value
-            var dobInput = document.getElementById('dob');
-
-            var dobDay = document.getElementById('dob-day');
-            var dobMonth = document.getElementById('dob-month');
-            var dobYear = document.getElementById('dob-year');
-
-            var currentDOB = new Date(dobInput.value);
-
-            dobDay.value = currentDOB.getDate() + 1;
-            dobMonth.value = currentDOB.getMonth() + 1;
-            dobYear.value = currentDOB.getFullYear();
-
 
             // Verify passwords are the same
             var password = document.getElementById('passwd');

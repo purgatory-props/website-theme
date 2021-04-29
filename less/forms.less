@@ -1,0 +1,56 @@
+// out: false
+@import "variables.less";
+
+.half-width-form {
+    width: 50%;
+
+    @media @responsive-first-size {
+        width: 100%;
+    }
+}
+
+.form-control {
+    padding: 8px 12px;
+    font-size: 1em;
+    line-height: 1em;
+    border: 2px solid #ddd;
+    background-color: white;
+    color: #555;
+
+    width: 100%;
+}
+
+input {
+    &.form-control {
+        &:hover, &:active, &:focus {
+            border-color: @color-accent-primary;
+        }
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    &.date-select {
+        .row {
+            margin-left: -5px;
+
+            .col-xs-4 {
+                width: 33.3%;
+                padding: 0 5px;
+                float: left;
+            }
+        }
+    }
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+}

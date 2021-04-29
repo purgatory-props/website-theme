@@ -39,7 +39,7 @@
 
     <p class="required"><sup class="required">*</sup> {l s='Required field'}</p>
 
-    <form action="{$link->getPageLink('address', true)|escape:'html':'UTF-8'}" method="post" class="std" id="add_address">
+    <form action="{$link->getPageLink('address', true)|escape:'html':'UTF-8'}" method="post" class="std half-width-form" id="add_address">
         {assign var="stateExist" value=false}
         {assign var="postCodeExist" value=false}
         {assign var="dniExist" value=false}

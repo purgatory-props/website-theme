@@ -30,11 +30,46 @@
     </div>
     <div class="form-group date-select">
       <label>{l s='Date of Birth'} <sup class="required">*</sup></label>
-      <input type="date" class="form-control validate" name="dob" id="dob" autocomplete="bday" required>
-
-      <input type="hidden" name="days" id="dob-day" autocomplete="bday-day">
-      <input type="hidden" name="months" id="dob-month" autocomplete="bday-month">
-      <input type="hidden" name="years" id="dob-year" autocomplete="bday-year">
+      <div class="row">
+        <div class="col-xs-4">
+          <select id="days" name="days" class="form-control">
+            <option value="">-</option>
+            {foreach from=$days item=day}
+              <option value="{$day}" {if ($sl_day == $day)} selected="selected"{/if}>{$day}&nbsp;&nbsp;</option>
+            {/foreach}
+          </select>
+          {*
+              {l s='January'}
+              {l s='February'}
+              {l s='March'}
+              {l s='April'}
+              {l s='May'}
+              {l s='June'}
+              {l s='July'}
+              {l s='August'}
+              {l s='September'}
+              {l s='October'}
+              {l s='November'}
+              {l s='December'}
+          *}
+        </div>
+        <div class="col-xs-4">
+          <select id="months" name="months" class="form-control">
+            <option value="">-</option>
+            {foreach from=$months key=k item=month}
+              <option value="{$k}" {if ($sl_month == $k)} selected="selected"{/if}>{l s=$month}&nbsp;</option>
+            {/foreach}
+          </select>
+        </div>
+        <div class="col-xs-4">
+          <select id="years" name="years" class="form-control">
+            <option value="">-</option>
+            {foreach from=$years item=year}
+              <option value="{$year}" {if ($sl_year == $year)} selected="selected"{/if}>{$year}&nbsp;&nbsp;</option>
+            {/foreach}
+          </select>
+        </div>
+      </div>
     </div>
     {if isset($newsletter) && $newsletter}
       <div class="checkbox">
