@@ -12,7 +12,7 @@
 </nav>
 
 <h1 class="page-heading">
-  {l s='Credit slips'}
+  {l s='Credit Slips'}
 </h1>
 <p>
   <b>{l s='Credit slips you have received after canceled orders'}.</b>
@@ -22,10 +22,10 @@
     <table id="order-list" class="table table-bordered footab">
       <thead>
       <tr>
-        <th data-sort-ignore="true">{l s='Credit slip'}</th>
+        <th data-sort-ignore="true">{l s='Credit Slip'}</th>
         <th data-sort-ignore="true">{l s='Order'}</th>
         <th>{l s='Date issued'}</th>
-        <th data-sort-ignore="true" data-hide="phone">{l s='View credit slip'}</th>
+        <th data-sort-ignore="true" data-hide="phone">{l s='View Credit Slip'}</th>
       </tr>
       </thead>
       <tbody>
