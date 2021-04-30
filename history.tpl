@@ -1,6 +1,6 @@
 {capture name=path}
   <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">
-    {l s='My account'}
+    {l s='My Account'}
   </a>
   <span class="navigation-pipe">{$navigationPipe}</span>
   <span class="navigation_page">{l s='Order history'}</span>
@@ -45,10 +45,10 @@
                 {foreach from=$orders item=order name=myLoop}
                     <tr>
                         <td class="history_link bold">
-                            {if isset($order.invoice) && $order.invoice && isset($order.virtual) && $order.virtual}
-                                <img class="icon" src="{$img_dir}icon/download_product.gif" alt="{l s='Products to download'}" title="{l s='Products to download'}">
-                            {/if}
                             <a class="textlink-nostyle" href="{$link->getPageLink('order-detail', true, NULL, "id_order={$order.id_order|intval}")|escape:'html':'UTF-8'}">
+                                 {if isset($order.invoice) && $order.invoice && isset($order.virtual) && $order.virtual}
+                                    <i class="fa fa-download"></i>
+                                {/if}
                                 {Order::getUniqReferenceOf($order.id_order)}
                             </a>
                         </td>

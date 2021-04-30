@@ -42,7 +42,15 @@
 
             {if $carrier->id}
                 <div class="order-shipping">
-                    {l s='Shipped With'}: <span class="shipping-method">{$shippedWith|escape:'html':'UTF-8'}</span>
+                    {l s='Shipped With'}: <span class="shipping-method">
+                        {if isset($followup)}
+                        <a href="{$followup|escape:'html':'UTF-8'}" target="_blank" title="{l s='Track Your Order Shipment'}" class="textlink-nostyle external-link">
+                        {/if}
+                            {$shippedWith|escape:'html':'UTF-8'}
+                        {if isset($followup)}
+                        </a>
+                        {/if}
+                    </span>
                 </div>
             {/if}
 
@@ -52,6 +60,15 @@
                     <a class="textlink" target="_blank" href="{$link->getPageLink('pdf-invoice', true)}?id_order={$order->id|intval}{if $is_guest}&amp;secure_key={$order->secure_key|escape:'html':'UTF-8'}{/if}">{l s='Download Invoice'}</a>
                 </div>
             {/if}
+
+            {if isset($followup)}
+                <div class="order-tracking">
+                    <a href="{$followup|escape:'html':'UTF-8'}" class="textlink-nostyle bold external-link" target="_blank">
+                        {l s='Track Your Order Shipment'}
+                    </a>
+                </div>
+            {/if}
+
         </div>
 
         {*<div class="info-order box">
@@ -63,11 +80,6 @@
                 <p><strong>{l s='Message'}</strong> {$order->gift_message|nl2br}</p>
             {/if}
         </div>*}
-
-        {if isset($followup)}
-            <p class="bold">{l s='Click the following link to track the delivery of your order'}</p>
-            <a href="{$followup|escape:'html':'UTF-8'}">{$followup|escape:'html':'UTF-8'}</a>
-        {/if}
 
         {$HOOK_ORDERDETAILDISPLAYED}
 
@@ -292,19 +304,16 @@
                                                 <td class="bold">
                                                     <label for="cb_{$product.id_order_detail|intval}">
                                                         {if $product.download_hash && $logable && $product.display_filename != '' && $product.product_quantity_refunded == 0 && $product.product_quantity_return == 0}
-                                                            {if isset($is_guest) && $is_guest}
-                                                                <a href="{$link->getPageLink('get-file', true, NULL, "key={$product.filename|escape:'html':'UTF-8'}-{$product.download_hash|escape:'html':'UTF-8'}&amp;id_order={$order->id}&secure_key={$order->secure_key}")|escape:'html':'UTF-8'}" title="{l s='Download this product'}">
-                                                            {else}
-                                                                <a href="{$link->getPageLink('get-file', true, NULL, "key={$product.filename|escape:'html':'UTF-8'}-{$product.download_hash|escape:'html':'UTF-8'}")|escape:'html':'UTF-8'}" title="{l s='Download this product'}">
-                                                            {/if}
-                                                                <img src="{$img_dir}icon/download_product.gif" class="icon" alt="{l s='Download product'}">
-                                                            </a>
+                                                            {assign var=urlExtra value=""}
 
                                                             {if isset($is_guest) && $is_guest}
-                                                                <a href="{$link->getPageLink('get-file', true, NULL, "key={$product.filename|escape:'html':'UTF-8'}-{$product.download_hash|escape:'html':'UTF-8'}&id_order={$order->id}&secure_key={$order->secure_key}")|escape:'html':'UTF-8'}" title="{l s='Download this product'}"> {$product.product_name|escape:'html':'UTF-8'} </a>
-                                                            {else}
-                                                                <a href="{$link->getPageLink('get-file', true, NULL, "key={$product.filename|escape:'html':'UTF-8'}-{$product.download_hash|escape:'html':'UTF-8'}")|escape:'html':'UTF-8'}" title="{l s='Download this product'}"> {$product.product_name|escape:'html':'UTF-8'} </a>
+                                                                {assign var=urlExtra value="&id_order="+strval($order->id)+"&secure_key="+strval($order->secure_key)}
                                                             {/if}
+
+                                                            <a href="{$link->getPageLink('get-file', true, NULL, "key={$product.filename|escape:'html':'UTF-8'}-{$product.download_hash|escape:'html':'UTF-8'}{$urlExtra}")|escape:'html':'UTF-8'}" title="{l s='Download this Product'}" class="textlink-nostyle">
+                                                                <i class="fa fa-download"></i>
+                                                                {$product.product_name|escape:'html':'UTF-8'}
+                                                            </a>
                                                         {else}
                                                             {$product.product_name|escape:'html':'UTF-8'}
                                                             {if $product.product_reference}
@@ -356,9 +365,8 @@
                                 {foreach from=$discounts item=discount}
                                     <tr>
                                         <td>{$discount.name|escape:'html':'UTF-8'}</td>
-                                        <td>{l s='Voucher'} {$discount.name|escape:'html':'UTF-8'}</td>
                                         <td><span class="order_qte_span editable">1</span></td>
-                                        <td>&nbsp;</td>
+                                        <td>{if $discount.value != 0.00}-{/if}{convertPriceWithCurrency price=$discount.value currency=$currency}</td>
                                         <td>{if $discount.value != 0.00}-{/if}{convertPriceWithCurrency price=$discount.value currency=$currency}</td>
                                         {if $return_allowed}
                                             <td>&nbsp;</td>
@@ -398,7 +406,7 @@
             <h2 class="order-details-title">{l s='Shipping'}</h2>
 
             <div class="shipping-address bg-color-dark"{if $order->isVirtual()} style="display:none;"{/if}>
-                <ul class="address box">
+                <ul class="address">
                     <li>
                         <h3 class="page-subheading">{l s='Shipping Address'}</h3>
                     </li>
@@ -420,8 +428,8 @@
                     {/foreach}
                 </ul>
             </div>
-            <div class="billing-address bg-color-dark">
-                <ul class="address {if $order->isVirtual()}full_width{/if} box">
+            <div class="billing-address bg-color-dark" {if $order->isVirtual()}style="float: left"{/if}>
+                <ul class="address">
                     <li>
                         <h3 class="page-subheading">{l s='Billing Address'}</h3>
                     </li>
@@ -455,8 +463,8 @@
                     <th>{l s='Date'}</th>
                     <th data-sort-ignore="true">{l s='Carrier'}</th>
                     <th data-hide="phone">{l s='Weight'}</th>
-                    <th data-hide="phone">{l s='Shipping cost'}</th>
-                    <th data-hide="phone" data-sort-ignore="true">{l s='Tracking number'}</th>
+                    <th data-hide="phone">{l s='Shipping Cost'}</th>
+                    <th data-hide="phone" data-sort-ignore="true">{l s='Tracking Number'}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -467,7 +475,7 @@
                         <td data-value="{if $line.weight > 0}{$line.weight|string_format:"%.3f"}{else}0{/if}">{if $line.weight > 0}{$line.weight|string_format:"%.3f"} {Configuration::get('PS_WEIGHT_UNIT')}{else}-{/if}</td>
                         <td data-value="{if $order->getTaxCalculationMethod() == $smarty.const.PS_TAX_INC}{$line.shipping_cost_tax_incl}{else}{$line.shipping_cost_tax_excl}{/if}">{if $order->getTaxCalculationMethod() == $smarty.const.PS_TAX_INC}{displayPrice price=$line.shipping_cost_tax_incl currency=$currency->id}{else}{displayPrice price=$line.shipping_cost_tax_excl currency=$currency->id}{/if}</td>
                         <td>
-                        <span class="shipping_number_show">{if $line.tracking_number}{if $line.url && $line.tracking_number}<a href="{$line.url|replace:'@':$line.tracking_number}">{$line.tracking_number}</a>{else}{$line.tracking_number}{/if}{else}-{/if}</span>
+                        <span class="shipping_number_show">{if $line.tracking_number}{if $line.url && $line.tracking_number}<a href="{$line.url|replace:'@':$line.tracking_number}" class="textlink-nostyle external-link" target="_blank">{$line.tracking_number}</a>{else}{$line.tracking_number}{/if}{else}-{/if}</span>
                         </td>
                     </tr>
                     {/foreach}
