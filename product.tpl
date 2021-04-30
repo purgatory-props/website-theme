@@ -16,6 +16,11 @@
 {assign var='largeDefaultWidth' value={getWidthSize|intval type='large'}}
 {assign var='largeDefaultHeight' value={getHeightSize|intval type='large'}}
 
+{assign var='isActuallyOnSale' value=false}
+{if $product->base_price > $productPrice}
+    {assign var='isActuallyOnSale' value=true}
+{/if}
+
 <div class="product-wrapper" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}">
 
@@ -42,7 +47,7 @@
                     {if isset($product->on_sale) && $product->on_sale && isset($product->show_price) && $product->show_price && !$PS_CATALOG_MODE}
                         <span class="product-label product-label-sale">{l s='Sale!'}</span>
                     {elseif isset($product->reduction) && $product->reduction && isset($product->show_price) && $product->show_price && !$PS_CATALOG_MODE}
-                        <span class="product-label product-label-discount">{l s='Reduced price!'}</span>
+                        <span class="product-label product-label-discount">{l s='Reduced Price!'}</span>
                     {/if}
                 </div>
 
@@ -189,13 +194,18 @@
                                         <p class="our_price_display accent-color" itemprop="offers" itemscope itemtype="https://schema.org/Offer">{strip}
                                             {if $product->quantity > 0}<link itemprop="availability" href="https://schema.org/InStock">{/if}
                                             {if $priceDisplay >= 0 && $priceDisplay <= 2}
-                                            <meta itemprop="price" content="{$productPrice}">
-                                            <span id="our_price_display" class="price">{convertPrice price=$productPrice|floatval}</span>
-                                            {if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) || !isset($display_tax_label))}
-                                                {if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}
-                                            {/if}
-                                            <meta itemprop="priceCurrency" content="{$currency->iso_code}">
-                                            {hook h="displayProductPriceBlock" product=$product type="price"}
+                                                <meta itemprop="price" content="{$productPrice}">
+                                                <span id="our_price_display" class="price">
+                                                    {if $isActuallyOnSale}
+                                                        <span class="old-price">{convertPrice price=$product->base_price|floatval}</span>
+                                                    {/if}
+                                                    {convertPrice price=$productPrice|floatval}
+                                                </span>
+                                                {if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) || !isset($display_tax_label))}
+                                                    {if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}
+                                                {/if}
+                                                <meta itemprop="priceCurrency" content="{$currency->iso_code}">
+                                                {hook h="displayProductPriceBlock" product=$product type="price"}
                                             {/if}
                                         {/strip}</p>
                                         <p id="reduction_percent" {if $productPriceWithoutReduction <= 0 || !$product->specificPrice || $product->specificPrice.reduction_type != 'percentage'} style="display:none;"{/if}>{strip}
