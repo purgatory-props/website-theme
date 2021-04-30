@@ -203,7 +203,7 @@
                                                         <span class="old-price">{convertPrice price=$product->base_price|floatval}</span>
                                                     {/if}
 
-                                                    <span id="our_price_display" class="price accent-color">
+                                                    <span id="our_price_display" class="current-price accent-color">
                                                         {convertPrice price=$productPrice|floatval}
                                                     </span>
 
