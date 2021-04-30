@@ -207,16 +207,14 @@
                                                         {convertPrice price=$productPrice|floatval}
                                                     </span>
 
-                                                    {if $productPriceWithoutReduction > 0 && $product->specificPrice}
-                                                        <span class="reduction-label noselect">
-                                                            {if $product->specificPrice.reduction_type == 'percentage'}
-                                                                {$product->specificPrice.reduction*100}%
-                                                            {else if $product->specificPrice.reduction_type == 'amount'}
-                                                                {convertPrice price=$productPriceWithoutReduction|floatval-$productPrice|floatval}
-                                                            {/if}
-                                                            &nbsp;{l s='Off!'}
-                                                        </span>
-                                                    {/if}
+                                                    <span id="price-reduction" class="reduction-label noselect" {if $productPriceWithoutReduction <= 0 || !$product->specificPrice}style="display:none"{/if}>
+                                                        {if $product->specificPrice.reduction_type == 'percentage'}
+                                                            {$product->specificPrice.reduction*100}%
+                                                        {else if $product->specificPrice.reduction_type == 'amount'}
+                                                            {convertPrice price=$productPriceWithoutReduction|floatval-$productPrice|floatval}
+                                                        {/if}
+                                                        &nbsp;{l s='Off!'}
+                                                    </span>
 
                                                     {if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) || !isset($display_tax_label))}
                                                         {if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}
@@ -269,7 +267,7 @@
                                             {assign var="groupName" value="group_$id_attribute_group"}
                                             <div class="attribute_list">
                                                 {if ($group.group_type == 'select')}
-                                                <select name="{$groupName}" id="group_{$id_attribute_group|intval}" class="form-control attribute_select no-print">
+                                                <select name="{$groupName}" id="group_{$id_attribute_group|intval}" class="form-control attribute_select no-print" autocomplete="off">
                                                     {foreach from=$group.attributes key=id_attribute item=group_attribute}
                                                     <option value="{$id_attribute|intval}"{if (isset($smarty.get.$groupName) && $smarty.get.$groupName|intval == $id_attribute) || $group.default == $id_attribute} selected="selected"{/if} title="{$group_attribute|escape:'html':'UTF-8'}">{$group_attribute|escape:'html':'UTF-8'}</option>
                                                     {/foreach}
@@ -296,7 +294,7 @@
                                                 <ul>
                                                     {foreach from=$group.attributes key=id_attribute item=group_attribute}
                                                     <li>
-                                                        <input type="radio" class="attribute_radio" name="{$groupName|escape:'html':'UTF-8'}" value="{$id_attribute}" {if ($group.default == $id_attribute)} checked="checked"{/if}>
+                                                        <input type="radio" class="attribute_radio" name="{$groupName|escape:'html':'UTF-8'}" value="{$id_attribute}" {if ($group.default == $id_attribute)} checked="checked"{/if} autocomplete="off">
                                                         <span class="label-text">{$group_attribute|escape:'html':'UTF-8'}</span>
                                                     </li>
                                                     {/foreach}

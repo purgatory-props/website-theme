@@ -154,14 +154,14 @@ function getProductAttribute() {
     }
 
     window.location.replace(url + request);
-  }
+}
 
 
 
 //update display of the availability of the product AND the prices of the product
 function updateDisplay() {
-    updatePrice();
-  }
+  updatePrice();
+}
 
 function updatePrice() {
     // Get combination prices
@@ -278,8 +278,8 @@ function updatePrice() {
 
     /*  Update the page content, no price calculation happens after */
 
-    var $reductionPercent = $('#reduction_percent');
-    var $reductionAmount = $('#reduction_amount');
+    var $reductionPercent = $('#price-reduction');
+    var $reductionAmount = $('#price-reduction');
     var $unitPrice = $('.unit-price');
     var $priceEcotax = $('.price-ecotax');
 
@@ -319,18 +319,19 @@ function updatePrice() {
       // Then if it's not only a group reduction we display the discount in red box
       if (priceWithDiscountsWithoutTax != priceWithGroupReductionWithoutTax) {
         if (combination.specific_price.reduction_type == 'amount') {
-          $('#reduction_amount_display').html('-' + formatCurrency(discountValue, currencyFormat, currencySign, currencyBlank));
+          $('#price-reduction').html(formatCurrency(discountValue, currencyFormat, currencySign, currencyBlank) + ' Off!');
           $reductionAmount.show();
         } else {
           var toFix = 2;
           if ((parseFloat(discountPercentage).toFixed(2) - parseFloat(discountPercentage).toFixed(0)) == 0) {
             toFix = 0;
           }
-          $('#reduction_percent_display').html('-' + parseFloat(discountPercentage).toFixed(toFix) + '%');
+          $('#price-reduction').html(parseFloat(discountPercentage).toFixed(toFix) + '% Off!');
           $reductionPercent.show();
         }
       }
     }
+
 
     // Green Tax (Eco tax)
     // Update display of Green Tax
@@ -362,8 +363,85 @@ function updatePrice() {
     } else {
       updateDiscountTable(priceWithDiscountsWithTax);
     }
-  }
+}
 
+
+/**
+ * Update display of the discounts table.
+ * @param combination Combination ID.
+ */
+ function displayDiscounts(combination) {
+  // Tables & rows selection
+  var quantityDiscountTable = $('#quantityDiscount');
+  var combinationsSpecificQuantityDiscount = $('.quantityDiscount_' + combination, quantityDiscountTable);
+  var allQuantityDiscount = $('.quantityDiscount_0', quantityDiscountTable);
+
+  // If there is some combinations specific quantity discount, show them, else, if there are some
+  // products quantity discount: show them. In case of result, show the category.
+  if (combinationsSpecificQuantityDiscount.length) {
+    quantityDiscountTable.find('tbody tr').hide();
+    combinationsSpecificQuantityDiscount.show();
+    quantityDiscountTable.show();
+  } else if (allQuantityDiscount.length) {
+    allQuantityDiscount.show();
+    $('tbody tr', quantityDiscountTable).not('.quantityDiscount_0').hide();
+    quantityDiscountTable.show();
+  } else {
+    quantityDiscountTable.hide();
+  }
+}
+
+function updateDiscountTable(newPrice) {
+  $('#quantityDiscount').find('tbody tr').each(function() {
+    var type = $(this).data('discount-type');
+    var discount = $(this).data('discount');
+    var quantity = $(this).data('discount-quantity');
+    var discountedPrice;
+    var discountUpTo;
+
+    if (type === 'percentage') {
+      discountedPrice = newPrice * (1 - discount / 100);
+      discountUpTo = newPrice * (discount / 100) * quantity;
+    } else if (type === 'amount') {
+      discountedPrice = newPrice - discount;
+      discountUpTo = discount * quantity;
+    }
+
+    if (displayDiscountPrice != 0 && discountedPrice != 0) {
+      $(this).children('td').eq(1).text(formatCurrency(discountedPrice, currencyFormat, currencySign, currencyBlank));
+    }
+    $(this).attr('data-real-discount-value', formatCurrency(discountedPrice, currencyFormat, currencySign, currencyBlank));
+    $(this).children('td').eq(2).text(upToTxt + ' ' + formatCurrency(discountUpTo, currencyFormat, currencySign, currencyBlank));
+  });
+}
+
+
+//find a specific price rule, based on pre calculated dom display array
+function findSpecificPrice() {
+  var domData = $('#quantityDiscount').find('table tbody tr').not(':hidden');
+  var nbProduct = $('#quantity_wanted').val();
+  var newPrice = false;
+
+  //construct current specific price for current combination
+  domData.each(function(i) {
+    var dataDiscountQuantity = parseInt($(this).attr('data-discount-quantity'), 10);
+    var dataDiscountNextQuantity = -1;
+
+    var nextQtDiscount = $(domData[i + 1]);
+    if (nextQtDiscount.length) {
+      dataDiscountNextQuantity = parseInt(nextQtDiscount.attr('data-discount-quantity'), 10);
+    }
+    if (
+      (dataDiscountNextQuantity !== -1 && nbProduct >= dataDiscountQuantity && nbProduct < dataDiscountNextQuantity) ||
+      (dataDiscountNextQuantity === -1 && nbProduct >= dataDiscountQuantity)
+    ) {
+      newPrice = $(this).attr('data-real-discount-value');
+      return false;
+    }
+  });
+
+  return newPrice;
+}
 
 /* When some attribute select is changed */
 $(document).on('change', '.attribute_select', function(e) {
