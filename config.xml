@@ -16,7 +16,7 @@
   <modules>
     <module action="enable" name="beesblog"/>
     <module action="enable" name="beesblogpopularposts"/>
-    <module action="enable" name="blockbestsellers"/>
+    <module action="disable" name="blockbestsellers"/>
     <module action="enable" name="blockcart"/>
     <module action="enable" name="blockcategories"/>
     <module action="enable" name="blockcms"/>
