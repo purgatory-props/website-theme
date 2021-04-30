@@ -1,6 +1,6 @@
 {* Login *}
 <div class="login-col">
-    <form action="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" method="post" id="login_form" class="box">
+    <form action="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" method="post" id="login_form" >
         <h3 class="page-subheading">{l s='Login'}</h3>
         <div class="form_content clearfix">
         <div class="form-group">
@@ -27,7 +27,7 @@
 
 {* Sign Up *}
 <div class="signup-col">
-    <form action="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" method="post" id="create-account_form" class="box">
+    <form action="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" method="post" id="create-account_form" >
         <h3 class="page-subheading">{l s='Need an Account?'}</h3>
         <div class="form_content clearfix">
         <div class="alert alert-danger" id="create_account_error" style="display:none"></div>

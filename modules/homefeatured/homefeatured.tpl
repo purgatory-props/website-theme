@@ -4,7 +4,7 @@
     <div class="wrapper slightly-smaller home-featured center">
         {if isset($products) && $products}
             <div class="tm-hp text-center">
-                <h2 class="section-title">{l s='featured' mod='homefeatured'} {l s='products' mod='homefeatured'}</h2>
+                <h1 class="section-title">{l s='featured' mod='homefeatured'} {l s='products' mod='homefeatured'}</h1>
             </div>
             {include file="$tpl_dir./product-list.tpl" class='homefeatured' id='homefeatured'}
         {else}

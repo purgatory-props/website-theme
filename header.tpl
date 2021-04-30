@@ -52,8 +52,6 @@
             document.createElement('picture');
         </script>
 
-        <script src="{$tpl_uri|escape:'htmlall':'UTF-8'}js/vendor/picturefill.min.js" data-keepinline async></script>
-        <script src="{$tpl_uri|escape:'htmlall':'UTF-8'}js/vendor/picturefill-mutation.min.js" data-keepinline async></script>
         <script src="{$tpl_uri|escape:'htmlall':'UTF-8'}js/vendor/sweetalert.min.js" data-keepinline async></script>
     </head>
     <body {if isset($page_name)}id="{$page_name|escape:'html':'UTF-8'}"{/if} class="{if isset($page_name)}{$page_name|escape:'html':'UTF-8'}{/if}{if isset($body_classes) && $body_classes|@count} {implode value=$body_classes separator=' '}{/if}">

@@ -6,55 +6,12 @@
       <description iso="en">Welcome the Darkness is a minimal dark-mode theme.</description>
   </descriptions>
   <variations>
-    <variation name="Welcome the Darkness" directory="welcome-the-darkness" responsive="1"
-               default_left_column="1" default_right_column="0"
+    <variation name="welcome-the-darkness" directory="welcome-the-darkness" responsive="1"
+               default_left_column="0" default_right_column="0"
                product_per_page="12" from="1.1.0"/>
   </variations>
   <docs></docs>
   <metas>
-    <meta meta_page="best-sales" left="1" right="0"/>
-    <meta meta_page="contact" left="0" right="0"/>
-    <meta meta_page="index" left="0" right="0"/>
-    <meta meta_page="manufacturer" left="1" right="0"/>
-    <meta meta_page="new-products" left="1" right="0"/>
-    <meta meta_page="password" left="0" right="0"/>
-    <meta meta_page="prices-drop" left="1" right="0"/>
-    <meta meta_page="sitemap" left="1" right="0"/>
-    <meta meta_page="supplier" left="0" right="0"/>
-    <meta meta_page="address" left="0" right="0"/>
-    <meta meta_page="addresses" left="0" right="0"/>
-    <meta meta_page="authentication" left="0" right="0"/>
-    <meta meta_page="cart" left="0" right="0"/>
-    <meta meta_page="discount" left="0" right="0"/>
-    <meta meta_page="history" left="0" right="0"/>
-    <meta meta_page="identity" left="0" right="0"/>
-    <meta meta_page="my-account" left="0" right="0"/>
-    <meta meta_page="order-follow" left="0" right="0"/>
-    <meta meta_page="order-slip" left="0" right="0"/>
-    <meta meta_page="order" left="0" right="0"/>
-    <meta meta_page="search" left="1" right="0"/>
-    <meta meta_page="stores" left="0" right="0"/>
-    <meta meta_page="order-opc" left="0" right="0"/>
-    <meta meta_page="guest-tracking" left="0" right="0"/>
-    <meta meta_page="order-confirmation" left="0" right="0"/>
-    <meta meta_page="module-bankwire-validation" left="0" right="0"/>
-    <meta meta_page="module-bankwire-payment" left="0" right="0"/>
-    <meta meta_page="products-comparison" left="0" right="0"/>
-    <meta meta_page="attachment" left="1" right="0"/>
-    <meta meta_page="favicon" left="1" right="0"/>
-    <meta meta_page="getfile" left="1" right="0"/>
-    <meta meta_page="module-blocknewsletter-verification" left="1" right="0"/>
-    <meta meta_page="order-detail" left="1" right="0"/>
-    <meta meta_page="order-return" left="1" right="0"/>
-    <meta meta_page="pagenotfound" left="1" right="0"/>
-    <meta meta_page="pdf-invoice" left="1" right="0"/>
-    <meta meta_page="pdf-order-return" left="1" right="0"/>
-    <meta meta_page="pdf-order-slip" left="1" right="0"/>
-    <meta meta_page="category" left="1" right="0"/>
-    <meta meta_page="changecurrency" left="1" right="0"/>
-    <meta meta_page="cms" left="1" right="0"/>
-    <meta meta_page="product" left="0" right="0"/>
-    <meta meta_page="statistics" left="1" right="0"/>
   </metas>
   <modules>
     <module action="enable" name="beesblog"/>
@@ -65,17 +22,17 @@
     <module action="enable" name="blockcms"/>
     <module action="enable" name="blockcontactinfos"/>
     <module action="enable" name="blockcurrencies"/>
-    <module action="enable" name="blocklanguages"/>
+    <module action="disable" name="blocklanguages"/>
     <module action="enable" name="blocklayered"/>
     <module action="enable" name="blockmanufacturer"/>
     <module action="enable" name="blockmyaccount"/>
-    <module action="enable" name="blockmyaccountfooter"/>
+    <module action="disable" name="blockmyaccountfooter"/>
     <module action="enable" name="blocknewproducts"/>
     <module action="enable" name="blocknewsletter"/>
     <module action="enable" name="blocksearch"/>
     <module action="enable" name="blocksocial"/>
     <module action="enable" name="blockspecials"/>
-    <module action="enable" name="blocksupplier"/>
+    <module action="disable" name="blocksupplier"/>
     <module action="enable" name="blocktags"/>
     <module action="enable" name="blocktopmenu"/>
     <module action="enable" name="blockuserinfo"/>
@@ -84,6 +41,7 @@
     <module action="enable" name="homefeatured"/>
     <module action="enable" name="homeslider"/>
     <module action="enable" name="socialsharing"/>
+    <module action="enable" name="tbhtmlblock" />
     <module action="disable" name="advancedeucompliance"/>
     <module action="disable" name="blockbanner"/>
     <module action="disable" name="blockcmsinfo"/>
@@ -179,6 +137,10 @@
       <hook module="socialsharing" hook="displayHeader" position="1"/>
       <hook module="socialsharing" hook="displayCompareExtraInformation" position="1"/>
       <hook module="socialsharing" hook="displayRightColumnProduct" position="1"/>
+      <hook module="blockcart" hook="displayNav" position="2"/>
+      <hook module="blocktopmenu" hook="displayNav" position="3"/>
+      <hook module="tbhtmlblock" hook="displayNav" position="4" />
+      <hook module="tbhtmlblock" hook="displayNav" position="1" />
     </hooks>
   </modules>
   <images>
