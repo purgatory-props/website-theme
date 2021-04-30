@@ -24,6 +24,11 @@
 
                 <li class="no-hover"><hr/></li>
                 <li>
+                    <a href="{$link->getPageLink('search', true)|escape:'html':'UTF-8'}">
+                        {l s='Search'}
+                    </a>
+                </li>
+                <li>
                     <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">
                         {if $is_logged}{l s='Your Account'}{else}{l s='Login/Signup'}{/if}
                     </a>

@@ -1,11 +1,7 @@
 {if isset($blockcart_top) && $blockcart_top}
-<div id="blockcart-container">
-    <div id="blockcart" class="shopping_cart">
-        {include file='./includes/header.tpl'}
-    </div>
+<div id="blockcart-container" class="shopping_cart">
 
-    {if !$PS_CATALOG_MODE}
-        {include file='./includes/dropdown.tpl'}
-    {/if}
+        {include file='./includes/header.tpl'}
+
 </div>
 {/if}

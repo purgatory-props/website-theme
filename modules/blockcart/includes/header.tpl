@@ -7,11 +7,7 @@
         <span>{l s='Cart' mod='blockcart'}</span>
     </div>
 
-    <span class="ajax_cart_quantity">{$cart_qties}</span>
-    <span class="ajax_cart_product_txt"{if $cart_qties != 1} style="display: none;"{/if}>{l s='Product' mod='blockcart'}</span>
-    <span class="ajax_cart_product_txt_s"{if $cart_qties < 2} style="display: none;"{/if}>{l s='Products' mod='blockcart'}</span>
-    <span class="ajax_cart_total"{if $cart_qties == 0} style="display: none;"{/if}>
-        {if $cart_qties > 0}
+    <span class="ajax_cart_total">
         {if $priceDisplay == 1}
             {assign var='blockcart_cart_flag' value='Cart::BOTH_WITHOUT_SHIPPING'|constant}
             {convertPrice price=$cart->getOrderTotal(false, $blockcart_cart_flag)}
@@ -19,7 +15,9 @@
             {assign var='blockcart_cart_flag' value='Cart::BOTH_WITHOUT_SHIPPING'|constant}
             {convertPrice price=$cart->getOrderTotal(true, $blockcart_cart_flag)}
         {/if}
-        {/if}
+
     </span>
-    <span class="ajax_cart_no_product"{if $cart_qties > 0} style="display: none;"{/if}>{l s='(empty)' mod='blockcart'}</span>
+    {if $cart_qties == 0}
+    <span class="ajax_cart_no_product">{l s='(empty)' mod='blockcart'}</span>
+    {/if}
 </a>

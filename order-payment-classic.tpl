@@ -223,10 +223,7 @@
             {* Display the gift product line *}
             {include file="./shopping-cart-product-line.tpl" productLast=$product@last productFirst=$product@first}
           {/foreach}
-          </tbody>
-
           {if count($discounts)}
-            <tbody>
             {foreach from=$discounts item=discount name=discountLoop}
               {if $discount.value_real|floatval == 0}
                 {continue}
@@ -258,8 +255,8 @@
                 </td>
               </tr>
             {/foreach}
-            </tbody>
           {/if}
+            </tbody>
         </table>
       </div>
     {/if}

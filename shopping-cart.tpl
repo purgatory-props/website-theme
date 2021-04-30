@@ -107,7 +107,7 @@
                 <form action="{if $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" id="voucher">
                   <fieldset>
                     <h4>{l s='Vouchers'}</h4>
-                    <input type="text" class="discount_name form-control" id="discount_name" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
+                    <input type="text" class="discount_name form-control quarter-width" id="discount_name" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
                     <input type="hidden" name="submitDiscount">
                     <button type="submit" name="submitAddDiscount" class="btn btn-primary"><span>{l s='OK'}</span></button>
                   </fieldset>
@@ -389,10 +389,9 @@
         {* Display the gift product line *}
         {include file="$tpl_dir./shopping-cart-product-line.tpl" productLast=$product@last productFirst=$product@first}
       {/foreach}
-      </tbody>
 
       {if sizeof($discounts)}
-        <tbody>
+
         {foreach $discounts as $discount}
           {if ($discount.value_real|floatval == 0 && $discount.free_shipping != 1) || ($discount.value_real|floatval == 0 && $discount.code == '')}
             {continue}
@@ -420,8 +419,8 @@
             </td>
           </tr>
         {/foreach}
-        </tbody>
       {/if}
+        </tbody>
     </table>
   </div>
 

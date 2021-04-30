@@ -53,14 +53,20 @@ header {
                 padding: 10px;
                 outline: none;
                 border: none;
-                margin-top: 1px;
+                margin-top: 2px;
 
                 height: @search-height;
                 width: 80%;
 
                 &:hover {
-                    outline: 2px solid @color-accent-primary;
+                    border: 2px solid @color-accent-primary;
+                    border-right: none;
                     cursor: text;
+
+                    + span .searchbtn {
+                        border: 2px solid @color-accent-primary;
+                        border-left: 0;
+                    }
                 }
             }
 
@@ -76,6 +82,7 @@ header {
                 border-bottom: 1px solid white;
 
                 margin-left: -6px;
+                margin-top: -2px;
 
                 &:hover {
                     background-color: @color-accent-primary;
