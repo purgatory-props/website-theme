@@ -48,6 +48,7 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js" async></script>
         <![endif]-->
         <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver" data-keepinline></script>
+
         <script type="text/javascript" data-keepinline>
             document.createElement('picture');
         </script>
