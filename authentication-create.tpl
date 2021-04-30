@@ -1,4 +1,4 @@
-<form action="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" method="post" id="account-creation_form" class="std box">
+<form action="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" method="post" id="account-creation_form" class="std">
   {$HOOK_CREATE_ACCOUNT_TOP}
 
   <div class="account_creation">
