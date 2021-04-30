@@ -140,7 +140,8 @@
       <hook module="blockcart" hook="displayNav" position="2"/>
       <hook module="blocktopmenu" hook="displayNav" position="3"/>
       <hook module="tbhtmlblock" hook="displayNav" position="4" />
-      <hook module="tbhtmlblock" hook="displayNav" position="1" />
+      <hook module="tbhtmlblock" hook="displayFooter" position="1" />
+      <hook module="tbhtmlblock" hook="displayHome" position="1" />
     </hooks>
   </modules>
   <images>
@@ -163,7 +164,7 @@
             products="true" categories="false" manufacturers="false"
            suppliers="false" scenes="false" stores="false"/>
     <image name="large" width="458" height="458"
-           products="true" categories="false" manufacturers="true"
+           products="true" categories="true" manufacturers="true"
            suppliers="true" scenes="false" stores="false"/>
     <image name="thickbox" width="800" height="800"
            products="true" categories="false" manufacturers="false"

@@ -23,16 +23,20 @@
     margin: 0 auto;
 }
 
-.template-half-width, .template-full-width {
+.template-half-width, .template-full-width, .template-40percent, .template-60percent {
     position: relative;
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px;
-}
 
-.template-half-width {
-    float: left;
-    width: 50%;
+    &.left-side {
+        padding-left: 0;
+    }
+
+    &.right-side {
+        padding-right: 0;
+    }
+
 
     @media @responsive-first-size {
         width: 100% !important;
@@ -40,6 +44,25 @@
         float: none;
     }
 }
+
+
+.template-half-width {
+    float: left;
+    width: 50%;
+
+}
+
+.template-40percent {
+    float: left;
+    width: 40%;
+}
+
+.template-60percent {
+    float: left;
+    width: 60%;
+}
+
+
 
 .template-full-width {
     width: 100%;
