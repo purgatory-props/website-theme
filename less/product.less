@@ -97,9 +97,14 @@
                 margin-top: 10px;
 
                 #buy_block {
-                    .our_price_display {
+                    .price-display {
                         font-size: 2em;
                         cursor: default;
+                        line-height: 1em;
+
+                        display: inline-block;
+
+                        margin-bottom: 20px;
 
                         .old-price {
                             color: @color-font;
@@ -107,7 +112,25 @@
                             font-size: 0.8em;
                             margin-right: 10px;
                         }
+
+
+                        .reduction-label {
+                            display: inline-block;
+                            cursor: default;
+
+                            margin-top: -5px;
+                            margin-left: 10px;
+
+                            vertical-align: middle;
+
+                            padding: 0 5px;
+                            font-size: 0.6em;
+
+                            background-color: green;
+                            text-transform: uppercase;
+                        }
                     }
+
 
                     .product_attributes {
                         .attribute_fieldset {

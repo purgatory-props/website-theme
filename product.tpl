@@ -191,46 +191,48 @@
                                 <div class="content_prices clearfix">
                                     {if $product->show_price && !isset($restricted_country_mode) && !$PS_CATALOG_MODE}
                                     <div>
-                                        <p class="our_price_display accent-color" itemprop="offers" itemscope itemtype="https://schema.org/Offer">{strip}
-                                            {if $product->quantity > 0}<link itemprop="availability" href="https://schema.org/InStock">{/if}
-                                            {if $priceDisplay >= 0 && $priceDisplay <= 2}
-                                                <meta itemprop="price" content="{$productPrice}">
-                                                <span id="our_price_display" class="price">
+                                        <div class="price-display" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                            {strip}
+                                                {if $product->quantity > 0}
+                                                    <link itemprop="availability" href="https://schema.org/InStock">
+                                                {/if}
+                                                {if $priceDisplay >= 0 && $priceDisplay <= 2}
+                                                    <meta itemprop="price" content="{$productPrice}">
+
                                                     {if $isActuallyOnSale}
                                                         <span class="old-price">{convertPrice price=$product->base_price|floatval}</span>
                                                     {/if}
-                                                    {convertPrice price=$productPrice|floatval}
-                                                </span>
-                                                {if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) || !isset($display_tax_label))}
-                                                    {if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}
+
+                                                    <span id="our_price_display" class="price accent-color">
+                                                        {convertPrice price=$productPrice|floatval}
+                                                    </span>
+
+                                                    {if $productPriceWithoutReduction > 0 && $product->specificPrice}
+                                                        <span class="reduction-label noselect">
+                                                            {if $product->specificPrice.reduction_type == 'percentage'}
+                                                                {$product->specificPrice.reduction*100}%
+                                                            {else if $product->specificPrice.reduction_type == 'amount'}
+                                                                {convertPrice price=$productPriceWithoutReduction|floatval-$productPrice|floatval}
+                                                            {/if}
+                                                            &nbsp;{l s='Off!'}
+                                                        </span>
+                                                    {/if}
+
+                                                    {if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) || !isset($display_tax_label))}
+                                                        {if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}
+                                                    {/if}
+
+                                                    <meta itemprop="priceCurrency" content="{$currency->iso_code}">
+                                                    {hook h="displayProductPriceBlock" product=$product type="price"}
                                                 {/if}
-                                                <meta itemprop="priceCurrency" content="{$currency->iso_code}">
-                                                {hook h="displayProductPriceBlock" product=$product type="price"}
-                                            {/if}
-                                        {/strip}</p>
-                                        <p id="reduction_percent" {if $productPriceWithoutReduction <= 0 || !$product->specificPrice || $product->specificPrice.reduction_type != 'percentage'} style="display:none;"{/if}>{strip}
-                                            <span id="reduction_percent_display">
-                                            {if $product->specificPrice && $product->specificPrice.reduction_type == 'percentage'}-{$product->specificPrice.reduction*100}%{/if}
-                                            </span>
-                                        {/strip}</p>
-                                        <p id="reduction_amount" {if $productPriceWithoutReduction <= 0 || !$product->specificPrice || $product->specificPrice.reduction_type != 'amount' || $product->specificPrice.reduction|floatval ==0} style="display:none"{/if}>{strip}
-                                            <span id="reduction_amount_display">
-                                            {if $product->specificPrice && $product->specificPrice.reduction_type == 'amount' && $product->specificPrice.reduction|floatval !=0}
-                                                -{convertPrice price=$productPriceWithoutReduction|floatval-$productPrice|floatval}
-                                            {/if}
-                                            </span>
-                                        {/strip}</p>
-                                        <p id="old_price"{if (!$product->specificPrice || !$product->specificPrice.reduction)} class="hidden"{/if}>{strip}
-                                            {if $priceDisplay >= 0 && $priceDisplay <= 2}
-                                            {hook h="displayProductPriceBlock" product=$product type="old_price"}
-                                            <span id="old_price_display"><span class="price">{if $productPriceWithoutReduction > $productPrice}{convertPrice price=$productPriceWithoutReduction|floatval}{/if}</span>{if $productPriceWithoutReduction > $productPrice && $tax_enabled && $display_tax_label == 1} {if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}{/if}</span>
-                                            {/if}
-                                        {/strip}</p>
+                                            {/strip}
+                                        </div>
+
                                         {if $priceDisplay == 2}
-                                        <br>
-                                        <span id="pretaxe_price">{strip}
-                                            <span id="pretaxe_price_display">{convertPrice price=$product->getPrice(false)}</span> {l s='tax excl.'}
-                                        {/strip}</span>
+                                            <br>
+                                            <span id="pretaxe_price">{strip}
+                                                <span id="pretaxe_price_display">{convertPrice price=$product->getPrice(false)}</span> {l s='tax excl.'}
+                                            {/strip}</span>
                                         {/if}
                                     </div>
                                     {if $packItems|@count && $productPrice < $product->getNoPackPrice()}
