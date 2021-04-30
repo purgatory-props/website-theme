@@ -24,7 +24,7 @@
     <module action="enable" name="blockcurrencies"/>
     <module action="disable" name="blocklanguages"/>
     <module action="enable" name="blocklayered"/>
-    <module action="enable" name="blockmanufacturer"/>
+    <module action="disable" name="blockmanufacturer"/>
     <module action="enable" name="blockmyaccount"/>
     <module action="disable" name="blockmyaccountfooter"/>
     <module action="enable" name="blocknewproducts"/>
