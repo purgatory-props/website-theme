@@ -24,7 +24,7 @@
 <div class="product-wrapper" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}">
 
-    <div class="product-header">
+    <div class="product-header clearfix" style="min-height: {$largeDefaultHeight|intval}px">
         {if !empty($confirmation)}
             <div class="alert alert-warning">{$confirmation}</div>
         {/if}
