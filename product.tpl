@@ -157,6 +157,8 @@
 
 
             <div class="product-flags">
+                {hook h='displayProductFlags'}
+
                 {assign var=isService value=false}
 
                 {foreach from=$product->ui_tags item=t}
@@ -343,8 +345,16 @@
                                 </div>
                             </div>
                         </form>
-                        {/if}
-                        {if isset($HOOK_EXTRA_RIGHT) && $HOOK_EXTRA_RIGHT}{$HOOK_EXTRA_RIGHT}{/if}
+                    {/if}
+
+                    {if isset($HOOK_EXTRA_RIGHT) && $HOOK_EXTRA_RIGHT}
+                        {$HOOK_EXTRA_RIGHT}
+                    {/if}
+
+
+                    {if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}
+                        {$HOOK_PRODUCT_ACTIONS}
+                    {/if}
 
                 {/if}
             </div>
