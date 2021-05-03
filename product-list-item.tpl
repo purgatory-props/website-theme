@@ -1,12 +1,11 @@
 <a class="grid-item-wrapper" href="{$product.link|escape:'html':'UTF-8'}" title="{$product.name|escape:'html':'UTF-8'} - {$product.description_short|strip_tags:'UTF-8'|truncate:40:'...'}" itemprop="url">
     <div class="product-container" itemscope itemtype="https://schema.org/Product">
-
-        <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
-            itemprop="image"
-            width="{getWidthSize|intval type='home'}"
-            height="{getHeightSize|intval type='home'}"
-            loading="lazy"
-            />
+            <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
+                itemprop="image"
+                width="{getWidthSize|intval type='home'}"
+                height="{getHeightSize|intval type='home'}"
+                loading="lazy"
+                />
 
         <div class="product-title">
             <h3 itemprop="name">{$product.name}</h3>

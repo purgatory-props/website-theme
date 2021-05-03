@@ -77,7 +77,19 @@
                     </a>
 
                 {else}
-                    Uhhhh...
+                    {* Coming Soon Product Image *}
+                    <a class="fullImageLink" style="cursor: default">
+                            <!--[if IE 9]></video><![endif]-->
+                            <img class="img-responsive center-block product-image center"
+                                itemprop="image"
+                                src="{$tpl_uri}/img/coming_soon_product_image.png"
+                                title="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
+                                alt="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
+                                width="{$largeDefaultWidth|intval}"
+                                height="{$largeDefaultWidth|intval}"
+                                id="productImage"
+                            >
+                    </a>
                 {/if}
             </div>
 
