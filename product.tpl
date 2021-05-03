@@ -39,7 +39,7 @@
                         {/if}
                     {/if}
                     {if isset($product->coming_soon) && $product->coming_soon == 1}
-                        <span class="product-label product-label-comingsoon">Coming Soon!</span>
+                        <span class="product-label product-label-comingsoon">{l s='Coming Soon!'}</span>
                     {/if}
                     {if isset($product->new) && $product->new == 1}
                         <span class="product-label product-label-new">{l s='New'}</span>
