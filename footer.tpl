@@ -15,6 +15,10 @@
     {assign var=halloweenCountdown value="Happy Halloween!"}
 {/if}
 
+{if $daysUntilHalloween == 183}
+    {assign var=halloweenCountdown value="Halfway to Halloween!"}
+{/if}
+
             </main>
         </div>
 
