@@ -21,6 +21,8 @@
     {assign var='isActuallyOnSale' value=true}
 {/if}
 
+{hook h='actionModifyProductIfAService' product=$product}
+
 <div class="product-wrapper" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}">
 
@@ -157,27 +159,14 @@
 
 
             <div class="product-flags">
-                {hook h='displayProductFlags'}
+                {hook h='displayProductFlags' product=$product}
 
                 {assign var=isService value=false}
-
-                {foreach from=$product->ui_tags item=t}
-                    {if $product->show_price || (($t['key'] == '--discontinued') || ($t['key'] == '--service'))}
-                        <div class="ui-tag ui-tag-{$t['name']}" style="background-color: {$t['bgcolor']}; color: {$t['fgcolor']}">
-                            <span class="ui-tag-title">{$t['title']}</span>
-                            <div class="ui-tag-desc">{$t['body']}</div>
-                        </div>
-
-                        {if $t['key'] == '--service'}
-                            {assign var=isService value=true}
-                        {/if}
-                    {/if}
-                {/foreach}
             </div>
 
             <!-- Add To Cart and Stuff -->
             <div class="product-actions">
-                {if $isService}
+                {if isset($product->is_service) && $product->is_service}
                     <!-- Service Starting Price and Contact Button -->
                     <div class="service-price-container" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                         {l s='Starting at'} <span id="our_price_display" class="price service-price accent-color">{convertPrice price=$productPrice|floatval}</span>
@@ -186,7 +175,7 @@
 
                     <div class="service-contact-container">
                         <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}?sendTo=4">
-                            <button class="service-contact-btn">
+                            <button class="service-contact-btn ">
                                 {l s='Contact Us About This Service'}
                             </button>
                         </a>
@@ -195,7 +184,6 @@
                     <!-- Add to Cart Button and Quantity if Available -->
                     {if ($product->show_price && !isset($restricted_country_mode)) || isset($groups) || $product->reference || (isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS)}
                         <form id="buy_block"{if $PS_CATALOG_MODE && !isset($groups) && $product->quantity > 0} class="hidden"{/if} action="{$link->getPageLink('cart')|escape:'html':'UTF-8'}" method="post">
-
                             <input type="hidden" name="token" value="{$static_token}">
                             <input type="hidden" name="id_product" value="{$product->id|intval}" id="product_page_product_id">
                             <input type="hidden" name="add" value="1">
@@ -346,17 +334,18 @@
                             </div>
                         </form>
                     {/if}
-
-                    {if isset($HOOK_EXTRA_RIGHT) && $HOOK_EXTRA_RIGHT}
-                        {$HOOK_EXTRA_RIGHT}
-                    {/if}
-
-
                     {if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}
                         {$HOOK_PRODUCT_ACTIONS}
                     {/if}
-
                 {/if}
+
+                {if isset($HOOK_EXTRA_RIGHT) && $HOOK_EXTRA_RIGHT}
+                    {$HOOK_EXTRA_RIGHT}
+                {/if}
+
+
+
+
             </div>
         </div>
     </div>
