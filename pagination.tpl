@@ -160,7 +160,6 @@
 
         <button type="submit" class="btn btn-default">{l s='Show all'}</button>
         <input name="n" id="nb_item" type="hidden" value="{$nb_products}">
-
       </form>
     </div>
   {/if}

@@ -34,7 +34,7 @@
       {/if}
 
       <label for="nb_item{if isset($paginationId)}_{$paginationId}{/if}" class="small">{l s='Items Per Page'}</label>
-      <select name="n" id="nb_item{if isset($paginationId)}_{$paginationId}{/if}" class="form-control">
+      <select name="n" id="nb_item{if isset($paginationId)}_{$paginationId}{/if}" class="form-control" onchange="this.form.submit()">
         {assign var="lastnValue" value="0"}
         {foreach from=$nArray item=nValue}
           {if $lastnValue <= $nb_products}
