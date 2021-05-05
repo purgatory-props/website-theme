@@ -312,28 +312,78 @@
 
                                 <div class="box-cart-bottom">
                                     {if !$PS_CATALOG_MODE}
-                                    <div id="quantity_wanted_p"{if (!$allow_oosp && $product->quantity <= 0) || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
-                                        <div><label for="quantity_wanted">{l s='Quantity'}</label></div>
-                                        <div class="input-group quantity-input" style="margin-top: 5px;">
-                                            <input type="number" min="1" name="qty" id="quantity_wanted" class="text-center quantity-input" id="quantity_wanted"  value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product->minimal_quantity > 1}{$product->minimal_quantity}{else}1{/if}{/if}">
+                                        <div id="quantity_wanted_p"{if (!$allow_oosp && $product->quantity <= 0) || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
+                                            <div><label for="quantity_wanted">{l s='Quantity'}</label></div>
+                                            <div class="input-group quantity-input" style="margin-top: 5px;">
+                                                <input type="number" min="1" name="qty" id="quantity_wanted" class="text-center quantity-input" id="quantity_wanted"  value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product->minimal_quantity > 1}{$product->minimal_quantity}{else}1{/if}{/if}" autocomplete="off">
+                                            </div>
                                         </div>
-                                    </div>
                                     {/if}
 
                                     {if $product->available_for_order}
-                                    <div {if (!$allow_oosp && $product->quantity <= 0) || !$product->available_for_order || (isset($restricted_country_mode) && $restricted_country_mode) || $PS_CATALOG_MODE} class="unvisible"{/if}>
-                                        <p id="add_to_cart" class="buttons_bottom_block no-print">
-                                            <button type="submit" name="Submit" class="btn btn-block btn-lg btn-success btn-add-to-cart">
-                                            <i class="icon icon-shopping-basket"></i>
-                                            <span>{if $content_only && (isset($product->customization_required) && $product->customization_required)}{l s='Customize'}{else}{l s='Add to Cart'}{/if}</span>
-                                            </button>
-                                        </p>
-                                    </div>
+                                        <div {if (!$allow_oosp && $product->quantity <= 0) || !$product->available_for_order || (isset($restricted_country_mode) && $restricted_country_mode) || $PS_CATALOG_MODE} class="unvisible"{/if}>
+                                            <p id="add_to_cart" class="buttons_bottom_block no-print">
+                                                <button type="submit" name="Submit" class="btn btn-block btn-lg btn-success btn-add-to-cart">
+                                                    <i class="icon icon-shopping-basket"></i>
+                                                    <span>{if $content_only && (isset($product->customization_required) && $product->customization_required)}{l s='Customize'}{else}{l s='Add to Cart'}{/if}</span>
+                                                </button>
+                                            </p>
+                                        </div>
                                     {/if}
                                 </div>
+
+                                {* Volume Discounts *}
+                                {if !empty($quantity_discounts)}
+                                    <section id="product-volume-discounts" class="page-product-box">
+                                        <div id="quantityDiscount" class="table-small">
+                                            <table class="table-product-discounts table table-condensed table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>{l s='Qty'}</th>
+                                                        <th>{if $display_discount_price}{l s='Price'}{else}{l s='Discount'}{/if}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {foreach from=$quantity_discounts item='quantity_discount' name='quantity_discounts'}
+                                                        {if $quantity_discount.price >= 0 || $quantity_discount.reduction_type == 'amount'}
+                                                            {$realDiscountPrice=$productPriceWithoutReduction|floatval-$quantity_discount.real_value|floatval}
+                                                        {else}
+                                                            {$realDiscountPrice=$productPriceWithoutReduction|floatval-($productPriceWithoutReduction*$quantity_discount.reduction)|floatval}
+                                                        {/if}
+                                                        <tr id="quantityDiscount_{$quantity_discount.id_product_attribute}" class="quantityDiscount_{$quantity_discount.id_product_attribute}" data-real-discount-value="{convertPrice price = $realDiscountPrice}" data-discount-type="{$quantity_discount.reduction_type}" data-discount="{$quantity_discount.real_value|floatval}" data-discount-quantity="{$quantity_discount.quantity|intval}">
+                                                            <td>
+                                                                {$quantity_discount.quantity|intval}
+                                                            </td>
+                                                            <td>
+                                                                {if $quantity_discount.price >= 0 || $quantity_discount.reduction_type == 'amount'}
+                                                                {if $display_discount_price}
+                                                                    {if $quantity_discount.reduction_tax == 0 && !$quantity_discount.price}
+                                                                    {convertPrice price = $productPriceWithoutReduction|floatval-($productPriceWithoutReduction*$quantity_discount.reduction_with_tax)|floatval}
+                                                                    {else}
+                                                                    {convertPrice price=$productPriceWithoutReduction|floatval-$quantity_discount.real_value|floatval}
+                                                                    {/if}
+                                                                {else}
+                                                                    {convertPrice price=$quantity_discount.real_value|floatval}
+                                                                {/if}
+                                                                {else}
+                                                                {if $display_discount_price}
+                                                                    {convertPrice price = $productPriceWithoutReduction|floatval-($productPriceWithoutReduction*$quantity_discount.reduction)|floatval}
+                                                                {else}
+                                                                    {$quantity_discount.real_value|floatval}%
+                                                                {/if}
+                                                                {/if}
+                                                            </td>
+                                                        </tr>
+                                                    {/foreach}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+                                {/if}
                             </div>
                         </form>
                     {/if}
+
                     {if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}
                         {$HOOK_PRODUCT_ACTIONS}
                     {/if}

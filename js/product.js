@@ -448,13 +448,30 @@ $(document).on('change', '.attribute_select', function(e) {
     e.preventDefault();
     findCombination();
     getProductAttribute();
-  });
+});
+
+
+$(document).on('change', '#quantity_wanted', function(e) {
+  e.preventDefault();
+  if (isNaN($(this).val()) || $(this).val() === '') {
+    (minimalQuantity > 1) ? $(this).val(minimalQuantity) : $(this).val('1');
+  }
+  var specificPrice = findSpecificPrice();
+  var $ourPriceDisplay = $('#our_price_display');
+
+  if (false !== specificPrice) {
+    $ourPriceDisplay.text(specificPrice);
+  } else if (typeof productHasAttributes !== 'undefined' && productHasAttributes) {
+    updateDisplay();
+  } else {
+    $ourPriceDisplay.text(formatCurrency(parseFloat($ourPriceDisplay.siblings('meta[itemprop="price"]').attr('content')), currencyFormat, currencySign, currencyBlank));
+  }
+});
 
 
 
 
-
-  if (typeof combinations !== 'undefined' && combinations) {
+if (typeof combinations !== 'undefined' && combinations) {
     var combinationsJS = [];
     window.combinationsHashSet = {};
     k = 0;
