@@ -17,7 +17,7 @@
     </div>
     <div class="required form-group">
       <label for="email">{l s='Email'} <sup class="required">*</sup></label>
-      <input type="email" class="is_required validate form-control" data-validate="isEmail" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email}{/if}" autocomplete="email" required>
+      <input type="email" class="is_required validate form-control" data-validate="isEmail" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email}{/if}" autocomplete="username" required>
     </div>
     <div class="required password form-group">
       <label for="passwd">{l s='Password'} <sup class="required">*</sup></label>
