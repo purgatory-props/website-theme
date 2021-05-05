@@ -342,10 +342,6 @@
                 {if isset($HOOK_EXTRA_RIGHT) && $HOOK_EXTRA_RIGHT}
                     {$HOOK_EXTRA_RIGHT}
                 {/if}
-
-
-
-
             </div>
         </div>
     </div>
@@ -406,7 +402,14 @@
                     {include file="$tpl_dir./product-list.tpl" products=$accessories}
                 </div>
             {/if}
+
+            <!-- Extra Tabs -->
+            {$HOOK_PRODUCT_TAB_CONTENT}
         </div>
+
+        {if isset($HOOK_PRODUCT_FOOTER) && $HOOK_PRODUCT_FOOTER}
+            {$HOOK_PRODUCT_FOOTER}
+        {/if}
     {/if}
 
     {strip}
