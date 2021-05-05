@@ -333,7 +333,7 @@
                                 </div>
 
                                 {* Volume Discounts *}
-                                {if !empty($quantity_discounts)}
+                                {if !empty($quantity_discounts) && $product->show_price}
                                     <section id="product-volume-discounts" class="page-product-box">
                                         <div id="quantityDiscount" class="table-small">
                                             <table class="table-product-discounts table table-condensed table-bordered table-hover">
