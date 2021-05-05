@@ -22,7 +22,7 @@
 
     {if isset($order)}
         {* Order Summary and Reorder *}
-        <div id="order-info-summary" class="box clearfix bg-color-dark">
+        <div id="order-info-summary" class="clearfix">
             {if isset($reorderingAllowed) && $reorderingAllowed}
                 <form id="submitReorder" action="{if isset($opc) && $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" class="submit">
                     <input type="hidden" value="{$order->id}" name="id_order">

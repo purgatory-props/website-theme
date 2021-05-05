@@ -1,5 +1,3 @@
-{*{hook h='actionModifyProductIfAService' product=$product}*}
-
 <a class="grid-item-wrapper" href="{$product.link|escape:'html':'UTF-8'}" title="{$product.name|escape:'html':'UTF-8'} - {$product.description_short|strip_tags:'UTF-8'|truncate:40:'...'}" itemprop="url">
     <div class="product-container" itemscope itemtype="https://schema.org/Product">
             <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
