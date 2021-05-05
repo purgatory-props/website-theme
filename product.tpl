@@ -26,7 +26,7 @@
 <div class="product-wrapper" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}">
 
-    <div class="product-header clearfix" style="min-height: {$largeDefaultHeight|intval}px">
+    <div class="product-header clearfix" >
         {if !empty($confirmation)}
             <div class="alert alert-warning">{$confirmation}</div>
         {/if}
@@ -61,7 +61,7 @@
                         title="{l s='View Full Image'}"
                     >
                             <div class="magnify-image">
-                                <div class="magnify-image-container center" style="width: {$largeDefaultWidth|intval}px; height: {$largeDefaultHeight|intval}px">
+                                <div class="magnify-image-container center" style="width: {$largeDefaultWidth|intval}px; height: 100%">
                                     <i class="fa fa-search center"></i>
                                 </div>
                             </div>
