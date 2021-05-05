@@ -5,11 +5,11 @@
         <div class="form_content clearfix">
         <div class="form-group">
             <label for="email">{l s='Email address'}</label>
-            <input class="is_required validate account_input form-control" data-validate="isEmail" type="email" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|stripslashes}{/if}" required focus>
+            <input class="is_required validate account_input form-control" data-validate="isEmail" type="email" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|stripslashes}{/if}" autocomplete="username" required focus>
         </div>
         <div class="form-group">
             <label for="passwd">{l s='Password'}</label>
-            <input class="is_required validate account_input form-control" type="password" data-validate="isPasswd" id="passwd" name="passwd" value="" required>
+            <input class="is_required validate account_input form-control" type="password" data-validate="isPasswd" id="passwd" name="passwd" value="" autocomplete="current-password" required>
         </div>
 
         <div class="lost_password form-group">
