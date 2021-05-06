@@ -166,7 +166,9 @@
 
             <!-- Add To Cart and Stuff -->
             <div class="product-actions">
-                {if isset($product->is_service) && $product->is_service}
+                {if isset($product->coming_soon) && $product->coming_soon}
+                    <h2 class="accent-color">{l s='Coming Soon!'}</h2>
+                {else if isset($product->is_service) && $product->is_service}
                     <!-- Service Starting Price and Contact Button -->
                     <div class="service-price-container" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                         {l s='Starting at'} <span id="our_price_display" class="price service-price accent-color">{convertPrice price=$productPrice|floatval}</span>
