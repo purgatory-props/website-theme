@@ -183,6 +183,7 @@
                         </a>
                     </div>
                 {else}
+
                     <!-- Add to Cart Button and Quantity if Available -->
                     {if ($product->show_price && !isset($restricted_country_mode)) || isset($groups) || $product->reference || (isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS)}
                         <form id="buy_block"{if $PS_CATALOG_MODE && !isset($groups) && $product->quantity > 0} class="hidden"{/if} action="{$link->getPageLink('cart')|escape:'html':'UTF-8'}" method="post">
@@ -313,6 +314,50 @@
                                 </div>
 
                                 <div class="box-cart-bottom">
+                                    {* Quantities/Stock *}
+                                    <div class="quantities-container">
+                                        {if ($display_qties == 1 && !$PS_CATALOG_MODE && $PS_STOCK_MANAGEMENT && $product->available_for_order)}
+                                            <span id="pQuantityAvailable"{if $product->quantity <= 0} style="display: none;"{/if}>
+                                                <span id="quantityAvailable">{$product->quantity|intval}</span>
+                                                <span {if $product->quantity > 1} style="display: none;"{/if} id="quantityAvailableTxt">{l s='Item'}</span>
+                                                <span {if $product->quantity == 1} style="display: none;"{/if} id="quantityAvailableTxtMultiple">{l s='Items'}</span>
+                                            </span>
+                                        {/if}
+
+                                        <span id="availability_statut"{if !$PS_STOCK_MANAGEMENT || ($product->quantity <= 0 && !$product->available_later && $allow_oosp) || ($product->quantity > 0 && !$product->available_now) || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
+                                            <span id="availability_value" class="label{if $product->quantity <= 0 && !$allow_oosp} label-danger{elseif $product->quantity <= 0} label-warning{else} label-success{/if}">
+                                                {if $product->quantity <= 0}
+                                                    {if $PS_STOCK_MANAGEMENT && $allow_oosp}
+                                                        {$product->available_later}
+                                                    {else}
+                                                        {l s='Out of Stock'}
+                                                    {/if}
+                                                {elseif $PS_STOCK_MANAGEMENT}
+                                                    {$product->available_now}
+                                                {/if}
+                                            </span>
+                                        </span>
+
+                                        {if $PS_STOCK_MANAGEMENT}
+                                            <span class="label label-warning" id="last_quantities"{if ($product->quantity > $last_qties || $product->quantity <= 0) || $allow_oosp || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none"{/if} >
+                                                {l s='Only a Few Left!'}
+                                            </span>
+                                        {/if}
+
+                                        {if $PS_STOCK_MANAGEMENT}
+                                            {if !$product->is_virtual}{hook h="displayProductDeliveryTime" product=$product}{/if}
+                                        {/if}
+
+                                        <p id="availability_date"{if ($product->quantity > 0) || !$product->available_for_order || $PS_CATALOG_MODE || !isset($product->available_date) || $product->available_date < $smarty.now|date_format:'%Y-%m-%d'} style="display: none;"{/if}>
+                                            <span id="availability_date_label"><b>{l s='Available By: '}</b></span>
+                                            <span id="availability_date_value">{if Validate::isDate($product->available_date)}{dateFormat date=$product->available_date full=false}{/if}</span>
+                                        </p>
+
+                                        <div id="oosHook"{if $product->quantity > 0} style="display: none;"{/if}>
+                                            {$HOOK_PRODUCT_OOS}
+                                        </div>
+                                    </div>
+
                                     {if !$PS_CATALOG_MODE}
                                         <div id="quantity_wanted_p"{if (!$allow_oosp && $product->quantity <= 0) || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
                                             <div><label for="quantity_wanted">{l s='Quantity'}</label></div>
