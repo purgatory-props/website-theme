@@ -168,6 +168,8 @@
             <div class="product-actions">
                 {if isset($product->coming_soon) && $product->coming_soon}
                     <h2 class="accent-color">{l s='Coming Soon!'}</h2>
+                {else if isset($product->discontinued) && $product->discontinued}
+                    <h2 class="label-danger">{l s='Discontinued'}
                 {else if isset($product->is_service) && $product->is_service}
                     <!-- Service Starting Price and Contact Button -->
                     <div class="service-price-container" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
@@ -340,7 +342,7 @@
 
                                         {if $PS_STOCK_MANAGEMENT}
                                             <span class="label label-warning" id="last_quantities"{if ($product->quantity > $last_qties || $product->quantity <= 0) || $allow_oosp || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none"{/if} >
-                                                {l s='Only a Few Left!'}
+                                                &nbsp;{l s='Only a Few Left!'}
                                             </span>
                                         {/if}
 
