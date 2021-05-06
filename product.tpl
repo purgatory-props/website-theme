@@ -21,7 +21,7 @@
     {assign var='isActuallyOnSale' value=true}
 {/if}
 
-{hook h='actionModifyProductIfAService' product=$product}
+{hook h='actionModifyProductForExtraFunctionality' product=$product}
 
 <div class="product-wrapper" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$link->getProductLink($product)|escape:'htmlall':'UTF-8'}">

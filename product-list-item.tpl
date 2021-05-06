@@ -1,3 +1,7 @@
+{capture name="newProduct"}{hook h='actionModifyProductForExtraFunctionality' product=$product capture=true}{/capture}
+{assign var="product" value=json_decode($smarty.capture.newProduct, true)}
+
+
 <a class="grid-item-wrapper" href="{$product.link|escape:'html':'UTF-8'}" title="{$product.name|escape:'html':'UTF-8'} - {$product.description_short|strip_tags:'UTF-8'|truncate:40:'...'}" itemprop="url">
     <div class="product-container" itemscope itemtype="https://schema.org/Product">
             <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
@@ -12,7 +16,7 @@
         </div>
 
         <div class="product-price">
-            {if isset($product.show_price) && $product.show_price && !isset($restricted_country_mode)}
+            {if isset($product.show_price) && $product.show_price && !isset($restricted_country_mode) && (isset($product->is_service) && !$product->is_service)}
                 <span class="price">{if !$priceDisplay}{convertPrice price=$product.price}{else}{convertPrice price=$product.price_tax_exc}{/if}</span>
             {/if}
         </div>
