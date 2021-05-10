@@ -448,7 +448,8 @@
     <div class="clearfix"></div>
 
     {if !$content_only}
-        <div class="product-tabs">
+        <div id="product-tabs-container" class="product-tabs">
+            {assign var=hasTabBefore value=false}
             {if isset($product) && $product->description}
                 {assign var=tabID value="tab-description"}
                 <input name="product-tabs" type="radio" id="{$tabID}" checked="checked" class="tab-switch" autocomplete="off"/>
@@ -457,11 +458,12 @@
                 <div class="product-tab description-tab">
                     {$product->description}
                 </div>
+                {assign var=hasTabBefore value=true}
             {/if}
 
             {if isset($features) && $features}
                 {assign var=tabID value="tab-specs"}
-                <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
+                <input name="product-tabs" type="radio" id="{$tabID}" {if !$hasTabBefore}checked="checked"{/if} class="tab-switch" autocomplete="off"/>
                 <label for="{$tabID}" class="tab-label noselect">{l s='Specs'}</label>
 
                 <div class="product-tab specs-tab">
@@ -476,11 +478,12 @@
                         {/foreach}
                     </table>
                 </div>
+                {assign var=hasTabBefore value=true}
             {/if}
 
             {if isset($attachments) && $attachments}
                 {assign var=tabID value="tab-downloads"}
-                <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
+                <input name="product-tabs" type="radio" id="{$tabID}" {if !$hasTabBefore}checked="checked"{/if} class="tab-switch" autocomplete="off"/>
                 <label for="{$tabID}" class="tab-label noselect">{l s='Downloads'}</label>
 
                 <div class="product-tab downloads-tab">
@@ -490,16 +493,18 @@
                         </a>
                     {/foreach}
                 </div>
+                {assign var=hasTabBefore value=true}
             {/if}
 
             {if isset($accessories) && $accessories}
                 {assign var=tabID value="tab-accessories"}
-                <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
+                <input name="product-tabs" type="radio" id="{$tabID}" {if !$hasTabBefore}checked="checked"{/if} class="tab-switch" autocomplete="off"/>
                 <label for="{$tabID}" class="tab-label noselect">{l s='Accessories'}</label>
 
                 <div class="product-tab accessories-tab">
                     {include file="$tpl_dir./product-list.tpl" products=$accessories}
                 </div>
+                {assign var=hasTabBefore value=true}
             {/if}
 
             <!-- Extra Tabs -->
