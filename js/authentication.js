@@ -130,4 +130,23 @@ $(function(){
         });
 
     });
+
+
+    $(document).on('click', '#createGuestBtn', function() {
+      $('#login-col').hide();
+      $('#signup-col').hide();
+      $('#new_account_form').show();
+
+      $(this).hide();
+      $('#createAccountBtn').show();
+    });
+
+    $(document).on('click', '#createAccountBtn', function() {
+      $('#new_account_form').hide();
+      $('#login-col').show();
+      $('#signup-col').show();
+
+      $(this).hide();
+      $('#createGuestBtn').show();
+    });
 });

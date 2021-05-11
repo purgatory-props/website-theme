@@ -75,7 +75,7 @@
       <div class="checkbox">
         <label for="newsletter">
           <input type="checkbox" name="newsletter" id="newsletter" value="1" {if isset($smarty.post.newsletter) AND $smarty.post.newsletter == 1} checked="checked"{/if}>
-          <span class="label-text">{l s='Sign up for our newsletter!'}</span>
+          <span class="label-text">{l s='Receive Newsletter'}</span>
           {if array_key_exists('newsletter', $field_required)}
             <sup class="required"> *</sup>
           {/if}
@@ -86,7 +86,7 @@
       <div class="checkbox">
         <label for="optin">
           <input type="checkbox" name="optin" id="optin" value="1" {if isset($smarty.post.optin) AND $smarty.post.optin == 1} checked="checked"{/if}>
-          <span class="label-text">{l s='Receive special offers from our partners!'}</span>
+          <span class="label-text">{l s='Receive Special Offers'}</span>
           {if array_key_exists('optin', $field_required)}
             <sup class="required"> *</sup>
           {/if}
@@ -96,7 +96,7 @@
   </div>
   {if $b2b_enable}
     <div class="account_creation">
-      <h3 class="page-subheading">{l s='Your company information'}</h3>
+      <h3 class="page-subheading">{l s='Company Information'}</h3>
       <div class="form-group">
         <label for="">{l s='Company'}</label>
         <input type="text" class="form-control" id="company" name="company" value="{if isset($smarty.post.company)}{$smarty.post.company}{/if}" autocomplete="organization">
@@ -118,7 +118,7 @@
 
   {if isset($PS_REGISTRATION_PROCESS_TYPE) && $PS_REGISTRATION_PROCESS_TYPE}
     <div class="account_creation">
-      <h3 class="page-subheading">{l s='Your address'}</h3>
+      <h3 class="page-subheading">{l s='Your Address'}</h3>
       {foreach from=$dlv_all_fields item=field_name}
         {if $field_name eq "company"}
           {if !$b2b_enable}
@@ -156,12 +156,12 @@
           </div>
         {elseif $field_name eq "firstname"}
           <div class="required form-group">
-            <label for="firstname">{l s='First name'} <sup class="required">*</sup></label>
+            <label for="firstname">{l s='First Name'} <sup class="required">*</sup></label>
             <input type="text" class="form-control" id="firstname" name="firstname" value="{if isset($smarty.post.firstname)}{$smarty.post.firstname}{/if}" autocomplete="given-name" required>
           </div>
         {elseif $field_name eq "lastname"}
           <div class="required form-group">
-            <label for="lastname">{l s='Last name'} <sup class="required">*</sup></label>
+            <label for="lastname">{l s='Last Name'} <sup class="required">*</sup></label>
             <input type="text" class="form-control" id="lastname" name="lastname" value="{if isset($smarty.post.lastname)}{$smarty.post.lastname}{/if}" autocomplete="family-name" required>
           </div>
         {elseif $field_name eq "address1"}
@@ -223,15 +223,15 @@
         </div>
       {/if}
       <div class="textarea form-group">
-        <label for="other">{l s='Additional information'}</label>
+        <label for="other">{l s='Additional Information'}</label>
         <textarea class="form-control" name="other" id="other" cols="26" rows="3">{if isset($smarty.post.other)}{$smarty.post.other}{/if}</textarea>
       </div>
       <div class="form-group">
-        <label for="phone">{l s='Home phone'}{if isset($one_phone_at_least) && $one_phone_at_least} <sup class="required">**</sup>{/if}</label>
+        <label for="phone">{l s='Home Phone'}{if isset($one_phone_at_least) && $one_phone_at_least} <sup class="required">**</sup>{/if}</label>
         <input type="text" class="form-control" name="phone" id="phone" value="{if isset($smarty.post.phone)}{$smarty.post.phone}{/if}">
       </div>
       <div class="{if isset($one_phone_at_least) && $one_phone_at_least}required {/if}form-group">
-        <label for="phone_mobile">{l s='Mobile phone'}{if isset($one_phone_at_least) && $one_phone_at_least} <sup class="required">**</sup>{/if}</label>
+        <label for="phone_mobile">{l s='Cell Phone'}{if isset($one_phone_at_least) && $one_phone_at_least} <sup class="required">**</sup>{/if}</label>
         <input type="text" class="form-control" name="phone_mobile" id="phone_mobile" value="{if isset($smarty.post.phone_mobile)}{$smarty.post.phone_mobile}{/if}">
       </div>
       {if isset($one_phone_at_least) && $one_phone_at_least}
@@ -244,9 +244,9 @@
       </div>
     </div>
     <div class="account_creation dni">
-      <h3 class="page-subheading">{l s='Tax identification'}</h3>
+      <h3 class="page-subheading">{l s='Tax Identification'}</h3>
       <div class="required form-group">
-        <label for="dni">{l s='Identification number'} <sup class="required">*</sup></label>
+        <label for="dni">{l s='Identification Number'} <sup class="required">*</sup></label>
         <input type="text" class="form-control" name="dni" id="dni" value="{if isset($smarty.post.dni)}{$smarty.post.dni}{/if}">
         <p class="help-block">{l s='DNI / NIF / NIE'}</p>
       </div>
@@ -257,7 +257,7 @@
     <input type="hidden" name="email_create" value="1">
     <input type="hidden" name="is_new_customer" value="1">
     {if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'html':'UTF-8'}">{/if}
-    <p class="required"><sup class="required">*</sup>{l s='Required field'}</p>
+    <p class="required"><sup class="required">*</sup>{l s='Required Field'}</p>
     <button type="submit" name="submitAccount" id="submitAccount" class="btn btn-lg btn-default">
       {l s='Register'} <i class="icon icon-chevron-right"></i>
     </button>

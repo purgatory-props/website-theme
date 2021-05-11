@@ -26,7 +26,7 @@
 </div>
 
 {* Sign Up *}
-<div id="login-col" class="signup-col">
+<div id="signup-col" class="signup-col">
     <form action="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" method="post" id="create-account_form" >
         <h3 class="page-subheading">{l s='Need an Account?'}</h3>
         <div class="form_content clearfix">
@@ -38,7 +38,7 @@
         <div class="submit">
             {if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'html':'UTF-8'}">{/if}
             <button class="btn btn-lg btn-default" type="submit" id="SubmitCreate" name="SubmitCreate">
-                <i class="icon icon-user-plus"></i> {l s='Create an Cccount'}
+                <i class="icon icon-user-plus"></i> {l s='Create an Account'}
             </button>
             <input type="hidden" class="hidden" name="SubmitCreate" value="{l s='Create an Account'}">
         </div>
