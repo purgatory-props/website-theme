@@ -1,8 +1,8 @@
 <div id="identity-page">
     {capture name=path}
-        <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='My account'}</a>
+        <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='Your Account'}</a>
         <span class="navigation-pipe">{$navigationPipe}</span>
-        <span class="navigation_page">{l s='Your personal information'}</span>
+        <span class="navigation_page">{l s='Personal Information'}</span>
     {/capture}
 
     <nav>

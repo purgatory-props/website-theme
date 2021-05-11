@@ -1,9 +1,9 @@
 {capture name=path}
   <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">
-    {l s='My Account'}
+    {l s='Your Account'}
   </a>
   <span class="navigation-pipe">{$navigationPipe}</span>
-  <span class="navigation_page">{l s='Order history'}</span>
+  <span class="navigation_page">{l s='Order History'}</span>
 {/capture}
 
 <div id="order-history-container" class="clearfix">

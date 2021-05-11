@@ -1,5 +1,5 @@
 <div id="addresses-page">
-    {capture name=path}<a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='My account'}</a><span class="navigation-pipe">{$navigationPipe}</span><span class="navigation_page">{l s='My addresses'}</span>{/capture}
+    {capture name=path}<a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='Your Account'}</a><span class="navigation-pipe">{$navigationPipe}</span><span class="navigation_page">{l s='Addresses'}</span>{/capture}
 
      <nav>
         <ul class="pager">

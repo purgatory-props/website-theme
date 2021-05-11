@@ -4,13 +4,18 @@
 {assign var="postCodeExist" value=false}
 {assign var="dniExist" value=false}
 
+
+
 <div id="authContainer" class="authentication-container clearfix-after">
     {hook h='displayAuthenticationTop'}
     {if isset($back) && preg_match("/^http/", $back)}{assign var='current_step' value='login'}{include file="$tpl_dir./order-steps.tpl"}{/if}
 
-
     {if !isset($email_create)}
-        {include './authentication-login.tpl'}
+      {if isset($inOrderProcess) && $inOrderProcess && $PS_GUEST_CHECKOUT_ENABLED}
+        {include './authentication-create-guest.tpl'}
+      {/if}
+      {include './authentication-login.tpl'}
+
     {else}
         {include './authentication-create.tpl'}
     {/if}

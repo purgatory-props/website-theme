@@ -19,6 +19,13 @@
     }
 }
 
+
+button.btn {
+    background-color: transparent;
+    margin-left: 0;
+}
+
+
 .btn-success {
     border-color: @color-success;
     color: @color-success;
@@ -35,23 +42,19 @@
     color: @color-error;
 
     &:hover {
-        background-color: @color-error;
+        background-color: @color-error !important;
         border-color: darken(@color-error, 10%);
     }
 }
 
 .btn-inverse {
-    background-color: @color-accent-primary;
+    background-color: @color-accent-primary !important;
     border-color: @color-accent-primary-darkened;
 
     &:hover {
-        background-color: transparent;
+        background-color: transparent !important;
         border-color: @color-font;
+
     }
 }
 
-
-button.btn {
-    background-color: transparent;
-    margin-left: 0;
-}

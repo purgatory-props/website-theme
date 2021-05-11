@@ -1,5 +1,5 @@
 <div class="my-account-wrapper">
-    {capture name=path}{l s='My account'}{/capture}
+    {capture name=path}{l s='Your Account'}{/capture}
 
     <h1 class="page-heading">{l s='Your Account'}</h1>
 

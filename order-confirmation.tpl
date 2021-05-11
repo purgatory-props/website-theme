@@ -1,4 +1,4 @@
-{capture name=path}{l s='Order confirmation'}{/capture}
+{capture name=path}{l s='Order Confirmation'}{/capture}
 
 <h1 class="page-heading">{l s='Order Confirmation'}</h1>
 

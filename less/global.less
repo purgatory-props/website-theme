@@ -51,11 +51,15 @@ a {
     color: @color-font;
     cursor: pointer;
 
+    &.inherit-color {
+        color: inherit;
+    }
+
     &.textlink, &.textlink-nostyle {
         text-decoration: underline;
 
         &:hover {
-            color: @color-accent-primary;
+            color: @color-accent-primary !important;
         }
     }
 
@@ -473,5 +477,6 @@ sup {
 @import "search.less";
 
 @import "header.less";
+@import "breadcrumbs.less";
 @import "footer.less";
 @import "media.less";

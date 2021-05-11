@@ -2,7 +2,7 @@
     {if !$opc}
   {addJsDefL name=txtProduct}{l s='product' js=1}{/addJsDefL}
   {addJsDefL name=txtProducts}{l s='products' js=1}{/addJsDefL}
-  {capture name=path}{l s='Your payment method'}{/capture}
+  {capture name=path}{l s='Payment Method'}{/capture}
   <h1 class="page-heading">{l s='Payment'}
   </h1>
 {else}

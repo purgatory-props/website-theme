@@ -86,6 +86,10 @@
         {hook h='displayNav' mod='blocktopmenu'}
     </header>
 
+    {if $page_name !='index' && $page_name !='pagenotfound'}
+        {include file="$tpl_dir./breadcrumbs.tpl"}
+    {/if}
+
     <div id="page-content" class="clearfix">
         <main class="wrapper slightly-smaller main-container center">
 {/if}

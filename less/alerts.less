@@ -7,11 +7,24 @@
 
     font-size: 1.1rem;
 
+    line-height: 1.2em;
+
     .noselect;
 
     &::before {
         font-family: "FontAwesome";
         margin-right: 0.5em;
+    }
+
+    &.alert-info {
+        background-color: #d9edf7;;
+        color: @color-dark-1;
+
+        outline: 2px solid darken(#d9edf7, 10%);
+
+        &::before {
+            content: "\f05a";
+        }
     }
 
     &.alert-danger {
@@ -44,5 +57,11 @@
         &::before {
             content: "\f058";
         }
+    }
+
+    @media @responsive-second-size {
+        margin-left: -5px;
+        margin-right: -5px;
+        outline: none !important;
     }
 }

@@ -1,4 +1,4 @@
-{if !$product->active}
+{if !$product->active && !isset($_GET['adtoken'])}
     {include file="$tpl_dir./404.tpl"}
 {else}
 {include file="$tpl_dir./errors.tpl"}

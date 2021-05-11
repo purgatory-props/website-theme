@@ -1,0 +1,34 @@
+// out: false
+@import "variables.less";
+
+.breadcrumbs-container {
+    margin-bottom: 10px;
+}
+
+.breadcrumb {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        display: inline;
+
+        a {
+            display: inline-block;
+            padding: 10px;
+            text-decoration: none;
+
+            &:hover {
+                background-color: @color-dark-3;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    li+li {
+        &::before {
+            color: @color-font;
+            content: "/\00a0";
+        }
+    }
+}
