@@ -13,12 +13,7 @@
         {include file="$tpl_dir./errors.tpl"}
         <div class="category-container">
             <section class="category-info">
-                <h1 class="category-title spooky-font no-margin page-heading{if (isset($subcategories) && !$products) || (isset($subcategories) && $products) || !isset($subcategories) && $products} product-listing{/if}">
-                    {$category->name|escape:'html':'UTF-8'}
-                    {if isset($categoryNameComplement)}
-                        &nbsp;{$categoryNameComplement|escape:'html':'UTF-8'}
-                    {/if}
-                </h1>
+                <h1 class="category-title spooky-font no-margin page-heading{if (isset($subcategories) && !$products) || (isset($subcategories) && $products) || !isset($subcategories) && $products} product-listing{/if}">{$category->name|escape:'html':'UTF-8'}{if isset($categoryNameComplement)}&nbsp;{$categoryNameComplement|escape:'html':'UTF-8'}{/if}</h1>
 
                 {if !empty($category->description)}
                     <div id="category-description" class="rte">{$category->description}</div>

@@ -19,15 +19,27 @@
             text-decoration: none;
 
             &:hover {
-                background-color: @color-dark-3;
-                text-decoration: underline;
+                color: @color-accent-primary;
+                //background-color: @color-dark-2;
+            }
+        }
+
+        &:last-of-type
+        {
+            color: orange;
+            a {
+                &:hover {
+                    color: @color-font;
+                    background: none !important;
+                    cursor: default;
+                }
             }
         }
     }
 
     li+li {
         &::before {
-            color: @color-font;
+            color: darken(@color-font, 10%);
             content: "/\00a0";
         }
     }

@@ -1,9 +1,9 @@
 <div id="address-page">
     {capture name=path}
-        <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='My account'}</a>
+        <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='Your Account'}</a>
         <span class="navigation-pipe">{$navigationPipe}</span>
-        <a href="{$link->getPageLink('addresses', true)|escape:'html':'UTF-8'}">{l s='My addresses'}</a>
-        {if !empty($id_address)}{l s='Edit address'}{else}{l s='Add a new address'}{/if}
+        <a href="{$link->getPageLink('addresses', true)|escape:'html':'UTF-8'}">{l s='Addresses'}</a>
+        {if !empty($id_address)}{l s='Edit address'}{else}{l s='New Address'}{/if}
     {/capture}
 
     <nav>
