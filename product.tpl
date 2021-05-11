@@ -1,5 +1,7 @@
+{if !$product->active}
+    {include file="$tpl_dir./404.tpl"}
+{else}
 {include file="$tpl_dir./errors.tpl"}
-
 {if !$priceDisplay || $priceDisplay == 2}
     {assign var='productPrice' value=$product->getPrice(true)}
     {assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(false)}
@@ -618,3 +620,4 @@
     {addJsDefL name='product_fileButtonHtml'}{l s='Choose File' js=1}{/addJsDefL}
   {/strip}
 </div>
+{/if} {* Active Check *}

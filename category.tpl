@@ -6,11 +6,11 @@
     {/if}
 {/if}
 
-{include file="$tpl_dir./errors.tpl"}
 {if !empty($category) && $category->id}
     {if !$category->active}
-        <div class="alert alert-warning">{l s='This category is currently unavailable.'}</div>
+        {include file="$tpl_dir./404.tpl"}
     {else}
+        {include file="$tpl_dir./errors.tpl"}
         <div class="category-container">
             <section class="category-info">
                 <h1 class="category-title spooky-font no-margin page-heading{if (isset($subcategories) && !$products) || (isset($subcategories) && $products) || !isset($subcategories) && $products} product-listing{/if}">
