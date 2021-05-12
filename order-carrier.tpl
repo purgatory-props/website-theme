@@ -98,7 +98,7 @@
                                 {convertPrice price=$option.total_price_without_tax}
                               {/if}
                             {else}
-                              {l s='Free'}
+                              {l s='Free!'}
                             {/if}
                             </div>
                         </label>
@@ -177,7 +177,7 @@
                                   {convertPrice price=$option.total_price_without_tax}
                                 {/if}
                               {else}
-                                {l s='Free'}
+                                {l s='Free!'}
                               {/if}
                             </div>
                           </td>

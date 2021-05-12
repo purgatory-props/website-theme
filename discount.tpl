@@ -38,7 +38,7 @@
             {/if}
             {if $discountDetail.free_shipping}
               {if $discountDetail.reduction_percent > 0 || $discountDetail.reduction_amount > 0} + {/if}
-              {l s='Free shipping'}
+              {l s='Free Shipping'}
             {/if}
 
             {* .gift_product_name avaialable since 1.6.1.6 *}
