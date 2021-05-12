@@ -5,17 +5,7 @@
         <span class="navigation_page">{l s='Personal Information'}</span>
     {/capture}
 
-    <nav>
-        <ul class="pager">
-            <li class="previous">
-                <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" class="textlink-nostyle">
-                    {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Account'}
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-  <h1 class="page-subheading">{l s='Your personal information'}</h1>
+  <h1 class="page-subheading">{l s='Your Personal Information'}</h1>
 
   {include file="$tpl_dir./errors.tpl"}
 
@@ -29,22 +19,22 @@
       <b>{l s='Please be sure to update your personal information if it has changed.'}</b>
     </p>
     <p class="required">
-      <sup class="required">*</sup>{l s='Required field'}
+      <sup class="required">*</sup>{l s='Required Field'}
     </p>
 
     <form action="{$link->getPageLink('identity', true)|escape:'html':'UTF-8'}" method="post" class="half-width-form">
       <fieldset>
 
         <div class="required form-group">
-          <label for="firstname" class="required">{l s='First name'}</label>
+          <label for="firstname" class="required">{l s='First Name'}</label>
           <input class="is_required validate form-control" data-validate="isName" type="text" id="firstname" name="firstname" value="{$smarty.post.firstname}" required>
         </div>
         <div class="required form-group">
-          <label for="lastname" class="required">{l s='Last name'}</label>
+          <label for="lastname" class="required">{l s='Last Name'}</label>
           <input class="is_required validate form-control" data-validate="isName" type="text" name="lastname" id="lastname" value="{$smarty.post.lastname}" required>
         </div>
         <div class="required form-group">
-            <label for="email" class="required">{l s='E-mail address'}</label>
+            <label for="email" class="required">{l s='Email'}</label>
             <input class="is_required validate form-control" data-validate="isEmail" type="email" name="email" id="email" value="{$smarty.post.email}" required>
         </div>
         <div class="form-group date-select clearfix">
@@ -99,7 +89,7 @@
           <input class="is_required validate form-control" type="password" data-validate="isPasswd" name="passwd" id="passwd" autocomplete="new-password">
         </div>
         <div class="password form-group">
-          <label for="confirmation">{l s='Confirmation'}</label>
+          <label for="confirmation">{l s='Confirm New Password'}</label>
           <input class="is_required validate form-control" type="password" data-validate="isPasswd" name="confirmation" id="confirmation" autocomplete="new-password">
         </div>
         {if isset($newsletter) && $newsletter}
@@ -129,7 +119,7 @@
           </div>
         {/if}
         {if $b2b_enable}
-          <h1 class="page-subheading">{l s='Your company information'}</h1>
+          <h1 class="page-subheading">{l s='Company Information'}</h1>
           <div class="form-group">
             <label for="company">{l s='Company'}</label>
             <input type="text" class="form-control" id="company" name="company" value="{if isset($smarty.post.company)}{$smarty.post.company}{/if}">

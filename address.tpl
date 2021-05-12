@@ -6,16 +6,6 @@
         {if !empty($id_address)}{l s='Edit address'}{else}{l s='New Address'}{/if}
     {/capture}
 
-    <nav>
-        <ul class="pager">
-            <li class="previous">
-                <a href="{$link->getPageLink('addresses', true)|escape:'html':'UTF-8'}" class="textlink-nostyle">
-                    {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Your Addresses'}
-                </a>
-            </li>
-        </ul>
-    </nav>
-
     <h1 class="page-subheading">{l s='Your address'}</h1>
 
     <p>

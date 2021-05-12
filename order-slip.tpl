@@ -1,16 +1,6 @@
 <div id="order-slip-page">
 {capture name=path}<a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='Your Account'}</a><span class="navigation-pipe">{$navigationPipe}</span><span class="navigation_page">{l s='Credit Slips'}</span>{/capture}
 
-<nav>
-  <ul class="pager">
-    <li class="previous">
-      <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" class="textlink-nostyle">
-        {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Account'}
-      </a>
-    </li>
-  </ul>
-</nav>
-
 <h1 class="page-heading">
   {l s='Credit Slips'}
 </h1>

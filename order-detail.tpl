@@ -9,15 +9,12 @@
 
 <div class="order-detail-container">
     {if !$is_guest}
-        <nav>
-            <ul class="pager" style="margin-top: 0;">
-                <li class="previous">
-                    <a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}" style="margin-left: 0;" class="textlink-nostyle">
-                        {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Order History'}
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        {capture name=path}
+            <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='Your Account'}</a>
+            <span class="navigation-pipe">{$navigationPipe}</span>
+            <a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}">{l s='Order History'}</a>
+            <span class="navigation_page">{l s='Order'} {if isset($order)}{$order->getUniqReference()}{else}{l s='Details'}{/if}</span>
+        {/capture}
     {/if}
 
     {include file="$tpl_dir./errors.tpl"}
@@ -30,7 +27,7 @@
                     <input type="hidden" value="{$order->id}" name="id_order">
                     <input type="hidden" value="" name="submitReorder">
 
-                    <a href="#" onclick="$(this).closest('form').submit(); return false;" class="btn btn-lg btn-success pull-right"><span>{l s='Reorder'} <i class="icon icon-chevron-right"></i></span></a>
+                    <a href="#" onclick="$(this).closest('form').submit(); return false;" class="btn btn-lg btn-success pull-right"><span>{l s='Reorder'} <i class="icon icon-refresh"></i></span></a>
                 </form>
             {/if}
 

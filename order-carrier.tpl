@@ -10,7 +10,7 @@
     <form id="form" action="{$link->getPageLink('order', true, NULL, "{if $multi_shipping}multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}" method="post" name="carrier_area">
 {else}
   <div id="carrier_area" class="opc-main-block">
-    <h1 class="page-heading step-num"><span>2</span> {l s='Delivery methods'}</h1>
+    <h1 class="page-heading step-num"><span>2</span> {l s='Delivery Methods'}</h1>
       <div id="opc_delivery_methods" class="opc-main-block">
         <div id="opc_delivery_methods-overlay" class="opc-overlay" style="display: none;"></div>
 {/if}

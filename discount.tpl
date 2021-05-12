@@ -5,18 +5,7 @@
   <span class="navigation_page">{l s='Vouchers'}</span>
 {/capture}
 
-
-<nav>
-  <ul class="pager">
-    <li class="previous">
-      <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" class="textlink-nostyle">
-        {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Account'}
-      </a>
-    </li>
-  </ul>
-</nav>
-
-<h1 class="page-heading">{l s='My vouchers'}</h1>
+<h1 class="page-heading">{l s='Your Vouchers'}</h1>
 
 {if isset($cart_rules) && count($cart_rules) && $nb_cart_rules}
   <div class="table-responsive">
