@@ -596,7 +596,9 @@
                 </div>
             </form>
         {else}
-            <div class="alert alert-info">{l s='You Can Not Return Items With a Guest Account'}</div>
+            {if $return_allowed}
+                <div class="alert alert-info">{l s='You Can Not Return Items With a Guest Account'}</div>
+            {/if}
         {/if}
     {/if}
 
