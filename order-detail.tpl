@@ -8,15 +8,17 @@
 
 
 <div class="order-detail-container">
-    <nav>
-        <ul class="pager" style="margin-top: 0;">
-            <li class="previous">
-                <a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}" style="margin-left: 0;" class="textlink-nostyle">
-                    {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Order History'}
-                </a>
-            </li>
-        </ul>
-    </nav>
+    {if !$is_guest}
+        <nav>
+            <ul class="pager" style="margin-top: 0;">
+                <li class="previous">
+                    <a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}" style="margin-left: 0;" class="textlink-nostyle">
+                        {if $isRtl}&rarr;{else}&larr;{/if} {l s='Back to Order History'}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    {/if}
 
     {include file="$tpl_dir./errors.tpl"}
 
@@ -142,7 +144,7 @@
                                 {if $order->total_discounts > 0}
                                     <tr class="small">
                                         <td class="total-label" colspan="{if $return_allowed}4{else}3{/if}">
-                                            <strong>{l s='Total vouchers'}</strong>
+                                            <strong>{l s='Vouchers'}</strong>
                                         </td>
                                         <td colspan="{if $order->hasProductReturned()}1{else}1{/if}">
                                             <span class="price-discount">{displayWtPriceWithCurrency price=$order->total_discounts currency=$currency convert=1}</span>
@@ -152,7 +154,7 @@
                                 {if $order->total_wrapping > 0}
                                     <tr class="small">
                                         <td class="total-label" colspan="{if $return_allowed}4{else}3{/if}">
-                                            <strong>{l s='Total gift wrapping cost'}</strong>
+                                            <strong>{l s='Gift Wrapping'}</strong>
                                         </td>
                                         <td colspan="{if $order->hasProductReturned()}1{else}1{/if}">
                                             <span class="price-wrapping">{displayWtPriceWithCurrency price=$order->total_wrapping currency=$currency}</span>
@@ -386,7 +388,7 @@
                             <textarea class="form-control" cols="67" rows="3" name="returnText"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="submitReturnMerchandise" class="btn btn-success"><span>{l s='Make an RMA slip'} <i class="icon icon-chevron-right"></i></span></button>
+                            <button type="submit" name="submitReturnMerchandise" class="btn btn-success"><span>{l s='Return'} <i class="icon icon-chevron-right"></i></span></button>
                             <input type="hidden" class="hidden" value="{$order->id|intval}" name="id_order">
                         </div>
                         </div>
@@ -594,7 +596,7 @@
                 </div>
             </form>
         {else}
-            <div class="alert alert-info"><i class="icon icon-info-sign"></i> {l s='You cannot return merchandise with a guest account'}</div>
+            <div class="alert alert-info">{l s='You Can Not Return Items With a Guest Account'}</div>
         {/if}
     {/if}
 
