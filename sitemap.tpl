@@ -2,50 +2,6 @@
 
 <h1 class="page-heading">{l s='Sitemap'}</h1>
 
-<div id="sitemap_content" class="row">
-  <div class="col-xs-12 col-sm-6">
-    <div class="sitemap_block box">
-      <h3 class="page-subheading">{l s='Offers'}</h3>
-      <ul>
-        <li><a href="{$link->getPageLink('new-products')|escape:'html':'UTF-8'}" title="{l s='View a new product'}" class="textlink-nostyle">{l s='New Products'}</a></li>
-        {if !$PS_CATALOG_MODE}
-          {if $PS_DISPLAY_BEST_SELLERS}
-            <li><a href="{$link->getPageLink('best-sales')|escape:'html':'UTF-8'}" title="{l s='View top-selling products'}" class="textlink-nostyle">{l s='Best Sellers'}</a></li>
-          {/if}
-          <li><a href="{$link->getPageLink('prices-drop')|escape:'html':'UTF-8'}" title="{l s='View products with a price drop'}" class="textlink-nostyle">{l s='Price Drops'}</a></li>
-        {/if}
-        {if $display_manufacturer_link OR $PS_DISPLAY_SUPPLIERS}
-          <li><a href="{$link->getPageLink('manufacturer')|escape:'html':'UTF-8'}" title="{l s='View a list of manufacturers'}" class="textlink-nostyle">{l s='Manufacturers'}</a></li>
-        {/if}
-        {if $display_supplier_link OR $PS_DISPLAY_SUPPLIERS}
-          <li><a href="{$link->getPageLink('supplier')|escape:'html':'UTF-8'}" title="{l s='View a list of suppliers'}" class="textlink-nostyle">{l s='Suppliers'}</a></li>
-        {/if}
-      </ul>
-    </div>
-  </div>
-  <div class="col-xs-12 col-sm-6">
-    <div class="sitemap_block box">
-      <h3 class="page-subheading">{l s='Account'}</h3>
-      <ul>
-        {if $is_logged}
-          <li><a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Manage your customer account'}" class="textlink-nostyle">{l s='Your Account'}</a></li>
-          <li><a href="{$link->getPageLink('identity', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Manage your personal information'}" class="textlink-nostyle">{l s='Personal Information'}</a></li>
-          <li><a href="{$link->getPageLink('addresses', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='View a list of my addresses'}" class="textlink-nostyle">{l s='Addresses'}</a></li>
-          {if $voucherAllowed}
-            <li><a href="{$link->getPageLink('discount', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='View a list of my discounts'}" class="textlink-nostyle">{l s='Discounts'}</a></li>
-          {/if}
-          <li><a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='View a list of my orders'}" class="textlink-nostyle">{l s='Order History'}</a></li>
-        {else}
-          <li><a href="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Authentication'}" class="textlink-nostyle">{l s='Authentication'}</a></li>
-          <li><a href="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Create new account'}" class="textlink-nostyle">{l s='Create New Account'}</a></li>
-        {/if}
-        {if $is_logged}
-          <li><a href="{$link->getPageLink('index')}?mylogout" rel="nofollow" title="{l s='Sign out'}" class="textlink-nostyle">{l s='Sign Out'}</a></li>
-        {/if}
-      </ul>
-    </div>
-  </div>
-</div>
 
 <div id="listpage_content" class="row">
   <div class="col-xs-12 col-sm-6">
@@ -96,3 +52,50 @@
     </div>
   </div>
 </div>
+
+<div id="sitemap_content" class="row">
+  <div class="col-xs-12 col-sm-6">
+    <div class="sitemap_block box">
+      <h3 class="page-subheading">{l s='Offers'}</h3>
+      <ul>
+        <li><a href="{$link->getPageLink('new-products')|escape:'html':'UTF-8'}" title="{l s='View a new product'}" class="textlink-nostyle">{l s='New Products'}</a></li>
+        {if !$PS_CATALOG_MODE}
+          {if $PS_DISPLAY_BEST_SELLERS}
+            <li><a href="{$link->getPageLink('best-sales')|escape:'html':'UTF-8'}" title="{l s='View top-selling products'}" class="textlink-nostyle">{l s='Best Sellers'}</a></li>
+          {/if}
+          <li><a href="{$link->getPageLink('prices-drop')|escape:'html':'UTF-8'}" title="{l s='View products with a price drop'}" class="textlink-nostyle">{l s='Price Drops'}</a></li>
+        {/if}
+        {if $display_manufacturer_link OR $PS_DISPLAY_SUPPLIERS}
+          <li><a href="{$link->getPageLink('manufacturer')|escape:'html':'UTF-8'}" title="{l s='View a list of manufacturers'}" class="textlink-nostyle">{l s='Manufacturers'}</a></li>
+        {/if}
+        {if $display_supplier_link OR $PS_DISPLAY_SUPPLIERS}
+          <li><a href="{$link->getPageLink('supplier')|escape:'html':'UTF-8'}" title="{l s='View a list of suppliers'}" class="textlink-nostyle">{l s='Suppliers'}</a></li>
+        {/if}
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6">
+    <div class="sitemap_block box">
+      <h3 class="page-subheading">{l s='Account'}</h3>
+      <ul>
+        {if $is_logged}
+          <li><a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Manage your customer account'}" class="textlink-nostyle">{l s='Your Account'}</a></li>
+          <li><a href="{$link->getPageLink('identity', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Manage your personal information'}" class="textlink-nostyle">{l s='Personal Information'}</a></li>
+          <li><a href="{$link->getPageLink('addresses', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='View a list of my addresses'}" class="textlink-nostyle">{l s='Addresses'}</a></li>
+          {if $voucherAllowed}
+            <li><a href="{$link->getPageLink('discount', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='View a list of my discounts'}" class="textlink-nostyle">{l s='Discounts'}</a></li>
+          {/if}
+          <li><a href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='View a list of my orders'}" class="textlink-nostyle">{l s='Order History'}</a></li>
+        {else}
+          <li><a href="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Authentication'}" class="textlink-nostyle">{l s='Authentication'}</a></li>
+          <li><a href="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Create new account'}" class="textlink-nostyle">{l s='Create New Account'}</a></li>
+        {/if}
+        {if $is_logged}
+          <li><a href="{$link->getPageLink('index')}?mylogout" rel="nofollow" title="{l s='Sign out'}" class="textlink-nostyle">{l s='Sign Out'}</a></li>
+        {/if}
+      </ul>
+    </div>
+  </div>
+</div>
+
