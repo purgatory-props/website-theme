@@ -86,7 +86,7 @@
         {hook h='displayNav' mod='blocktopmenu'}
     </header>
 
-    {if $page_name !='index' && $page_name !='pagenotfound'}
+    {if $page_name !='index' && $page_name !='pagenotfound' && $page_name != 'sitemap'}
         {include file="$tpl_dir./breadcrumbs.tpl"}
     {/if}
 
