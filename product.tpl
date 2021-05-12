@@ -618,6 +618,14 @@
     {addJsDefL name=uploading_in_progress}{l s='Uploading in progress, please be patient.' js=1}{/addJsDefL}
     {addJsDefL name='product_fileDefaultHtml'}{l s='No file selected' js=1}{/addJsDefL}
     {addJsDefL name='product_fileButtonHtml'}{l s='Choose File' js=1}{/addJsDefL}
+
+    {addJsDefL name='addedToCartTitle'}{$product->name|escape:'html':'UTF-8'} {l s='Added to Cart!'}{/addJsDefL}
+    {addJsDefL name='addedToCartContinueShopping'}{l s='Continue Shopping'}{/addJsDefL}
+    {addJsDefL name='addedToCartGoToCart'}{l s='Go to Cart'}{/addJsDefL}
+    {addJsDefL name='goToCartURL'}{$link->getPageLink('order')|escape:'html':'UTF-8'}{/addJsDefL}
+
+    {addJsDefL name='addToCartErrorTitle'}{l s='Could Not Add to Cart'}{/addJsDefL}
+    {addJsDefL name='addToCartErrorText'}{l s='There was a problem adding this item to your cart. Please try again in a few minutes. If the problem persists then please contact us.'}{/addJsDefL}
   {/strip}
 </div>
 {/if} {* Active Check *}

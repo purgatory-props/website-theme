@@ -7,7 +7,7 @@
         <span>{l s='Cart' mod='blockcart'}</span>
     </div>
 
-    <span class="ajax_cart_total">
+    <span id="CartTotal" class="ajax_cart_total">
         {if $priceDisplay == 1}
             {assign var='blockcart_cart_flag' value='Cart::BOTH_WITHOUT_SHIPPING'|constant}
             {convertPrice price=$cart->getOrderTotal(false, $blockcart_cart_flag)}

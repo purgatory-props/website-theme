@@ -510,3 +510,65 @@ if (typeof combinations !== 'undefined' && combinations) {
     window.combinations = combinationsJS;
 
   }
+
+
+
+$(document).on('submit', '#buy_block', function(e) {
+  e.preventDefault();
+
+  var form = $(this);
+  var url = form.attr('action');
+
+  $('body').addClass('loading-overlay');
+
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: form.serialize(), // serializes the form's elements.
+    success: function(data)
+    {
+      var hasNewTotal = false;
+      // Get new cart total from the page
+      var result = new DOMParser().parseFromString(data, "text/html").documentElement;
+      var span = result.lastChild.querySelector('span[id="CartTotal"]');
+      if (span != null) {
+        var el = document.getElementById('CartTotal');
+        el.innerHTML = span.innerHTML;
+        hasNewTotal = true;
+      }
+
+      $('body').removeClass('loading-overlay');
+
+      swal({
+        title: addedToCartTitle,
+        icon: 'success',
+        buttons: {
+          cancel: addedToCartContinueShopping,
+          cart: addedToCartGoToCart
+        },
+      })
+      .then(function (buttonPressed) {
+        if (buttonPressed == 'cart') {
+          window.location.href = goToCartURL;
+        }
+        else {
+          if (!hasNewTotal)
+            window.location.reload();
+        }
+      });
+    },
+    error: function() {
+      $('body').removeClass('loading-overlay');
+
+      swal({
+        title: addToCartErrorTitle,
+        text: addToCartErrorText,
+        icon: 'error',
+      })
+      .then(function (buttonPressed) {
+        window.location.reload();
+      });
+    }
+  });
+
+});
