@@ -10,7 +10,7 @@
             width: 41%;
             float: left;
 
-            @media @responsive-third-size {
+            @media @responsive-second-size {
                 width: 100%;
                 float:  none;
                 text-align: center;
@@ -75,7 +75,7 @@
 
             padding-left: 10px;
 
-            @media @responsive-third-size {
+            @media @responsive-second-size {
                 width: 100%;
                 float: none;
                 padding-left: 0;
@@ -336,7 +336,7 @@
                 padding-right: 10px;
             }
 
-            @media @responsive-third-size {
+            @media @responsive-second-size {
                 width: 100%;
 
                 border-bottom: 2px solid darken(@color-header-bg, 5%);
@@ -363,7 +363,7 @@
 
             line-height: 1.2em;
 
-            @media @responsive-third-size-min {
+            @media @responsive-second-size-min {
                 order: 99;
             }
 
@@ -426,24 +426,34 @@
     float: left;
     margin: 0 3px 3px 0;
     padding: 1px;
-    border: 1px solid #eee;
-    width: 26px;
-    height: 26px;
+    border: 1px solid #4d4d4d;
+    width: 44px;
+    height: 44px;
   }
 
   #color_to_pick_list li.selected {
-    border: 1px solid #4d4d4d;
+    border: 1px solid #eee;
   }
 
   #color_to_pick_list li a.color_pick {
     display: block;
-    height: 22px;
-    width: 22px;
+    height: 40px;
+    width: 40px;
     cursor: pointer;
   }
 
   #color_to_pick_list li a.color_pick img {
     display: block;
-    height: 22px;
-    width: 22px;
+    height: 40px;
+    width: 40px;
+  }
+
+  @media @responsive-second-size {
+      #attributes {
+          fieldset {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+          }
+      }
   }
