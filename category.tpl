@@ -20,44 +20,48 @@
                 {/if}
             </section>
         </div>
-    {if $showSubcategories || !empty($products)}
-    </main>
-    {/if}
+        {if $showSubcategories || !empty($products)}
+        </main>
+        {/if}
 
-    {if $showSubcategories}
-        <div class="bg-color-light subcategory-container">
-            <div class="wrapper slightly-smaller center category-container">
-                <section class="category-subcategories">
-                    {include file='./subcategory-list.tpl'}
-                </section>
-            </div>
-        </div>
-    {/if}
-
-    {if !empty($products)}
-        <div class="products-container{if !$showSubcategories} bg-color-light{/if}">
-            <div class="category-container wrapper slightly-smaller center">
-                <div class="form-inline sortPagiBar clearfix">
-                    {include file="./product-sort.tpl"}
-                    {include file="./nbr-product-page.tpl"}
+        {if $showSubcategories}
+            <div class="bg-color-light subcategory-container">
+                <div class="wrapper slightly-smaller center category-container">
+                    <section class="category-subcategories">
+                        {include file='./subcategory-list.tpl'}
+                    </section>
                 </div>
+            </div>
+        {/if}
 
-                <section class="category-products">
-                    {if $showSubcategories}<h2 class="section-title">{l s='Products'}</h2>{/if}
-                    {include file="./product-list.tpl" products=$products}
-                </section>
+        {if !empty($products)}
+            <div class="products-container{if !$showSubcategories} bg-color-light{/if}">
+                <div class="category-container wrapper slightly-smaller center">
+                    <div class="form-inline sortPagiBar clearfix">
+                        {include file="./product-sort.tpl"}
+                        {include file="./nbr-product-page.tpl"}
+                    </div>
 
-                <div class="content_sortPagiBar">
-                    <div class="bottom-pagination-content form-inline clearfix">
-                        {include file="./pagination.tpl" paginationId='bottom'}
+                    <section class="category-products">
+                        {if $showSubcategories}<h2 class="section-title">{l s='Products'}</h2>{/if}
+                        {include file="./product-list.tpl" products=$products}
+                    </section>
+
+                    <div class="content_sortPagiBar">
+                        <div class="bottom-pagination-content form-inline clearfix">
+                            {include file="./pagination.tpl" paginationId='bottom'}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {/if}
+        {else}
+            {if !$showSubcategories}
+                <div class="text-center">{l s='There are no products in this category'}</div>
+            {/if}
+        {/if}
 
-    {if $showSubcategories || !empty($products)}
-        <main class="wrapper slightly-smaller main-container center">
+        {if $showSubcategories || !empty($products)}
+            <main class="wrapper slightly-smaller main-container center">
+        {/if}
     {/if}
-{/if}
 {/if}
