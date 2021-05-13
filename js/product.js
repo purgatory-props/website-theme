@@ -7,6 +7,21 @@ var first_url_check = true;
 var firstTime = true;
 
 
+//check if a function exists
+function function_exists(function_name) {
+  if (typeof function_name === 'string')
+    function_name = this.window[function_name];
+  return typeof function_name === 'function';
+}
+
+//execute oosHook js code
+function oosHookJsCode() {
+  for (var i = 0; i < oosHookJsCodeFunctions.length; i++) {
+    if (function_exists(oosHookJsCodeFunctions[i]))
+      setTimeout(oosHookJsCodeFunctions[i] + '()', 0);
+  }
+}
+
 function changeBigPictureForProduct(e) {
     var productImageContainer = document.getElementById('productImage');
     if (productImageContainer == null)
@@ -22,6 +37,10 @@ function changeBigPictureForProduct(e) {
     if (e.target.hasAttribute('data-fullImage') && productImageLink != null) {
         productImageLink.setAttribute('href', e.target.getAttribute('data-fullImage'));
     }
+
+    $('.thumbnail.shown').removeClass('shown');
+
+    $(e.target).addClass('shown');
 
     return false;
 }
@@ -105,6 +124,8 @@ function colorPickerClick(elt) {
 
 // Update display of the large image
 function displayImage($thumbAnchor) {
+  $thumbAnchor.click();
+  /*
   // Traverse to parent first
   var $thumb = $.extend({}, true, $thumbAnchor);
   $thumb = $thumb.closest('a');
@@ -153,8 +174,10 @@ function displayImage($thumbAnchor) {
 
   $('#views_block').find('li a').removeClass('shown');
   $thumbAnchor.addClass('shown');
+  */
 }
 
+var thumbSlider = false;
 // Change the current product images regarding the combination selected
 function refreshProductImages(id_product_attribute) {
   id_product_attribute = parseInt(id_product_attribute, 10) || 0;
@@ -166,7 +189,7 @@ function refreshProductImages(id_product_attribute) {
     if (combination) {
       // Show the large image in relation to the selected combination
       if (combination['image'] && combination['image'] != -1) {
-        var $thumbAnchor = $('#thumb_' + combination['image']).parent();
+        var $thumbAnchor = $('#thumbnail_' + combination['image']);
         displayImage($thumbAnchor);
 
         if (thumbSlider !== false) {
@@ -295,8 +318,137 @@ function getProductAttribute() {
 
 //update display of the availability of the product AND the prices of the product
 function updateDisplay() {
+  var $oosHook = $('#oosHook');
+  var $lastQuantities = $('#last_quantities');
+  var $availabilityValue = $('#availability_value');
+  var $availabilityDate = $('#availability_date');
+  var $availabilityDateVal = $('#availability_date_value');
+
   updatePrice();
+
+  if (!selectedCombination['unavailable'] && quantityAvailable > 0 && productAvailableForOrder == 1) {
+    //show the choice of quantities
+    $('#quantity_wanted_p:hidden').show();
+
+    //show the "add to cart" button ONLY if it was hidden
+    $('#add_to_cart:hidden').fadeIn();
+
+    //hide the hook out of stock
+    $oosHook.hide();
+    $availabilityDate.hide();
+
+    //availability value management
+    if (stock_management && availableNowValue != '') {
+      $availabilityValue.removeClass('label-warning').addClass('label-success').text(availableNowValue).show();
+      $('#availability_statut:hidden').show();
+    } else
+      $('#availability_statut:visible').hide();
+
+    //'last quantities' message management
+    if (!allowBuyWhenOutOfStock) {
+      $lastQuantities.toggle(quantityAvailable <= maxQuantityToAllowDisplayOfLastQuantityMessage);
+    }
+
+    if (quantitiesDisplayAllowed) {
+      $('#pQuantityAvailable:hidden').show();
+      $('#quantityAvailable').text(quantityAvailable);
+
+      if (quantityAvailable < 2) // we have 1 or less product in stock and need to show "item" instead of "items"
+      {
+        $('#quantityAvailableTxt').show();
+        $('#quantityAvailableTxtMultiple').hide();
+      } else {
+        $('#quantityAvailableTxt').hide();
+        $('#quantityAvailableTxtMultiple').show();
+      }
+    }
+  }
+  else {
+    // show the hook out of stock
+    if (productAvailableForOrder == 1) {
+      $oosHook.show();
+      if ($oosHook.length && function_exists('oosHookJsCode')) {
+        oosHookJsCode();
+      }
+    }
+
+    // hide 'last quantities' message if it was previously visible
+    $lastQuantities.hide();
+
+    // hide the quantity of pieces if it was previously visible
+    $('#pQuantityAvailable:visible').hide();
+
+    // hide the choice of quantities
+    if (!allowBuyWhenOutOfStock)
+      $('#quantity_wanted_p:visible').hide();
+
+    // display that the product is unavailable with theses attributes
+    if (!selectedCombination['unavailable']) {
+      $availabilityValue.text(doesntExistNoMore + (globalQuantity > 0 ? ' ' + doesntExistNoMoreBut : ''));
+      if (!allowBuyWhenOutOfStock) {
+        $availabilityValue.removeClass('label-success').addClass('label-warning');
+      }
+    } else {
+      $availabilityValue.text(doesntExist).removeClass('label-success').addClass('label-warning');
+      $oosHook.hide();
+    }
+
+    if ((stock_management == 1 && !allowBuyWhenOutOfStock) || (!stock_management && selectedCombination['unavailable']))
+      $('#availability_statut:hidden').show();
+
+    if (typeof(selectedCombination['available_date']) != 'undefined' && typeof(selectedCombination['available_date']['date_formatted']) != 'undefined' && selectedCombination['available_date']['date'].length != 0) {
+      var available_date = selectedCombination['available_date']['date'];
+      var tab_date = available_date.split('-');
+      var time_available = new Date(tab_date[0], tab_date[1], tab_date[2]);
+      time_available.setMonth(time_available.getMonth() - 1);
+      var now = new Date();
+      if (now.getTime() < time_available.getTime() && $availabilityDateVal.text() != selectedCombination['available_date']['date_formatted']) {
+        $availabilityDate.fadeOut('fast', function() {
+        $availabilityDateVal.text(selectedCombination['available_date']['date_formatted']);
+          $(this).fadeIn();
+        });
+      } else if (now.getTime() < time_available.getTime()) {
+        $availabilityDate.fadeIn();
+      }
+    } else {
+      $availabilityDate.fadeOut();
+    }
+
+    //show the 'add to cart' button ONLY IF it's possible to buy when out of stock AND if it was previously invisible
+    if (allowBuyWhenOutOfStock && !selectedCombination['unavailable'] && productAvailableForOrder) {
+      $('#add_to_cart:hidden').fadeIn();
+
+      if (stock_management && availableLaterValue != '') {
+        $availabilityValue.addClass('label-warning').text(availableLaterValue).show();
+        $('#availability_statut:hidden').show();
+      } else
+        $('#availability_statut:visible').hide();
+    } else {
+      $('#add_to_cart:visible').fadeOut();
+      if (stock_management == 1 && productAvailableForOrder)
+        $('#availability_statut:hidden').show();
+    }
+
+    if (productAvailableForOrder == 0)
+      $('#availability_statut:visible').hide();
+  }
+
+  var $productReference = $('#product_reference');
+  if (selectedCombination['reference'] || productReference) {
+
+    if (selectedCombination['reference']) {
+      $productReference.find('span').text(selectedCombination['reference']);
+    } else if (productReference) {
+      $productReference.find('span').text(productReference);
+    }
+
+    $productReference.show();
+  } else {
+    $productReference.hide();
+  }
 }
+
+
 
 function updatePrice() {
     // Get combination prices

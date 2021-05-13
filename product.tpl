@@ -113,12 +113,13 @@
                                 {assign var=imageURL value=$link->getImageLink($product->link_rewrite, $imageIds, 'large', null, ImageManager::retinaSupport())}
                                 {assign var=imageFullURL value=$link->getImageLink($product->link_rewrite, $imageIds, '', null, ImageManager::retinaSupport())}
 
-                                <li data-slide-num="{$smarty.foreach.thumbnails.iteration|intval}" id="thumbnail_{$image.id_image|intval}" style="display: inline-block">
+                                <li data-slide-num="{$smarty.foreach.thumbnails.iteration|intval}"  style="display: inline-block">
                                     <a data-image="{$imageURL}"
                                         data-fullImage="{$imageFullURL}"
                                         class="thumbnail thumbnail-link fancybox{if $image.id_image == $cover.id_image} shown{/if}"
                                         title="{$imageTitle|escape:'htmlall':'UTF-8'}"
                                         onclick="changeBigPictureForProduct(event); return false;"
+                                        id="thumbnail_{$image.id_image|intval}"
                                     >
                                         <img src="{$link->getImageLink($product->link_rewrite, $imageIds, 'cart', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
                                             data-image="{$imageURL}"
