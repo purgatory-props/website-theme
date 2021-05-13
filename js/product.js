@@ -572,3 +572,12 @@ $(document).on('submit', '#buy_block', function(e) {
   });
 
 });
+
+
+function GoToProductTab(tabId) {
+  var el = document.getElementById(tabId);
+  if (el == null)
+    return;
+
+  $(el).click();
+}

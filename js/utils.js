@@ -2,12 +2,23 @@ function toggleLoading(element, forceLoading) {
     if (element == null)
         return;
 
+
     forceLoading = forceLoading || false;
-    if (forceLoading || element.classList.indexOf('loading-overlay') == -1)
+    if (forceLoading || !__hasClass(element, 'loading-overlay'))
         element.classList.add('loading-overlay');
     else
         element.classList.remove('loading-overlay');
 }
+
+function __hasClass(el, c) {
+    try {
+        return el.classList.indexOf(c) != -1;
+    }
+    catch (e) {
+        return el.classList.contains(c);
+    }
+}
+
 
 function NetworkRequest(method, url, data) {
     return new Promise((resolve, reject) => {

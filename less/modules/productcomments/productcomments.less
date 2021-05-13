@@ -1,0 +1,137 @@
+// out: ../../../css/modules/productcomments/
+@import "../../variables.less";
+
+.product-stars {
+    .star {
+        position: relative;
+        overflow:  hidden;
+        float: left;
+        margin-right: 0.15em;
+
+        &::after {
+            content: "\f006";
+            font-family: "FontAwesome";
+            color: #777;
+
+            font-size: 1.5em;
+            line-height: 1em;
+        }
+
+        &.star_on {
+            &::after {
+                content: "\f005";
+                font-family: "FontAwesome";
+                color: @color-accent-primary;
+            }
+        }
+    }
+}
+
+
+
+#reviews-tab {
+
+    .product-review {
+        border-bottom: 2px solid @color-dark-1;
+        padding-bottom: 20px;
+        padding-top: 20px;
+
+        &:last-of-type {
+            border-bottom: 0px;
+        }
+
+
+        .review-author {
+            font-style: italic;
+        }
+
+        .review-title {
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .review-body {
+            line-height: 1.2em;
+            margin-top: 15px;
+        }
+
+
+        .review-rating {
+            margin-bottom: 5px;
+            .product-stars;
+        }
+
+        .review-feedback {
+            .report-review {
+                width: 100%;
+                text-align: right;
+
+                a {
+                    color: lighten(@color-dark-2, 40%);
+                }
+            }
+        }
+    }
+
+
+    #new_comment_form {
+        .star_content {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 1.2em;
+
+            &::before, &::after {
+                content: " ";
+                display: table;
+            }
+
+            &::after {
+                clear: both;
+            }
+
+            .cancel, .star {
+                position: relative;
+                overflow: hidden;
+                float: left;
+                margin-right: 0.15em;
+                cursor: pointer;
+
+                a {
+                    position: absolute;
+                    text-indent: -5000px;
+                }
+            }
+
+            .cancel {
+                &::after {
+                    content: "\f05e";
+                    font-family: "FontAwesome";
+                    color: #777;
+
+                    font-size: 1.2em;
+                    line-height: 1em;
+                }
+            }
+
+
+            .star {
+                &::after {
+                    content: "\f006";
+                    font-family: "FontAwesome";
+                    color: #777;
+                    font-size: 1.2em;
+                    line-height: 1em;
+                }
+
+                &.star_on, &.star_hover {
+                    &::after {
+                        content: "\f005";
+                        font-family: "FontAwesome";
+                        color: @color-accent-primary;
+                    }
+                }
+            }
+        }
+    }
+}
