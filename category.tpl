@@ -1,8 +1,12 @@
- {assign var="showSubcategories" value=false}
+{assign var="showSubcategories" value=false}
 
- {if !empty($subcategories)}
+{if !empty($subcategories)}
     {if empty($products) || count($subcategories) > 1}
         {assign var="showSubcategories" value=true}
+    {else}
+        {if !empty($products)}
+            {assign var="showSubcategories" value=!($category->display_from_sub)}
+        {/if}
     {/if}
 {/if}
 
