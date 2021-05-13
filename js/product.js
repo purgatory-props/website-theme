@@ -45,6 +45,141 @@ function getCurrentCombinationAttributes() {
     return attributeIds;
   }
 
+  function saveCustomization() {
+    $('#quantityBackup').val($('#quantity_wanted').val());
+    $('#customizationForm').submit();
+  }
+
+
+function checkMinimalQuantity(minimal_quantity) {
+  var $qtyWanted = $('#quantity_wanted');
+  var $minQtyWantedP = $('#minimal_quantity_wanted_p');
+
+  if ($qtyWanted.val() < minimal_quantity) {
+    $minQtyWantedP.css('color', 'red');
+  } else {
+    $minQtyWantedP.css('color', '#374853');
+  }
+}
+
+function colorPickerClick(elt) {
+  var id_attribute = $(elt).attr('id').replace('color_', '');
+  $(elt).parent().parent().children().removeClass('selected');
+  $(elt).fadeTo('fast', 1, function() {
+    $(this).fadeTo('fast', 0, function() {
+      $(this).fadeTo('fast', 1, function() {
+        $(this).parent().addClass('selected');
+      });
+    });
+  });
+  $(elt).parent().parent().parent().children('.color_pick_hidden').val(id_attribute);
+}
+
+
+/**
+ * Update display of the discounts table.
+ * @param combination Combination ID.
+ */
+ function displayDiscounts(combination) {
+  // Tables & rows selection
+  var quantityDiscountTable = $('#quantityDiscount');
+  var combinationsSpecificQuantityDiscount = $('.quantityDiscount_' + combination, quantityDiscountTable);
+  var allQuantityDiscount = $('.quantityDiscount_0', quantityDiscountTable);
+
+  // If there is some combinations specific quantity discount, show them, else, if there are some
+  // products quantity discount: show them. In case of result, show the category.
+  if (combinationsSpecificQuantityDiscount.length) {
+    quantityDiscountTable.find('tbody tr').hide();
+    combinationsSpecificQuantityDiscount.show();
+    quantityDiscountTable.show();
+  } else if (allQuantityDiscount.length) {
+    allQuantityDiscount.show();
+    $('tbody tr', quantityDiscountTable).not('.quantityDiscount_0').hide();
+    quantityDiscountTable.show();
+  } else {
+    quantityDiscountTable.hide();
+  }
+}
+
+
+
+// Update display of the large image
+function displayImage($thumbAnchor) {
+  // Traverse to parent first
+  var $thumb = $.extend({}, true, $thumbAnchor);
+  $thumb = $thumb.closest('a');
+  var imgSrcThickBox;
+  var imgSrcLarge;
+  if (window.useWebp && Modernizr.webp) {
+    //Reversing webp support
+    //imgSrcThickBox = $thumb.attr('href').replace('.jpg', '.webp');
+    //imgSrcLarge = imgSrcThickBox.replace('thickbox', 'large');
+    imgSrcThickBox = $thumb.attr('href');
+    imgSrcLarge = imgSrcThickBox.replace('thickbox', 'large');
+  } else {
+    imgSrcThickBox = $thumb.attr('href');
+    imgSrcLarge = imgSrcThickBox.replace('thickbox', 'large');
+  }
+  var imgTitle = $thumb.attr('title');
+
+  // Target image element
+  var $img = $('#bigpic').find('> img');
+  if ($img.attr('src') === imgSrcLarge) {
+    return;
+  }
+
+  $img.attr({
+    src: imgSrcLarge,
+    srcset: imgSrcLarge,
+    alt: imgTitle,
+    title: imgTitle
+  });
+
+  if (window.useWebp && Modernizr.webp) {
+    var $source = $('#bigpic').find('> source');
+    if ($source.length) {
+      $source.attr({
+        src: imgSrcLarge,
+        srcset: imgSrcLarge,
+        alt: imgTitle,
+        title: imgTitle
+      });
+    }
+  }
+
+  // There is no API to change zoom src, need to reinit
+  $('#image-block').trigger('zoom.destroy');
+  initZoom(imgSrcThickBox);
+
+  $('#views_block').find('li a').removeClass('shown');
+  $thumbAnchor.addClass('shown');
+}
+
+// Change the current product images regarding the combination selected
+function refreshProductImages(id_product_attribute) {
+  id_product_attribute = parseInt(id_product_attribute, 10) || 0;
+
+  var combinationHash = getCurrentCombinationHash();
+
+  if (typeof window.combinationsHashSet !== 'undefined') {
+    var combination = window.combinationsHashSet[combinationHash];
+    if (combination) {
+      // Show the large image in relation to the selected combination
+      if (combination['image'] && combination['image'] != -1) {
+        var $thumbAnchor = $('#thumb_' + combination['image']).parent();
+        displayImage($thumbAnchor);
+
+        if (thumbSlider !== false) {
+          var $thumbLi = $thumbAnchor.parent();
+          var slideNumber = parseInt($thumbLi.data('slide-num'), 10) || 0;
+          thumbSlider.goToSlide(slideNumber);
+        }
+      }
+    }
+  }
+}
+
+
 function getCurrentCombinationHash() {
     var attributeIds = getCurrentCombinationAttributes();
     return attributeIds.sort().join('-');
@@ -63,7 +198,7 @@ function findCombination() {
         $minQtyLabel.html(combination['minimal_quantity']);
         $minQtyP.fadeIn();
         $qtyWanted.val(combination['minimal_quantity']).on('keyup', function() {
-          //checkMinimalQuantity(combination['minimal_quantity']);
+          checkMinimalQuantity(combination['minimal_quantity']);
         });
       }
       //combination of the user has been found in our specifications of combinations (created in back office)
@@ -84,7 +219,7 @@ function findCombination() {
 
       //show discounts values according to the selected combination
       if (combination['idCombination'] && combination['idCombination'] > 0) {
-        //displayDiscounts(combination['idCombination']);
+        displayDiscounts(combination['idCombination']);
       }
 
       //get available_date for combination product
@@ -94,10 +229,10 @@ function findCombination() {
       updateDisplay();
 
       if (firstTime) {
-        //refreshProductImages(0);
+        refreshProductImages(0);
         firstTime = false;
       } else {
-        //refreshProductImages(combination['idCombination']);
+        refreshProductImages(combination['idCombination']);
       }
 
       //leave the function because combination has been found
@@ -450,6 +585,12 @@ $(document).on('change', '.attribute_select', function(e) {
     getProductAttribute();
 });
 
+$(document).on('click', '.color_pick', function(e) {
+  e.preventDefault();
+  colorPickerClick($(this));
+  findCombination();
+  getProductAttribute();
+});
 
 $(document).on('change', '#quantity_wanted', function(e) {
   e.preventDefault();

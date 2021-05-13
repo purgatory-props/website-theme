@@ -401,3 +401,45 @@
         }
     }
 }
+
+
+#color_to_pick_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #color_to_pick_list:before, #color_to_pick_list:after {
+    content: " ";
+    display: table;
+  }
+
+  #color_to_pick_list:after {
+    clear: both;
+  }
+
+  #color_to_pick_list li {
+    float: left;
+    margin: 0 3px 3px 0;
+    padding: 1px;
+    border: 1px solid #eee;
+    width: 26px;
+    height: 26px;
+  }
+
+  #color_to_pick_list li.selected {
+    border: 1px solid #4d4d4d;
+  }
+
+  #color_to_pick_list li a.color_pick {
+    display: block;
+    height: 22px;
+    width: 22px;
+    cursor: pointer;
+  }
+
+  #color_to_pick_list li a.color_pick img {
+    display: block;
+    height: 22px;
+    width: 22px;
+  }
