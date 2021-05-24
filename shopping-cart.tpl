@@ -106,10 +106,10 @@
               {if $voucherAllowed}
                 <form action="{if $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" id="voucher">
                   <fieldset>
-                    <h4>{l s='Vouchers'}</h4>
+                    <h4>{l s='Discount Codes'}</h4>
                     <input type="text" class="discount_name form-control quarter-width" id="discount_name" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
                     <input type="hidden" name="submitDiscount">
-                    <button type="submit" name="submitAddDiscount" class="btn btn-primary"><span>{l s='OK'}</span></button>
+                    <button type="submit" name="submitAddDiscount" class="btn btn-primary"><span>{l s='Add'}</span></button>
                   </fieldset>
                 </form>
                 {if $displayVouchers}
@@ -131,7 +131,7 @@
               {if $voucherAllowed}
                 <form action="{if $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" id="voucher">
                   <fieldset>
-                    <h4>{l s='Vouchers'}</h4>
+                    <h4>{l s='Discount Codes'}</h4>
                     <input type="text" class="discount_name form-control" id="discount_name" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
                     <input type="hidden" name="submitDiscount">
                     <button type="submit" name="submitAddDiscount" class="btn btn-primary"><span>{l s='OK'}</span></button>
@@ -157,7 +157,7 @@
             {if $voucherAllowed}
               <form action="{if $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" id="voucher">
                 <fieldset>
-                  <h4>{l s='Vouchers'}</h4>
+                  <h4>{l s='Codes'}</h4>
                   <input type="text" class="discount_name form-control" id="discount_name" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
                   <input type="hidden" name="submitDiscount">
                   <button type="submit" name="submitAddDiscount" class="btn btn-primary">
@@ -231,12 +231,12 @@
         <td colspan="{$col_span_subtotal}" class="text-{if $isRtl}left{else}right{/if}">
           {if $display_tax_label}
             {if $use_taxes && $priceDisplay == 0}
-              {l s='Vouchers (tax incl.)'}
+              {l s='Codes (tax incl.)'}
             {else}
-              {l s='Vouchers'}
+              {l s='Codes'}
             {/if}
           {else}
-            {l s='Vouchers'}
+            {l s='Codes'}
           {/if}
         </td>
         <td colspan="2" class="price-discount price" id="total_discount">
@@ -428,7 +428,7 @@
     <div class="checkbox">
       <label for="allow_seperated_package" class="inline">
         <input type="checkbox" name="allow_seperated_package" id="allow_seperated_package" {if $cart->allow_seperated_package}checked="checked"{/if} autocomplete="off">
-        <span class="label-text">{l s='Send available products first'}</span>
+        <span class="label-text">{l s='Ship Available Products First'}</span>
       </label>
     </div>
   {/if}
