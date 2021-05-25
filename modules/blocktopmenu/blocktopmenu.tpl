@@ -2,7 +2,7 @@
     <nav id="menu">
         <!-- Desktop Menu -->
         <div class="header-wrapper wrapper no-mobile">
-            <ul class="clearfix menu-content">
+            <ul id="desktop-menu" class="clearfix menu-content">
                 {$MENU}
             </ul>
         </div>
@@ -54,6 +54,24 @@
                     x.style.display = "block";
                     menu.classList.add('expand');
                     menuBtn.style['visibility'] = 'hidden';
+                }
+            }
+
+            var allMenuLinks = document.querySelectorAll('#desktop-menu li');
+            for (var i = 0; i < allMenuLinks.length; i++) {
+                var submenus = allMenuLinks[i].getElementsByTagName('ul');
+                if (submenus.length == 1) {
+                    var menuLink = allMenuLinks[i].getElementsByTagName('a')[0];
+                    var submenu = submenus[0];
+
+                    var newMenuItem = document.createElement('li');
+                    var newMenuItemLink = document.createElement('a');
+                    newMenuItemLink.setAttribute('href', menuLink.getAttribute('href'));
+                    newMenuItemLink.setAttribute('title', menuLink.getAttribute('title'));
+                    newMenuItemLink.innerHTML = '{l s='All'} ' + menuLink.innerHTML;
+                    newMenuItem.appendChild(newMenuItemLink);
+
+                    submenu.insertBefore(newMenuItem, submenu.childNodes[0]);
                 }
             }
         </script>
