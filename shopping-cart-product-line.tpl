@@ -54,9 +54,9 @@
         {/if}
 
         {if !$priceDisplay}
-          <li class="price final-price{if isset($product.is_discounted) && $product.is_discounted && isset($product.reduction_applies) && $product.reduction_applies} special-price{/if}">{convertPrice price=$product.price_wt}</li>
+          <li class="price final-price small{if isset($product.is_discounted) && $product.is_discounted && isset($product.reduction_applies) && $product.reduction_applies} special-price{/if}">{convertPrice price=$product.price_wt}</li>
         {else}
-          <li class="price final-price{if isset($product.is_discounted) && $product.is_discounted && isset($product.reduction_applies) && $product.reduction_applies} special-price{/if}">{convertPrice price=$product.price}</li>
+          <li class="price final-price small{if isset($product.is_discounted) && $product.is_discounted && isset($product.reduction_applies) && $product.reduction_applies} special-price{/if}">{convertPrice price=$product.price}</li>
         {/if}
       {/if}
     </ul>
@@ -108,7 +108,7 @@
     </td>
   {/if}
   <td class="cart_total" data-title="{l s='Total'}">
-    <span class="price" id="total_product_price_{$product.id_product}_{$product.id_product_attribute}{if $quantityDisplayed > 0}_nocustom{/if}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}">
+    <span class="price total-price" id="total_product_price_{$product.id_product}_{$product.id_product_attribute}{if $quantityDisplayed > 0}_nocustom{/if}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}">
       {if !empty($product.gift)}
         <span class="gift-icon">{l s='Gift!'}</span>
       {else}
