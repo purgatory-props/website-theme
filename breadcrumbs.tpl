@@ -1,4 +1,4 @@
-{assign var='forbiddenPages' value=['index', 'pagenotfound', 'sitemap', 'authentication']}
+{assign var='forbiddenPages' value=['index', 'pagenotfound', 'sitemap', 'authentication', 'order']}
 
 {if !in_array($page_name, $forbiddenPages)}
 

@@ -448,6 +448,7 @@
     {$addresses_style.phone_mobile = 'address_phone_mobile'}
     {$addresses_style.alias = 'address_title'}
   {/if}
+
   {if !$advanced_payment_api && ((!empty($delivery_option) && (!isset($isVirtualCart) || !$isVirtualCart)) OR $delivery->id || $invoice->id) && !$opc}
     <div class="order_delivery clearfix row">
       {if !isset($formattedAddresses) || (count($formattedAddresses.invoice) == 0 && count($formattedAddresses.delivery) == 0) || (count($formattedAddresses.invoice.formated) == 0 && count($formattedAddresses.delivery.formated) == 0)}
@@ -513,6 +514,7 @@
       {/if}
     </div>
   {/if}
+
   <div id="HOOK_SHOPPING_CART">{$HOOK_SHOPPING_CART}</div>
 
   <p class="cart_navigation clearfix">
