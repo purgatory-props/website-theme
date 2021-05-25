@@ -65,7 +65,7 @@
                           {if $option.unique_carrier}
                             {foreach $option.carrier_list as $carrier}
                               <strong>{$carrier.instance->name|escape:'htmlall':'UTF-8'}</strong>
-                              {if isset($carrier.instance->delay[$cookie->id_lang])}
+                              {if isset($carrier.instance->delay[$cookie->id_lang]) && !ctype_space($carrier.instance->delay[$cookie->id_lang])}
                                 <br>{l s='Delivery time:'}&nbsp;{$carrier.instance->delay[$cookie->id_lang]|escape:'htmlall':'UTF-8'}
                               {/if}
                             {/foreach}
@@ -269,14 +269,14 @@
                       {/if}
                     {/foreach}
                     {if !$flag_error_message}
-                      {l s='No carriers available for the address "%s".' sprintf=$address->alias}
+                      {l s='No Carriers Available for the Address "%s".' sprintf=$address->alias}
                     {/if}
                   {/if}
                   {if !$address@last}
                     <br>
                   {/if}
                   {foreachelse}
-                  {l s='No carriers available.'}
+                  {l s='No Carriers Available.'}
                 {/foreach}
               </div>
             {/if}
@@ -285,7 +285,7 @@
       </div>
       <div id="extra_carrier" style="display: none;"></div>
       {if $opc}
-        <p class="carrier_title">{l s='Leave a message'}</p>
+        <p class="carrier_title">{l s='Leave a Message'}</p>
         <div>
           <p>{l s='If you would like to add a comment about your order, please write it in the field below.'}</p>
             <textarea class="form-control" cols="120" rows="2" name="message" id="message">{strip}
