@@ -802,7 +802,7 @@ if (typeof combinations !== 'undefined' && combinations) {
     }
     window.combinations = combinationsJS;
 
-  }
+}
 
 
 
@@ -874,3 +874,78 @@ function GoToProductTab(tabId) {
 
   $(el).click();
 }
+
+
+
+function checkUrl() {
+  if (original_url != window.location || first_url_check) {
+    first_url_check = false;
+    var url = window.location + '';
+    // if we need to load a specific combination
+    if (url.indexOf('#/') != -1) {
+      // get the params to fill from a "normal" url
+      params = url.substring(url.indexOf('#') + 1, url.length);
+      tabParams = params.split('/');
+      tabValues = [];
+      if (tabParams[0] == '') {
+        tabParams.shift();
+      }
+
+      var len = tabParams.length;
+      for (var i = 0; i < len; i++) {
+        tabParams[i] = tabParams[i].replace(attribute_anchor_separator, '-');
+        tabValues.push(tabParams[i].split('-'));
+      }
+
+      // fill html with values
+      $('.color_pick').removeClass('selected').parent().parent().children().removeClass('selected');
+
+      var count = 0;
+      for (var z in tabValues) {
+        for (var a in attributesCombinations) {
+          if (attributesCombinations.hasOwnProperty(a)) {
+            if (attributesCombinations[a]['group'] === decodeURIComponent(tabValues[z][1]) &&
+              attributesCombinations[a]['id_attribute'] === decodeURIComponent(tabValues[z][0])) {
+              count++;
+
+              // add class 'selected' to the selected color
+              $('#color_' + attributesCombinations[a]['id_attribute']).addClass('selected').parent().addClass('selected');
+              $('input:radio[value=' + attributesCombinations[a]['id_attribute'] + ']').prop('checked', true);
+              $('input[type=hidden][name=group_' + attributesCombinations[a]['id_attribute_group'] + ']').val(attributesCombinations[a]['id_attribute']);
+              $('select[name=group_' + attributesCombinations[a]['id_attribute_group'] + ']').val(attributesCombinations[a]['id_attribute']);
+            }
+          }
+        }
+      }
+
+      // find combination and select corresponding thumbs
+      if (count) {
+        if (firstTime) {
+          firstTime = false;
+          findCombination();
+        }
+        original_url = url;
+        return true;
+      } else {
+        // no combination found = removing attributes from url
+        window.location.replace(url.substring(0, url.indexOf('#')));
+      }
+    }
+  }
+  return false;
+}
+
+
+
+$(function() {
+  var url_found = checkUrl();
+
+  // init the price in relation of the selected attributes
+  if (!url_found) {
+    if (typeof productHasAttributes !== 'undefined' && productHasAttributes) {
+      findCombination();
+    } else {
+      refreshProductImages(0);
+    }
+  }
+});
