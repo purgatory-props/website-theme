@@ -49,7 +49,7 @@
            <a href="{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1&select_address=1{if $back}&mod={$back}{/if}")|escape:'html':'UTF-8'}" title="{l s='Add'}" class="btn">
              <span>
                {l s='New Address'}
-               <i class="icon icon-chevron-right"></i>
+               <i class="icon icon-plus"></i>
              </span>
            </a>
         {/if}
@@ -68,7 +68,7 @@
   </div>
   <p class="address_add submit">
     <a href="{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{if $back}&mod={$back}{/if}")|escape:'html':'UTF-8'}" title="{l s='Add'}" class="btn">
-      <span>{l s='New Address'} <i class="icon icon-chevron-right"></i></span>
+      <span>{l s='New Address'} <i class="icon icon-plus"></i></span>
     </a>
   </p>
   {if !$opc}
