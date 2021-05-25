@@ -517,9 +517,14 @@
 
   <p class="cart_navigation clearfix">
     {if !$opc}
+      {if $is_logged}
+        {assign var='nextStepName' value='Proceed to Address'}
+      {else}
+        {assign var='nextStepName' value='Proceed to Account Info'}
+      {/if}
       <a  href="{if $back}{$link->getPageLink('order', true, NULL, 'step=1&amp;back={$back}')|escape:'html':'UTF-8'}{else}{$link->getPageLink('order', true, NULL, 'step=1')|escape:'html':'UTF-8'}{/if}"
-          class="btn btn-lg btn-success pull-right standard-checkout btn-full" title="{l s='Proceed to Address'}">
-        <span>{l s='Proceed to Address'} <i class="icon icon-chevron-right"></i></span>
+          class="btn btn-lg btn-success pull-right standard-checkout btn-full" title="{$nextStepName}">
+        <span>{$nextStepName} <i class="icon icon-chevron-right"></i></span>
       </a>
     {/if}
     <a href="{if (isset($smarty.server.HTTP_REFERER) && ($smarty.server.HTTP_REFERER == $link->getPageLink('order', true) || $smarty.server.HTTP_REFERER == $link->getPageLink('order-opc', true) || strstr($smarty.server.HTTP_REFERER, 'step='))) || !isset($smarty.server.HTTP_REFERER)}{$link->getPageLink('index')}{else}{$smarty.server.HTTP_REFERER|regex_replace:'/[\?|&]content_only=1/':''|escape:'html':'UTF-8'|secureReferrer}{/if}"

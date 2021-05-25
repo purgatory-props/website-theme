@@ -32,17 +32,17 @@
         <a href="javascript:;">{l s='Summary'}</a>
       {/if}
     </li>
-
+    {if !$is_logged}
     <li class="{if $step_num > 2}completed{elseif $step_num == 2}active{else}not-completed{/if}">
       {if $current_step=='payment' || $current_step=='shipping' || $current_step=='address'}
         <a href="{$link->getPageLink('order', true, NULL, "{$smarty.capture.url_back}&step=1{if $multi_shipping}&multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}">
           {l s='Sign In'}
         </a>
       {else}
-        <a href="javascript:;">{l s='Sign In'}</a>
+        <a href="javascript:;">{l s='Account Info'}</a>
       {/if}
     </li>
-
+    {/if}
     <li class="{if $step_num > 3}completed{elseif $step_num == 3}active{else}not-completed{/if}">
       {if $current_step=='payment' || $current_step=='shipping'}
         <a href="{$link->getPageLink('order', true, NULL, "{$smarty.capture.url_back}&step=1{if $multi_shipping}&multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}">
