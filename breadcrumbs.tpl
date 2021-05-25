@@ -1,3 +1,7 @@
+{assign var='forbiddenPages' value=['index', 'pagenotfound', 'sitemap', 'authentication']}
+
+{if !in_array($page_name, $forbiddenPages)}
+
 {if isset($smarty.capture.path)}{assign var='path' value=$smarty.capture.path}{/if}
 
 {if !empty($path)}
@@ -28,6 +32,7 @@
             </a>
             <meta itemprop="position" content="1">
           </li>
+
           {if !empty($breadcrumbs)}
             {foreach from=$breadcrumbs item=breadcrumb name=crumbs}
               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
@@ -62,3 +67,4 @@
     </ul>
   </nav>
 {/if}
+{/if} {* Forbidden Pages Check *}

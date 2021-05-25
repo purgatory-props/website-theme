@@ -258,7 +258,7 @@
     <input type="hidden" name="is_new_customer" value="1">
     {if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'html':'UTF-8'}">{/if}
     <p class="required"><sup class="required">*</sup>{l s='Required Field'}</p>
-    <button type="submit" name="submitAccount" id="submitAccount" class="btn btn-lg btn-default">
+    <button type="submit" name="submitAccount" id="submitAccount" class="btn btn-lg btn-default form-control">
       {l s='Register'} <i class="icon icon-chevron-right"></i>
     </button>
   </div>

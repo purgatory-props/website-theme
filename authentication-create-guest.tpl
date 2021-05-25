@@ -331,7 +331,7 @@
           <label for="phone_mobile_invoice">{l s='Cell Phone'}{if isset($one_phone_at_least) && $one_phone_at_least} <sup class="required">*</sup>{/if}</label>
           <input type="text" class="form-control" name="phone_mobile_invoice" id="phone_mobile_invoice" value="{if isset($smarty.post.phone_mobile_invoice) && $smarty.post.phone_mobile_invoice}{$smarty.post.phone_mobile_invoice}{/if}">
         </div>
-        <input type="hidden" name="alias_invoice" id="alias_invoice" value="{l s='My Invoice address'}">
+        <input type="hidden" name="alias_invoice" id="alias_invoice" value="{l s='My Invoice Address'}">
       </div>
     </div>
     {$HOOK_CREATE_ACCOUNT_FORM}
@@ -339,7 +339,7 @@
   <p class="cart_navigation required submit clearfix">
     <span><sup class="required">*</sup>{l s='Required Field'}</span>
     <input type="hidden" name="display_guest_checkout" value="1">
-    <button type="submit" class="btn btn-lg btn-success" name="submitGuestAccount" id="submitGuestAccount">
+    <button type="submit" class="btn btn-lg btn-success form-control" name="submitGuestAccount" id="submitGuestAccount">
           <span>
             {l s='Proceed to checkout'}
             <i class="icon icon-chevron-right"></i>
