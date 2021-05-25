@@ -15,7 +15,7 @@
             <div class="bloc_adresses row">
                 {foreach from=$multipleAddresses item=address name=myLoop}
                     <div class="address">
-                        <ul class="box list-unstyled">
+                        <ul class="list-unstyled">
                             <li>
                                 <h3 class="page-subheading">{$address.object.alias}</h3>
                             </li>

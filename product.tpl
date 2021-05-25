@@ -238,7 +238,7 @@
                                                     </span>
 
                                                     {if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) || !isset($display_tax_label))}
-                                                        {if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}
+                                                        <span class="small">{if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}</span>
                                                     {/if}
 
                                                     <meta itemprop="priceCurrency" content="{$currency->iso_code}">
@@ -250,7 +250,7 @@
                                         {if $priceDisplay == 2}
                                             <br>
                                             <span id="pretaxe_price">{strip}
-                                                <span id="pretaxe_price_display">{convertPrice price=$product->getPrice(false)}</span> {l s='tax excl.'}
+                                                <span id="pretaxe_price_display" class="small">{convertPrice price=$product->getPrice(false)}</span> {l s='tax excl.'}
                                             {/strip}</span>
                                         {/if}
                                     </div>
