@@ -56,7 +56,7 @@
                     menuBtn.style['visibility'] = 'hidden';
                 }
             }
-
+            /*
             var allMenuLinks = document.querySelectorAll('#desktop-menu li');
             for (var i = 0; i < allMenuLinks.length; i++) {
                 var submenus = allMenuLinks[i].getElementsByTagName('ul');
@@ -73,7 +73,7 @@
 
                     submenu.insertBefore(newMenuItem, submenu.childNodes[0]);
                 }
-            }
+            }*/
         </script>
     </nav>
 {/if}
