@@ -1,12 +1,11 @@
 {hook h='actionModifyProductForExtraFunctionality' product=$product}
-{if !isset($product->coming_soon) || !($product->coming_soon)}
+{if (!isset($product->coming_soon) || !$product->coming_soon) && (!isset($product->hide_comments) || !$product->hide_comments) && (!isset($product->is_service) || !$product->is_service)}
 
 {assign var=tabID value="tab-reviews"}
 <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
 <label for="{$tabID}" class="tab-label noselect">{l s='Reviews'}</label>
 
 <div id="reviews-tab" class="product-tab reviews-tab">
-
     {if (!$too_early && ($is_logged || $allow_guests))}
         {if !isset($product->discontinued) || !$product->discontinued}
             {* Review Form *}
