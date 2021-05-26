@@ -25,13 +25,22 @@
 
 {assign var=hasColorOption value=false}
 {if isset($groups)}
-{foreach from=$groups key=id_attribute_group item=group}
-    {if !empty($group.attributes)}
-        {if ($group.group_type == 'color')}
-            {assign var=hasColorOption value=true}
+    {foreach from=$groups key=id_attribute_group item=group}
+        {if !empty($group.attributes)}
+            {if ($group.group_type == 'color')}
+                {assign var=hasColorOption value=true}
+            {/if}
         {/if}
-    {/if}
-{/foreach}
+    {/foreach}
+{/if}
+
+{assign var='orderLaterLabel' value='Backorder'}
+{assign var='orderNowLabel' value='In Stock'}
+{if !ctype_space($product->available_later) && !empty($product->available_later)}
+    {assign var='orderLaterLabel' value=$product->available_later}
+{/if}
+{if !ctype_space($product->available_now) && !empty($product->available_now)}
+    {assign var='orderNowLabel' value=$product->available_now}
 {/if}
 
 {hook h='actionModifyProductForExtraFunctionality' product=$product}
@@ -199,7 +208,6 @@
                         </a>
                     </div>
                 {else}
-
                     <!-- Add to Cart Button and Quantity if Available -->
                     {if ($product->show_price && !isset($restricted_country_mode)) || isset($groups) || $product->reference || (isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS)}
                         <form id="buy_block"{if $PS_CATALOG_MODE && !isset($groups) && $product->quantity > 0} class="hidden"{/if} action="{$link->getPageLink('cart')|escape:'html':'UTF-8'}" method="post">
@@ -210,66 +218,67 @@
 
                             <div class="box-info-product">
                                 <div class="content_prices clearfix">
-                                    {if $product->show_price && !isset($restricted_country_mode) && !$PS_CATALOG_MODE}
-                                    <div>
-                                        <div class="price-display" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                                            {strip}
-                                                {if $product->quantity > 0}
-                                                    <link itemprop="availability" href="https://schema.org/InStock">
-                                                {/if}
-                                                {if $priceDisplay >= 0 && $priceDisplay <= 2}
-                                                    <meta itemprop="price" content="{$productPrice}">
-
-                                                    {if $isActuallyOnSale}
-                                                        <span class="old-price">{convertPrice price=$product->base_price|floatval}</span>
+                                    {if $product->show_price && !isset($restricted_country_mode) && !$PS_CATALOG_MODE && ($product->quantity > 0 || $allow_oosp)}
+                                        <div>
+                                            <div class="price-display" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                                {strip}
+                                                    {if $product->quantity > 0}
+                                                        <link itemprop="availability" href="https://schema.org/InStock">
                                                     {/if}
+                                                    {if $priceDisplay >= 0 && $priceDisplay <= 2}
+                                                        <meta itemprop="price" content="{$productPrice}">
 
-                                                    <span id="our_price_display" class="current-price accent-color">
-                                                        {convertPrice price=$productPrice|floatval}
-                                                    </span>
-
-                                                    <span id="price-reduction" class="reduction-label noselect" {if $productPriceWithoutReduction <= 0 || !$product->specificPrice}style="display:none"{/if}>
-                                                        {if $product->specificPrice.reduction_type == 'percentage'}
-                                                            {$product->specificPrice.reduction*100}%
-                                                        {else if $product->specificPrice.reduction_type == 'amount'}
-                                                            {convertPrice price=$productPriceWithoutReduction|floatval-$productPrice|floatval}
+                                                        {if $isActuallyOnSale}
+                                                            <span class="old-price">{convertPrice price=$product->base_price|floatval}</span>
                                                         {/if}
-                                                        &nbsp;{l s='Off!'}
-                                                    </span>
 
-                                                    {if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) || !isset($display_tax_label))}
-                                                        <span class="small">{if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}</span>
+                                                        <span id="our_price_display" class="current-price accent-color">
+                                                            {convertPrice price=$productPrice|floatval}
+                                                        </span>
+
+                                                        <span id="price-reduction" class="reduction-label noselect" {if $productPriceWithoutReduction <= 0 || !$product->specificPrice}style="display:none"{/if}>
+                                                            {if $product->specificPrice.reduction_type == 'percentage'}
+                                                                {$product->specificPrice.reduction*100}%
+                                                            {else if $product->specificPrice.reduction_type == 'amount'}
+                                                                {convertPrice price=$productPriceWithoutReduction|floatval-$productPrice|floatval}
+                                                            {/if}
+                                                            &nbsp;{l s='Off!'}
+                                                        </span>
+
+                                                        {if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) || !isset($display_tax_label))}
+                                                            <span class="small">{if $priceDisplay == 1} {l s='tax excl.'}{else} {l s='tax incl.'}{/if}</span>
+                                                        {/if}
+
+                                                        <meta itemprop="priceCurrency" content="{$currency->iso_code}">
+                                                        {hook h="displayProductPriceBlock" product=$product type="price"}
                                                     {/if}
+                                                {/strip}
+                                            </div>
 
-                                                    <meta itemprop="priceCurrency" content="{$currency->iso_code}">
-                                                    {hook h="displayProductPriceBlock" product=$product type="price"}
-                                                {/if}
-                                            {/strip}
+                                            {if $priceDisplay == 2}
+                                                <br>
+                                                <span id="pretaxe_price">{strip}
+                                                    <span id="pretaxe_price_display" class="small">{convertPrice price=$product->getPrice(false)}</span> {l s='tax excl.'}
+                                                {/strip}</span>
+                                            {/if}
                                         </div>
+                                        {if $packItems|@count && $productPrice < $product->getNoPackPrice()}
+                                            <p class="pack_price">{l s='Instead of'} <span style="text-decoration: line-through;">{convertPrice price=$product->getNoPackPrice()}</span></p>
+                                        {/if}
+                                        {if $product->ecotax != 0}
+                                            <p class="price-ecotax">{l s='Including'} <span id="ecotax_price_display">{if $priceDisplay == 2}{$ecotax_tax_exc|convertAndFormatPrice}{else}{$ecotax_tax_inc|convertAndFormatPrice}{/if}</span> {l s='for ecotax'}
+                                            {if $product->specificPrice && $product->specificPrice.reduction}
+                                                <br>{l s='(not impacted by the discount)'}
+                                            {/if}
+                                            </p>
+                                        {/if}
+                                        {if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
+                                            {math equation="pprice / punit_price" pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
+                                            <p class="unit-price"><span id="unit_price_display">{convertPrice price=$unit_price}</span> {l s='per'} {$product->unity|escape:'html':'UTF-8'}</p>
+                                            {hook h="displayProductPriceBlock" product=$product type="unit_price"}
+                                        {/if}
+                                    {/if}
 
-                                        {if $priceDisplay == 2}
-                                            <br>
-                                            <span id="pretaxe_price">{strip}
-                                                <span id="pretaxe_price_display" class="small">{convertPrice price=$product->getPrice(false)}</span> {l s='tax excl.'}
-                                            {/strip}</span>
-                                        {/if}
-                                    </div>
-                                    {if $packItems|@count && $productPrice < $product->getNoPackPrice()}
-                                        <p class="pack_price">{l s='Instead of'} <span style="text-decoration: line-through;">{convertPrice price=$product->getNoPackPrice()}</span></p>
-                                    {/if}
-                                    {if $product->ecotax != 0}
-                                        <p class="price-ecotax">{l s='Including'} <span id="ecotax_price_display">{if $priceDisplay == 2}{$ecotax_tax_exc|convertAndFormatPrice}{else}{$ecotax_tax_inc|convertAndFormatPrice}{/if}</span> {l s='for ecotax'}
-                                        {if $product->specificPrice && $product->specificPrice.reduction}
-                                            <br>{l s='(not impacted by the discount)'}
-                                        {/if}
-                                        </p>
-                                    {/if}
-                                    {if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
-                                        {math equation="pprice / punit_price" pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
-                                        <p class="unit-price"><span id="unit_price_display">{convertPrice price=$unit_price}</span> {l s='per'} {$product->unity|escape:'html':'UTF-8'}</p>
-                                        {hook h="displayProductPriceBlock" product=$product type="unit_price"}
-                                    {/if}
-                                    {/if} {*close if for show price*}
                                     {hook h="displayProductPriceBlock" product=$product type="weight" hook_origin='product_sheet'}
                                     {hook h="displayProductPriceBlock" product=$product type="after_price"}
                                 </div>
@@ -330,7 +339,7 @@
                                 </div>
 
                                 <div class="box-cart-bottom">
-                                    {* Quantities/Stock *}
+                                    {* Quanities *}
                                     <div class="quantities-container">
                                         {if ($display_qties == 1 && !$PS_CATALOG_MODE && $PS_STOCK_MANAGEMENT && $product->available_for_order)}
                                             <span id="pQuantityAvailable"{if $product->quantity <= 0} style="display: none;"{/if}>
@@ -340,20 +349,23 @@
                                             </span>
                                         {/if}
 
-                                        <span id="availability_statut"{if !$PS_STOCK_MANAGEMENT || ($product->quantity <= 0 && !$product->available_later && $allow_oosp) || ($product->quantity > 0 && !$product->available_now) || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
+                                        {* Availability *}
+                                        <span id="availability_statut"{if !$PS_STOCK_MANAGEMENT || ($product->quantity <= 0 && !$allow_oosp) || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
                                             <span id="availability_value" class="label{if $product->quantity <= 0 && !$allow_oosp} label-danger{elseif $product->quantity <= 0} label-warning{else} label-success{/if}">
                                                 {if $product->quantity <= 0}
-                                                    {if $PS_STOCK_MANAGEMENT && $allow_oosp}
-                                                        {$product->available_later}
-                                                    {else}
-                                                        <h2 style="margin: 0">{l s='Out of Stock'}</h2>
-                                                    {/if}
+                                                    {$orderLaterLabel}
                                                 {elseif $PS_STOCK_MANAGEMENT}
-                                                    {$product->available_now}
+                                                    {$orderNowLabel}
                                                 {/if}
                                             </span>
                                         </span>
 
+                                        {* Out of Stock *}
+                                        {if $PS_STOCK_MANAGEMENT && $product->quantity <= 0 && !$allow_oosp}
+                                            <h2 style="margin: 0" class="label label-warning" style="display: block">{l s='Out of Stock'}</h2>
+                                        {/if}
+
+                                        {* Few Left Warning *}
                                         {if $PS_STOCK_MANAGEMENT}
                                             <span class="label label-warning" id="last_quantities"{if ($product->quantity > $last_qties || $product->quantity <= 0) || $allow_oosp || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none"{/if} >
                                                 &nbsp;{l s='Only a Few Left!'}
@@ -364,8 +376,9 @@
                                             {if !$product->is_virtual}{hook h="displayProductDeliveryTime" product=$product}{/if}
                                         {/if}
 
+                                        {* Available By Date *}
                                         <p id="availability_date"{if ($product->quantity > 0) || !$product->available_for_order || $PS_CATALOG_MODE || !isset($product->available_date) || $product->available_date < $smarty.now|date_format:'%Y-%m-%d'} style="display: none;"{/if}>
-                                            <span id="availability_date_label"><b>{l s='Available By: '}</b></span>
+                                            <span id="availability_date_label">{l s='Available By '}</span>
                                             <span id="availability_date_value">{if Validate::isDate($product->available_date)}{dateFormat date=$product->available_date full=false}{/if}</span>
                                         </p>
 
@@ -538,8 +551,8 @@
       {addJsDefL name=adtoken}{$smarty.get.adtoken|escape:'html':'UTF-8'}{/addJsDefL}
     {/if}
     {addJsDef allowBuyWhenOutOfStock=$allow_oosp|boolval}
-    {addJsDef availableNowValue=$product->available_now|escape:'quotes':'UTF-8'}
-    {addJsDef availableLaterValue=$product->available_later|escape:'quotes':'UTF-8'}
+    {addJsDef availableNowValue=$orderNowLabel|escape:'quotes':'UTF-8'}
+    {addJsDef availableLaterValue=$orderLaterLabel|escape:'quotes':'UTF-8'}
     {addJsDef attribute_anchor_separator=$attribute_anchor_separator|escape:'quotes':'UTF-8'}
     {addJsDef attributesCombinations=$attributesCombinations}
     {addJsDef currentDate=$smarty.now|date_format:'%Y-%m-%d %H:%M:%S'}
