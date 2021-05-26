@@ -1,4 +1,7 @@
 // out: false
+.only-print {
+    display: none;
+}
 
 @media print {
     header {
@@ -9,7 +12,12 @@
         display: none;
     }
 
-    .hide-print {
+    .hide-print, .no-print, .hidden-print {
         display: none;
     }
+
+    .only-print {
+        display: block;
+    }
 }
+

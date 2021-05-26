@@ -27,7 +27,7 @@
                     <input type="hidden" value="{$order->id}" name="id_order">
                     <input type="hidden" value="" name="submitReorder">
 
-                    <a href="#" onclick="$(this).closest('form').submit(); return false;" class="btn btn-lg btn-success pull-right"><span>{l s='Reorder'} <i class="icon icon-refresh"></i></span></a>
+                    <a href="#" onclick="$(this).closest('form').submit(); return false;" class="btn btn-lg btn-success pull-right hide-print"><span>{l s='Reorder'} <i class="icon icon-refresh"></i></span></a>
                 </form>
             {/if}
 
@@ -54,7 +54,7 @@
             {/if}
 
             {if $invoice AND $invoiceAllowed}
-                <div class="order-invoice">
+                <div class="order-invoice hide-print">
                     <i class="icon icon-file-text"></i>
                     <a class="textlink" target="_blank" href="{$link->getPageLink('pdf-invoice', true)}?id_order={$order->id|intval}{if $is_guest}&amp;secure_key={$order->secure_key|escape:'html':'UTF-8'}{/if}">{l s='Download Invoice'}</a>
                 </div>
@@ -62,9 +62,10 @@
 
             {if isset($followup)}
                 <div class="order-tracking">
-                    <a href="{$followup|escape:'html':'UTF-8'}" class="textlink-nostyle bold external-link" target="_blank">
+                    <a href="{$followup|escape:'html':'UTF-8'}" class="textlink-nostyle bold external-link no-print" target="_blank">
                         {l s='Track Your Order Shipment'}
                     </a>
+                    <span class="only-print">{l s='Track Your Order Shipment'}: {$followup|escape:'html':'UTF-8'}</span>
                 </div>
             {/if}
 
@@ -521,8 +522,8 @@
         {* Messages *}
         {if !$is_guest}
             {if count($messages)}
-                <h2 class="page-heading order-details-title">{l s='Messages'}</h2>
-                <div class="table_block table-responsive">
+                <h2 class="page-heading order-details-title no-print">{l s='Messages'}</h2>
+                <div class="table_block table-responsive no-print">
                     <table class="detail_step_by_step table table-bordered order-details-table">
                     <thead>
                     <tr>
@@ -566,12 +567,12 @@
             {/if}
 
             {if isset($message_confirmation) && $message_confirmation}
-                <div class="alert alert-success">
+                <div class="alert alert-success no-print">
                     {l s='Message successfully sent'}
                 </div>
             {/if}
 
-            <form action="{$link->getPageLink('order-detail', true)|escape:'html':'UTF-8'}" method="post" class="std" id="sendOrderMessage">
+            <form action="{$link->getPageLink('order-detail', true)|escape:'html':'UTF-8'}" method="post" class="std no-print" id="sendOrderMessage">
                 <h3 class="page-heading">{l s='Add a Message'}</h3>
                 <p>{l s='If you would like to add a comment about your order, please write it in the field below.'}</p>
                 <div class="form-group">

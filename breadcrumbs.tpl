@@ -23,7 +23,7 @@
 {/if}
 
 
-<div class="breadcrumbs-container clearfix">
+<div class="breadcrumbs-container clearfix no-print">
     <div class="wrapper slightly-smaller center">
         <ol class="breadcrumb list-unstyled no-mobile" itemscope itemtype="http://schema.org/BreadcrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">

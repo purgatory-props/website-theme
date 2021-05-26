@@ -344,7 +344,7 @@
                                     {/if}
                                 </div>
 
-                                <div id="box-cart-bottom" class="box-cart-bottom">
+                                <div id="box-cart-bottom" class="box-cart-bottom no-print">
                                     {* Quanities *}
                                     <div class="quantities-container">
                                         {if ($display_qties == 1 && !$PS_CATALOG_MODE && $PS_STOCK_MANAGEMENT && $product->available_for_order)}
