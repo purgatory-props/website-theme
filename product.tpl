@@ -350,20 +350,19 @@
                                         {/if}
 
                                         {* Availability *}
-                                        <span id="availability_statut"{if !$PS_STOCK_MANAGEMENT || ($product->quantity <= 0 && !$allow_oosp) || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
-                                            <span id="availability_value" class="label{if $product->quantity <= 0 && !$allow_oosp} label-danger{elseif $product->quantity <= 0} label-warning{else} label-success{/if}">
+                                        <span id="availability_statut"{if !$PS_STOCK_MANAGEMENT || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
+                                            <span id="availability_value" class="label{if $product->quantity <= 0} label-warning{else} label-success{/if}">
                                                 {if $product->quantity <= 0}
-                                                    {$orderLaterLabel}
+                                                    {if $allow_oosp}
+                                                        {$orderLaterLabel}
+                                                    {else}
+                                                        <h2 style="margin: 0" style="display: block">{l s='Out of Stock'}</h2>
+                                                    {/if}
                                                 {elseif $PS_STOCK_MANAGEMENT}
                                                     {$orderNowLabel}
                                                 {/if}
                                             </span>
                                         </span>
-
-                                        {* Out of Stock *}
-                                        {if $PS_STOCK_MANAGEMENT && $product->quantity <= 0 && !$allow_oosp}
-                                            <h2 style="margin: 0" class="label label-warning" style="display: block">{l s='Out of Stock'}</h2>
-                                        {/if}
 
                                         {* Few Left Warning *}
                                         {if $PS_STOCK_MANAGEMENT}
