@@ -1,0 +1,69 @@
+// out: ../../../../css/modules/prestaqna/css/
+@import "../../../variables.less";
+
+.qna-tab {
+    #ask-question-btn {
+        margin-bottom: 20px;
+    }
+
+    #qna-form-alerts {
+        .alert {
+            margin-bottom: 10px;
+        }
+    }
+
+    .product-question {
+        border-bottom: 1px solid white;
+
+        margin-bottom: 15px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .question-title {
+            cursor: pointer;
+
+            font-size: 1.2em;
+
+            line-height: 1.2em;
+            padding: 5px 0;
+
+            &:first-of-type {
+                padding-top: 0;
+            }
+
+            .title {
+                font-weight: bold;
+
+                margin-left: 15px;
+            }
+        }
+
+        .question-answer {
+            display: none;
+            padding-top: 10px;
+            padding-bottom: 15px;
+        }
+
+
+        .collapse-icon {
+            display: none;
+        }
+
+
+        &.expanded {
+            .question-answer {
+                display: block;
+            }
+
+            .expand-icon {
+                display: none;
+            }
+
+            .collapse-icon {
+                display: inline;
+            }
+        }
+    }
+}
