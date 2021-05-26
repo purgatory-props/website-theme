@@ -832,35 +832,13 @@ $(document).on('submit', '#buy_block', function(e) {
 
       $('body').removeClass('loading-overlay');
 
-      swal({
-        title: addedToCartTitle,
-        icon: 'success',
-        buttons: {
-          cancel: addedToCartContinueShopping,
-          cart: addedToCartGoToCart
-        },
-      })
-      .then(function (buttonPressed) {
-        if (buttonPressed == 'cart') {
-          window.location.href = goToCartURL;
-        }
-        else {
-          if (!hasNewTotal)
-            window.location.reload();
-        }
-      });
+      addProductNotification('<div class="alert alert-success" style="padding: 10px; margin-top: 10px;">' + addedToCartTitle + ' <a href="' + goToCartURL + '" class="link">' + addedToCartGoToCart + '</a></div>', false);
+
     },
     error: function() {
       $('body').removeClass('loading-overlay');
 
-      swal({
-        title: addToCartErrorTitle,
-        text: addToCartErrorText,
-        icon: 'error',
-      })
-      .then(function (buttonPressed) {
-        window.location.reload();
-      });
+      addProductNotification('<div class="alert alert-danger" style="padding: 10px; margin-top: 10px;">' + addToCartErrorText + '</div>', true);
     }
   });
 
@@ -873,6 +851,21 @@ function GoToProductTab(tabId) {
     return;
 
   $(el).click();
+}
+
+
+
+function addProductNotification(notification, isError) {
+  addProductNotificationTo('#product-notifications-desktop', notification, isError);
+  addProductNotificationTo('#product-notifications-mobile', notification, isError);
+}
+
+
+function addProductNotificationTo(div, notification, isError) {
+  $(div).append(notification);
+  if (!isError) {
+    $(div).children(':last').delay(10000).fadeOut();
+  }
 }
 
 

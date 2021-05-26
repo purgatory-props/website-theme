@@ -96,5 +96,5 @@
     {include file="$tpl_dir./breadcrumbs.tpl"}
 
     <div id="page-content" class="clearfix">
-        <main class="wrapper slightly-smaller main-container center">
+        <main id="first-wrapper" class="wrapper slightly-smaller main-container center">
 {/if}
