@@ -346,7 +346,7 @@
                                                     {if $PS_STOCK_MANAGEMENT && $allow_oosp}
                                                         {$product->available_later}
                                                     {else}
-                                                        {l s='Out of Stock'}
+                                                        <h2 style="margin: 0">{l s='Out of Stock'}</h2>
                                                     {/if}
                                                 {elseif $PS_STOCK_MANAGEMENT}
                                                     {$product->available_now}

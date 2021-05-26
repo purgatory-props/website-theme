@@ -22,10 +22,10 @@
   {/if}
 {/if}
 
+
 <div class="breadcrumbs-container clearfix">
     <div class="wrapper slightly-smaller center">
-
-        <ol class="breadcrumb list-unstyled" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <ol class="breadcrumb list-unstyled no-mobile" itemscope itemtype="http://schema.org/BreadcrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
             <a href="{if isset($force_ssl) && $force_ssl}{$base_dir_ssl}{else}{$base_dir}{/if}" title="{l s='Home Page'}" itemprop="item">
               <span itemprop="name">{l s='Home'}</span>
@@ -34,8 +34,8 @@
           </li>
 
           {if !empty($breadcrumbs)}
-            {foreach from=$breadcrumbs item=breadcrumb name=crumbs}
-              <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            {foreach from=$breadcrumbs item=breadcrumb name=crumbs key=index}
+              <li class="desktop-crumb" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                 {if !empty($breadcrumb.url)}
                   <a href="{$breadcrumb.url}" itemprop="item">
                     <span itemprop="name">{$breadcrumb.title}</span>
@@ -46,11 +46,26 @@
                   </a>
                 {/if}
                 <meta itemprop="position" content="{($smarty.foreach.crumbs.iteration|intval + 1)}">
+
+                {if $index == (count($breadcrumbs) - 2)}
+                  {assign var='parentCrumb' value=$breadcrumb}
+                {/if}
               </li>
             {/foreach}
           {/if}
         </ol>
 
+        <ol class="breadcrumb list-unstyled no-desktop" itemscope itemtype="http://schema.org/BreadcrumbList">
+          {if !isset($parentCrumb) || count($breadcrumbs) == 0}
+            {assign var=parentCrumb value=[ 'url' => (isset($force_ssl) && $force_ssl) ? $base_dir_ssl : $base_dir, 'title' => 'Home']}
+          {/if}
+
+          {if isset($parentCrumb)}
+            <li class="mobile-crumb" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <a href="{$parentCrumb.url}" title="{l s='Back to'} {$parentCrumb.title}">&lt; {l s='Back to'} {$parentCrumb.title}</a>
+            </li>
+          {/if}
+        </ol>
     </div>
 </div>
 {if isset($smarty.get.search_query) && isset($smarty.get.results) && $smarty.get.results > 1 && isset($smarty.server.HTTP_REFERER)}
