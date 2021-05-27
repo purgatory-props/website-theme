@@ -7,8 +7,8 @@
     {assign var='orderNowLabel' value=$product.available_now}
 {/if}
 
-<tr id="product_{$product.id_product}_{$product.id_product_attribute}_{if $quantityDisplayed > 0}nocustom{else}0{/if}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}" class="textlink-nostyle">
-  <td class="cart_product">
+<tr id="product_{$product.id_product}_{$product.id_product_attribute}_{if $quantityDisplayed > 0}nocustom{else}0{/if}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}" class="textlink-nostyle no-border">
+  <td class="cart_product no-border">
     <a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute, false, false, true)|escape:'html':'UTF-8'}">
         <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'small', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
              alt="{$product.name|escape:'html':'UTF-8'}"
@@ -18,7 +18,7 @@
         >
     </a>
   </td>
-  <td class="cart_description">
+  <td class="cart_description no-border">
     {capture name=sep} : {/capture}
     {capture}{l s=' : '}{/capture}
     <p class="product-name textlink-nostyle"><a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute, false, false, true)|escape:'html':'UTF-8'}" class="textlink-nostyle">{$product.name|escape:'html':'UTF-8'}</a></p>
@@ -26,7 +26,7 @@
     {if isset($product.attributes) && $product.attributes}<small><a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute, false, false, true)|escape:'html':'UTF-8'}">{$product.attributes|@replace: $smarty.capture.sep:$smarty.capture.default|escape:'html':'UTF-8'}</a></small>{/if}
   </td>
   {if $PS_STOCK_MANAGEMENT}
-    <td class="cart_avail">
+    <td class="cart_avail no-border">
       <span class="label{if $product.quantity_available <= 0 && (isset($product.allow_oosp) && !$product.allow_oosp)} label-danger{else if $product.quantity_available <= 0 && (isset($product.allow_oosp) && $product.allow_oosp)} label-warning{else} label-success{/if}">
         {if $product.quantity_available <= 0}
           {if isset($product.allow_oosp) && $product.allow_oosp}
@@ -41,7 +41,7 @@
       {if !$product.is_virtual}{hook h="displayProductDeliveryTime" product=$product}{/if}
     </td>
   {/if}
-  <td class="cart_unit" data-title="{l s='Unit price'}">
+  <td class="cart_unit no-border" data-title="{l s='Unit price'}">
     <ul class="price text-{if $isRtl}left{else}right{/if}" id="product_price_{$product.id_product}_{$product.id_product_attribute}{if $quantityDisplayed > 0}_nocustom{/if}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}">
       {if !empty($product.gift)}
         <li class="gift-icon">{l s='Gift!'}</li>
@@ -84,7 +84,7 @@
     </ul>
   </td>
 
-  <td class="cart_quantity text-center" data-title="{l s='Quantity'}">
+  <td class="cart_quantity text-center no-border" data-title="{l s='Quantity'}">
     {if (isset($cannotModify) && $cannotModify == 1)}
       <span>
         {if $quantityDisplayed == 0 AND isset($customizedDatas.$productId.$productAttributeId)}
@@ -119,7 +119,7 @@
   </td>
 
   {if !isset($noDeleteButton) || !$noDeleteButton}
-    <td class="cart_delete text-center" data-title="{l s='Delete'}">
+    <td class="cart_delete text-center no-border" data-title="{l s='Delete'}">
       {if (!isset($customizedDatas.$productId.$productAttributeId) OR $quantityDisplayed > 0) && empty($product.gift)}
         <div>
           <a rel="nofollow" title="{l s='Delete'}" class="cart_quantity_delete" id="{$product.id_product}_{$product.id_product_attribute}_{if $quantityDisplayed > 0}nocustom{else}0{/if}_{$product.id_address_delivery|intval}" href="{$link->getPageLink('cart', true, NULL, "delete=1&amp;id_product={$product.id_product|intval}&amp;ipa={$product.id_product_attribute|intval}&amp;id_address_delivery={$product.id_address_delivery|intval}&amp;token={$token_cart}")|escape:'html':'UTF-8'}"><i class="icon icon-trash"></i></a>
@@ -129,7 +129,7 @@
       {/if}
     </td>
   {/if}
-  <td class="cart_total" data-title="{l s='Total'}">
+  <td class="cart_total no-border" data-title="{l s='Total'}">
     <span class="price total-price" id="total_product_price_{$product.id_product}_{$product.id_product_attribute}{if $quantityDisplayed > 0}_nocustom{/if}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}">
       {if !empty($product.gift)}
         <span class="gift-icon">{l s='Gift!'}</span>
