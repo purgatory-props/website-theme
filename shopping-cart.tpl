@@ -122,7 +122,7 @@
                 {/if}
               {/if}
             </td>
-            <td colspan="{$col_span_subtotal}" class=" no-bordertext-{if $isRtl}left{else}right{/if}">{if $display_tax_label}{l s='Item Total'}{else}{l s='Item Total'}{/if}</td>
+            <td colspan="{$col_span_subtotal}" class=" no-border text-{if $isRtl}left{else}right{/if}">{if $display_tax_label}{l s='Item Total'}{else}{l s='Item Total'}{/if}</td>
             <td colspan="2" class="price no-border" id="total_product">{displayPrice price=$total_products}</td>
           </tr>
         {else}

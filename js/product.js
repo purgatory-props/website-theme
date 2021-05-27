@@ -834,6 +834,10 @@ $(document).on('submit', '#buy_block', function(e) {
 
       addProductNotification('<div class="alert alert-success" style="padding: 10px; margin-top: 10px;">' + addedToCartTitle + ' <a href="' + goToCartURL + '" class="link">' + addedToCartGoToCart + '</a></div>', false);
 
+      if (hasNewTotal) {
+        $('#CartTotal + .ajax_cart_no_product').css('display', 'none');
+        $('#CartTotal').css('display', 'inline-block');
+      }
     },
     error: function() {
       $('body').removeClass('loading-overlay');
