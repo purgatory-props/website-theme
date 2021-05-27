@@ -5,49 +5,41 @@
       <div id="order-detail-content" class="table_block table-responsive">
         <table id="cart_summary" class="table table-bordered">
           <thead>
-          <tr>
-            <th class="cart_product">{l s='Product'}</th>
-            <th class="cart_description">{l s='Description'}</th>
+          <tr class="no-border">
+            <th class="cart_product no-border">{l s='Product'}</th>
+            <th class="cart_description no-border">{l s='Description'}</th>
             {if $PS_STOCK_MANAGEMENT}
-              <th class="cart_availability text-center">{l s='Availability'}</th>
+              <th class="cart_availability no-border">{l s='Availability'}</th>
             {/if}
-            <th class="cart_unit text-right">{l s='Unit Price'}</th>
-            <th class="cart_quantity text-center">{l s='Qty'}</th>
-            <th class="cart_total">{l s='Total'}</th>
+            <th class="cart_unit text-right no-border">{l s='Unit Price'}</th>
+            <th class="cart_quantity text-center no-border">{l s='Qty'}</th>
+            <th class="cart_total no-border">{l s='Total'}</th>
           </tr>
           </thead>
-          <tfoot>
+          <tfoot style="border-top: 2px solid #b8b8b8">
           {if $use_taxes}
             {if $priceDisplay}
               <tr class="cart_total_price small">
-                <td colspan="4" class="text-right">{if $display_tax_label}{l s='Item Total'}{else}{l s='Item Total'}{/if}</td>
-                <td colspan="2" class="price" id="total_product">{displayPrice price=$total_products}</td>
+                <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">{if $display_tax_label}{l s='Item Total'}{else}{l s='Item Total'}{/if}</td>
+                <td colspan="1" class="price" id="total_product">{displayPrice price=$total_products}</td>
               </tr>
             {else}
               <tr class="cart_total_price small">
-                <td colspan="4" class="text-right">{if $display_tax_label}{l s='Item Total'}{else}{l s='Item Total'}{/if}</td>
-                <td colspan="2" class="price" id="total_product">{displayPrice price=$total_products_wt}</td>
+                <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">{if $display_tax_label}{l s='Item Total'}{else}{l s='Item Total'}{/if}</td>
+                <td colspan="1" class="price" id="total_product">{displayPrice price=$total_products_wt}</td>
               </tr>
             {/if}
           {else}
             <tr class="cart_total_price small">
-              <td colspan="4" class="text-right">{l s='Item Total'}</td>
-              <td colspan="2" class="price" id="total_product">{displayPrice price=$total_products}</td>
+              <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">{l s='Item Total'}</td>
+              <td colspan="1" class="price" id="total_product">{displayPrice price=$total_products}</td>
             </tr>
           {/if}
           <tr class="cart_total_voucher" {if $total_wrapping == 0}style="display:none"{/if}>
-            <td colspan="4" class="text-right small">
-              {if $use_taxes}
-                {if $priceDisplay}
-                  {if $display_tax_label}{l s='Gift Wrapping'}{else}{l s='Gift Wrapping'}{/if}
-                {else}
-                  {if $display_tax_label}{l s='Gift Wrapping'}{else}{l s='Gift Wrapping'}{/if}
-                {/if}
-              {else}
-                {l s='Gift Wrapping:'}
-              {/if}
+            <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right small">
+              {l s='Gift Wrapping'}
             </td>
-            <td colspan="2" class="price-discount price small text-success" id="total_wrapping">
+            <td colspan="1" class="price-discount price small text-success" id="total_wrapping">
               {if $use_taxes}
                 {if $priceDisplay}
                   {displayPrice price=$total_wrapping_tax_exc}
@@ -61,42 +53,34 @@
           </tr>
           {if $total_shipping_tax_exc <= 0 && (!isset($isVirtualCart) || !$isVirtualCart) && $free_ship}
             <tr class="cart_total_delivery small">
-              <td colspan="4" class="text-right">{l s='Total shipping'}</td>
-              <td colspan="2" class="price" id="total_shipping">{l s='Free Shipping!'}</td>
+              <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">{l s='Shipping'}</td>
+              <td colspan="1" class="price" id="total_shipping">{l s='Free Shipping!'}</td>
             </tr>
           {else}
             {if $use_taxes && $total_shipping_tax_exc != $total_shipping}
               {if $priceDisplay}
                 <tr class="cart_total_delivery small" {if $shippingCost <= 0} style="display:none"{/if}>
-                  <td colspan="4" class="text-right">{if $display_tax_label}{l s='Shipping'}{else}{l s='Shipping'}{/if}</td>
-                  <td colspan="2" class="price" id="total_shipping">{displayPrice price=$shippingCostTaxExc}</td>
+                  <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">{if $display_tax_label}{l s='Shipping'}{else}{l s='Shipping'}{/if}</td>
+                  <td colspan="1" class="price" id="total_shipping">{displayPrice price=$shippingCostTaxExc}</td>
                 </tr>
               {else}
                 <tr class="cart_total_delivery small"{if $shippingCost <= 0} style="display:none"{/if}>
-                  <td colspan="4" class="text-right">{if $display_tax_label}{l s='Shipping'}{else}{l s='Shipping'}{/if}</td>
-                  <td colspan="2" class="price" id="total_shipping" >{displayPrice price=$shippingCost}</td>
+                  <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">{if $display_tax_label}{l s='Shipping'}{else}{l s='Shipping'}{/if}</td>
+                  <td colspan="1" class="price" id="total_shipping" >{displayPrice price=$shippingCost}</td>
                 </tr>
               {/if}
             {else}
               <tr class="cart_total_delivery small"{if $shippingCost <= 0} style="display:none"{/if}>
-                <td colspan="4" class="text-right">{l s='Shipping'}</td>
-                <td colspan="2" class="price" id="total_shipping" >{displayPrice price=$shippingCostTaxExc}</td>
+                <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">{l s='Shipping'}</td>
+                <td colspan="1" class="price" id="total_shipping" >{displayPrice price=$shippingCostTaxExc}</td>
               </tr>
             {/if}
           {/if}
           <tr class="cart_total_voucher small text-success" {if $total_discounts == 0}style="display:none"{/if}>
-            <td colspan="4" class="text-right">
-              {if $use_taxes}
-                {if $priceDisplay}
-                  {if $display_tax_label && $show_taxes}{l s='Vouchers'}{else}{l s='Vouchers'}{/if}
-                {else}
-                  {if $display_tax_label && $show_taxes}{l s='Vouchers'}{else}{l s='Vouchers'}{/if}
-                {/if}
-              {else}
-                {l s='Vouchers'}
-              {/if}
+            <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">
+                {l s='Promo Codes'}
             </td>
-            <td colspan="2" class="price-discount price text-success" id="total_discount">
+            <td colspan="1" class="price-discount price text-success" id="total_discount">
               {if $use_taxes}
                 {if $priceDisplay}
                   {displayPrice price=$total_discounts_tax_exc*-1}
@@ -111,46 +95,22 @@
           {if $use_taxes}
             {if $total_tax != 0 && $show_taxes}
               <tr class="cart_total_tax">
-                <td colspan="4" class="text-right">{l s='Tax'}</td>
-                <td colspan="2" class="price" id="total_tax" >{displayPrice price=$total_tax}</td>
+                <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right">{l s='Tax'}</td>
+                <td colspan="1" class="price" id="total_tax" >{displayPrice price=$total_tax}</td>
               </tr>
             {/if}
-            <tr class="cart_total_price color-accent" style="font-size: 1.5em;">
-              <td colspan="4" class="total_price_container text-right"><span>{l s='Total'}</span></td>
-              <td colspan="2" class="price" id="total_price_container">
+            <tr class="cart_total_price color-accent bold" style="font-size: 1.3em;">
+              <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="total_price_container text-right"><span>{l s='Total'}</span></td>
+              <td colspan="1" class="price" id="total_price_container">
                 <span id="total_price" data-selenium-total-price="{$total_price}">{displayPrice price=$total_price}</span>
               </td>
             </tr>
           {else}
-            <tr class="cart_total_price">
-              {if $voucherAllowed}
-                <td colspan="2" id="cart_voucher" class="cart_voucher">
-                  <div id="cart_voucher" class="table_block">
-                    {if $voucherAllowed}
-                      <form action="{if $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" id="voucher">
-                        <fieldset>
-                          <h4>{l s='Vouchers'}</h4>
-                          <input type="text" id="discount_name" class="form-control" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
-                          <input type="hidden" name="submitDiscount">
-                          <button type="submit" name="submitAddDiscount" class="btn btn-primary"><span>{l s='ok'}</span></button>
-                          {if $displayVouchers}
-                            <p id="title" class="title_offers">{l s='Take advantage of our offers:'}</p>
-                            <div id="display_cart_vouchers">
-                              {foreach from=$displayVouchers item=voucher}
-                                <span onclick="$('#discount_name').val('{$voucher.name}');return false;" class="voucher_name">{$voucher.name}</span> - {$voucher.description} <br>
-                              {/foreach}
-                            </div>
-                          {/if}
-                        </fieldset>
-                      </form>
-                    {/if}
-                  </div>
-                </td>
-              {/if}
-              <td colspan="{if !$voucherAllowed}4{else}2{/if}" class="text-right total_price_container">
+            <tr class="cart_total_price color-accent bold" style="font-size: 1.3em">
+              <td colspan="{if $PS_STOCK_MANAGEMENT}5{else}4{/if}" class="text-right total_price_container">
                 <span>{l s='Total'}</span>
               </td>
-              <td colspan="2" class="price total_price_container" id="total_price_container">
+              <td colspan="1" class="price total_price_container" id="total_price_container">
                 <span id="total_price" data-selenium-total-price="{$total_price_without_tax}">{displayPrice price=$total_price_without_tax}</span>
               </td>
             </tr>
@@ -172,8 +132,8 @@
             {* Then the customized datas ones*}
             {if isset($customizedDatas.$productId.$productAttributeId)}
               {foreach from=$customizedDatas.$productId.$productAttributeId[$product.id_address_delivery] key='id_customization' item='customization'}
-                <tr id="product_{$product.id_product}_{$product.id_product_attribute}_{$id_customization}" class="cart_item">
-                  <td colspan="4">
+                <tr id="product_{$product.id_product}_{$product.id_product_attribute}_{$id_customization}" class="cart_item no-border">
+                  <td colspan="4" class="no-border">
                     {foreach from=$customization.datas key='type' item='datas'}
                       {if $type == $CUSTOMIZE_FILE}
                         <div class="customizationUploaded">
@@ -201,10 +161,10 @@
                       {/if}
                     {/foreach}
                   </td>
-                  <td class="cart_quantity text-center">
+                  <td class="cart_quantity text-center no-border">
                     {$customization.quantity}
                   </td>
-                  <td class="cart_total"></td>
+                  <td class="cart_total no-border"></td>
                 </tr>
                 {assign var='quantityDisplayed' value=$quantityDisplayed+$customization.quantity}
               {/foreach}
@@ -228,9 +188,9 @@
               {if $discount.value_real|floatval == 0}
                 {continue}
               {/if}
-              <tr class="cart_discount text-success" id="cart_discount_{$discount.id_discount}">
-                <td class="cart_discount_name" colspan="{if $PS_STOCK_MANAGEMENT}3{else}2{/if}">{$discount.name}</td>
-                <td class="cart_discount_price text-right">
+              <tr class="cart_discount text-success no-border" id="cart_discount_{$discount.id_discount}">
+                <td class="cart_discount_name no-border" colspan="{if $PS_STOCK_MANAGEMENT}3{else}2{/if}">{$discount.name}</td>
+                <td class="cart_discount_price text-right no-border">
                   <span class="price-discount">
                     {if $discount.value_real > 0}
                       {if !$priceDisplay}
@@ -241,8 +201,8 @@
                     {/if}
                   </span>
                 </td>
-                <td class="cart_discount_delete text-center">1</td>
-                <td class="cart_discount_price">
+                <td class="cart_discount_delete text-center no-border">1</td>
+                <td class="cart_discount_price no-border">
                   <span class="price-discount">
                     {if $discount.value_real > 0}
                       {if !$priceDisplay}

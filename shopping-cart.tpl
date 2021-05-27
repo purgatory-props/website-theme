@@ -74,7 +74,7 @@
         <th class="cart_total no-border">{l s='Total'}</th>
       </tr>
       </thead>
-      <tfoot>
+      <tfoot style="border-top: 2px solid #b8b8b8">
       {assign var='rowspan_total' value=2+$total_discounts_num+$total_wrapping_taxes_num}
 
       {if $use_taxes && $show_taxes && $total_tax != 0}
@@ -107,7 +107,7 @@
                 <form action="{if $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" id="voucher">
                   <fieldset>
                     <h4>{l s='Add Promo Codes'}</h4>
-                    <input type="text" class="discount_name form-control quarter-width" id="discount_name" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
+                    <input type="text" class="discount_name form-control quarter-width uppercase" id="discount_name" autocomplete="off" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
                     <input type="hidden" name="submitDiscount">
                     <button type="submit" name="submitAddDiscount" class="btn btn-primary"><span>{l s='Add'}</span></button>
                   </fieldset>
@@ -132,7 +132,7 @@
                 <form action="{if $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" id="voucher">
                   <fieldset>
                     <h4>{l s='Add Promo Codes'}</h4>
-                    <input type="text" class="discount_name form-control" id="discount_name" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
+                    <input type="text" class="discount_name form-control uppercase" id="discount_name" name="discount_name" autocomplete="off" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
                     <input type="hidden" name="submitDiscount">
                     <button type="submit" name="submitAddDiscount" class="btn btn-primary"><span>{l s='Add'}</span></button>
                   </fieldset>
@@ -158,7 +158,7 @@
               <form action="{if $opc}{$link->getPageLink('order-opc', true)}{else}{$link->getPageLink('order', true)}{/if}" method="post" id="voucher">
                 <fieldset>
                   <h4>{l s='Add Promo Codes'}</h4>
-                  <input type="text" class="discount_name form-control" id="discount_name" name="discount_name" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
+                  <input type="text" class="discount_name form-control uppercase" id="discount_name" name="discount_name" autocomplete="off" value="{if isset($discount_name) && $discount_name}{$discount_name}{/if}">
                   <input type="hidden" name="submitDiscount">
                   <button type="submit" name="submitAddDiscount" class="btn btn-primary">
                     <span>{l s='Add'}</span>
