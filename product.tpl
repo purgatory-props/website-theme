@@ -122,7 +122,7 @@
             </div>
 
             {* Other Images *}
-            <div class="images-list clearfix{if isset($images) && count($images) < 2} hidden{/if}" {if $hasColorOption}style="display:none"{/if}>
+            <div class="images-list clearfix{if isset($images) && count($images) < 2} hidden{/if}" {if $hasColorOption || (isset($product->hide_all_images) && $product->hide_all_images)}style="display:none"{/if}>
                 <div class="thumbnail_list">
                     <ul class="list-unstyled">
                         {if isset($images)}
