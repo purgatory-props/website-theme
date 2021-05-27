@@ -7,7 +7,7 @@
     {assign var='orderNowLabel' value=$product.available_now}
 {/if}
 
-<tr id="product_{$product.id_product}_{$product.id_product_attribute}_{if $quantityDisplayed > 0}nocustom{else}0{/if}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}" class="textlink-nostyle no-border">
+<tr id="product_{$product.id_product}_{$product.id_product_attribute}_{if $quantityDisplayed > 0}nocustom{else}0{/if}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if} textlink-nostyle no-border">
   <td class="cart_product no-border">
     <a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute, false, false, true)|escape:'html':'UTF-8'}">
         <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'small', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
