@@ -1,9 +1,22 @@
 // out: ../../../../css/modules/prestaqna/css/
 @import "../../../variables.less";
 
+.support-page {
+    .qna-tab-label {
+        display: none;
+    }
+
+    .qna-tab {
+        #qna_ask, #qna-form-alerts, #ask-question-btn {
+            display: none !important;
+        }
+    }
+}
+
 .qna-tab {
     #ask-question-btn {
         margin-bottom: 20px;
+        display: block;
     }
 
     #qna-form-alerts {
@@ -44,6 +57,7 @@
             display: none;
             padding-top: 10px;
             padding-bottom: 15px;
+            line-height: 1.2em;
         }
 
 

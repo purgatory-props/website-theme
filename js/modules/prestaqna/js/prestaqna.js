@@ -5,28 +5,30 @@ function toggleQuestionForm() {
 }
 
 $(document).ready(function() {
-    $('#qna_ask').validate({
-        submitHandler: function(form) {
-            var $serialized = $(form).serialize();
-            ajaxCall($('#qna_ask'),$serialized);
-        },
-        errorClass: "invalid",
-        rules: {
-            qna_q: "required",
-            qna_email: {
-                required: true,
-                email: true
+    if ($('#qna_ask').validate != undefined) {
+        $('#qna_ask').validate({
+            submitHandler: function(form) {
+                var $serialized = $(form).serialize();
+                ajaxCall($('#qna_ask'),$serialized);
+            },
+            errorClass: "invalid",
+            rules: {
+                qna_q: "required",
+                qna_email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                qna_q: '',
+                qna_email: {
+                    required: '',
+                    email: qna_bademail
+                }
             }
-        },
-        messages: {
-            qna_q: '',
-            qna_email: {
-                required: '',
-                email: qna_bademail
-            }
-        }
 
-    });
+        });
+    }
 
     $('#qna_ask').on('submit', function(){
         $('#qna-form-alerts').html('');

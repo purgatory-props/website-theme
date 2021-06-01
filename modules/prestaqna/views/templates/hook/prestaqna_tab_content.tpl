@@ -3,7 +3,8 @@
 
     {assign var=tabID value="tab-qna"}
     <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
-    <label for="{$tabID}" class="tab-label noselect">{l s='Questions'}</label>
+    <label for="{$tabID}" class="tab-label noselect qna-tab-label">{l s='Questions'}</label>
+
 
     <div class="product-tab qna-tab">
         {* Ask A Question Form *}
@@ -31,7 +32,7 @@
         <div id="qna-form-alerts">
         </div>
 
-        <button id="ask-question-btn" class="btn btn-success" onclick="toggleQuestionForm()" style="display: block">
+        <button id="ask-question-btn" class="btn btn-success" onclick="toggleQuestionForm()">
             {l s='Ask a Question'}
         </button>
 
