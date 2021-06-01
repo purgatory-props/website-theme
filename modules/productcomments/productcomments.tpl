@@ -58,7 +58,7 @@
                         <p class="help-block">
                             <sup class="required">*</sup> {l s='Required Field' mod='productcomments'}
                         </p>
-                        <button id="submitNewMessage" name="submitMessage" type="submit" class="btn btn-success">
+                        <button id="submitNewMessage" name="submitMessage" type="submit" class="btn">
                             {l s='Submit' mod='productcomments'}
                         </button>
                         <a class="closefb btn btn-danger btn-link" href="#" id="close_comment_form">
