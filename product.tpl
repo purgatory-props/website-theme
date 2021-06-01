@@ -382,10 +382,10 @@
                                         {/if}
 
                                         {* Available By Date *}
-                                        <p id="availability_date" style="margin-top: 2px" {if ($product->quantity > 0) || !$product->available_for_order || $PS_CATALOG_MODE || !isset($product->available_date) || $product->available_date < $smarty.now|date_format:'%Y-%m-%d'} style="display: none;"{/if}>
+                                        <!--<p id="availability_date" style="margin-top: 2px" {if ($product->quantity > 0) || !$product->available_for_order || $PS_CATALOG_MODE || !isset($product->available_date) || $product->available_date < $smarty.now|date_format:'%Y-%m-%d'} style="display: none;"{/if}>
                                             <span id="availability_date_label">{l s='Available by '}</span>
                                             <span id="availability_date_value">{if Validate::isDate($product->available_date)}{dateFormat date=$product->available_date full=false}{/if}</span>
-                                        </p>
+                                        </p>-->
 
                                         <div id="oosHook"{if $product->quantity > 0} style="display: none;"{/if}>
                                             {$HOOK_PRODUCT_OOS}

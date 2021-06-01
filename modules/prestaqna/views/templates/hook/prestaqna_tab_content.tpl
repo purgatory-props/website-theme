@@ -31,7 +31,7 @@
         <div id="qna-form-alerts">
         </div>
 
-        <button id="ask-question-btn" class="btn btn-success" onclick="toggleQuestionForm()">
+        <button id="ask-question-btn" class="btn btn-success" onclick="toggleQuestionForm()" style="display: block">
             {l s='Ask a Question'}
         </button>
 
