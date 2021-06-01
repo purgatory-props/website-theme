@@ -61,7 +61,7 @@
                         <button id="submitNewMessage" name="submitMessage" type="submit" class="btn btn-success">
                             {l s='Submit' mod='productcomments'}
                         </button>
-                        <a class="closefb btn btn-link" href="#" id="close_comment_form">
+                        <a class="closefb btn btn-danger btn-link" href="#" id="close_comment_form">
                             {l s='Cancel' mod='productcomments'}
                         </a>
                     </div>

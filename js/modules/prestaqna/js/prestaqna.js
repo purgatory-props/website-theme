@@ -1,12 +1,10 @@
 
-    function toggleQuestionForm() {
-        $('#qna_ask').toggleClass('hidden');
-        $('#ask-question-btn').toggleClass('hidden');
-    }
+function toggleQuestionForm() {
+    $('#qna_ask').toggleClass('hidden');
+    $('#ask-question-btn').toggleClass('hidden');
+}
 
 $(document).ready(function() {
-
-
     $('#qna_ask').validate({
         submitHandler: function(form) {
             var $serialized = $(form).serialize();

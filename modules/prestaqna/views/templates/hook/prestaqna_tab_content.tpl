@@ -24,7 +24,7 @@
                 <input type="hidden" name="qna_prod" value="{$smarty.get.id_product}"/>
 
                 <input type="submit" title="{l s='Ask Question' mod='prestaqna'}" class="btn btn-default" value="{l s='Submit Question' mod='prestaqna'}" style="margin-left: 0px">
-                <button title="{l s='Cancel'}" class="btn btn-danger" onclick="toggleQuestionForm()">{l s='Cancel'}</button>
+                <a title="{l s='Cancel'}" class="btn btn-danger" onclick="toggleQuestionForm()">{l s='Cancel'}</a>
             </div>
         </form>
 
