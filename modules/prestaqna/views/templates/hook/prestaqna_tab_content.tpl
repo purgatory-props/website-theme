@@ -1,6 +1,7 @@
+{hook h='actionModifyProductForExtraFunctionality' product=$product}
+
 {* Do Not Show If Coming Soon, A Service, Or No Reviews *}
 {if (!isset($product->coming_soon) || !$product->coming_soon) && (!isset($product->hide_comments) || !$product->hide_comments) && (!isset($product->is_service) || !$product->is_service)}
-
     {assign var=tabID value="tab-qna"}
     <input name="product-tabs" type="radio" id="{$tabID}" class="tab-switch" autocomplete="off"/>
     <label for="{$tabID}" class="tab-label noselect qna-tab-label">{l s='Questions'}</label>
