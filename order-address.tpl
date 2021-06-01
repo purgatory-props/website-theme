@@ -82,13 +82,15 @@
     <p class="cart_navigation clearfix">
       <input type="hidden" class="hidden" name="step" value="2">
       <input type="hidden" name="back" value="{$back}">
-      <a href="{$link->getPageLink($back_order_page, true, NULL, "{if $back}back={$back}{/if}")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default">
+
+      <button type="submit" name="processAddress" class="btn btn-lg btn-success pull-right full-width-mobile text-center" style="margin-right: 0">
+        <span>{l s='Proceed to Shipping'} <i class="icon icon-chevron-right"></i></span>
+      </button>
+
+      <a href="{$link->getPageLink($back_order_page, true, NULL, "{if $back}back={$back}{/if}")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default full-width-mobile text-center" style="margin-left: 0">
         <i class="icon icon-chevron-left"></i>
         {l s='Back to Summary'}
       </a>
-      <button type="submit" name="processAddress" class="btn btn-lg btn-success pull-right">
-        <span>{l s='Proceed to Shipping'} <i class="icon icon-chevron-right"></i></span>
-      </button>
     </p>
   </form>
 {else}

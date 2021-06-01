@@ -17,6 +17,7 @@
             </div>
 
             <div class="submit">
+                 {if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'html':'UTF-8'}">{/if}
                 <button type="submit" id="SubmitLogin" name="SubmitLogin" class="btn btn-lg btn-default form-control">
                     <i class="icon icon-sign-in"></i> {l s='Sign In'}
                 </button>

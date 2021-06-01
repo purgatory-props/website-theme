@@ -362,32 +362,33 @@
   <p class="cart_navigation clearfix">
     <input type="hidden" name="step" value="3">
     <input type="hidden" name="back" value="{$back}">
-    {if !$is_guest}
-      {if $back}
-        <a href="{$link->getPageLink('order', true, NULL, "step=1&back={$back}{if $multi_shipping}&multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default">
-          <i class="icon icon-chevron-left"></i>
-          {l s='Back to Address'}
-        </a>
-      {else}
-        <a href="{$link->getPageLink('order', true, NULL, "step=1{if $multi_shipping}&multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default">
-          <i class="icon icon-chevron-left"></i>
-          {l s='Back to Address'}
-        </a>
-      {/if}
-    {else}
-      <a href="{$link->getPageLink('order', true, NULL, "{if $multi_shipping}multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default">
-        <i class="icon icon-chevron-left"></i>
-        {l s='Back to Address'}
-      </a>
-    {/if}
     {if isset($virtual_cart) && $virtual_cart || (isset($delivery_option_list) && !empty($delivery_option_list))}
-      <button type="submit" name="processCarrier" class="btn btn-lg btn-success pull-right standard-checkout">
+      <button type="submit" name="processCarrier" class="btn btn-lg btn-success pull-right standard-checkout full-width-mobile text-center" style="margin-right: 0">
         <span>
           {l s='Proceed to Payment'}
           <i class="icon icon-chevron-right right"></i>
         </span>
       </button>
     {/if}
+    {if !$is_guest}
+      {if $back}
+        <a href="{$link->getPageLink('order', true, NULL, "step=1&back={$back}{if $multi_shipping}&multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default full-width-mobile text-center" style="margin-left: 0">
+          <i class="icon icon-chevron-left"></i>
+          {l s='Back to Address'}
+        </a>
+      {else}
+        <a href="{$link->getPageLink('order', true, NULL, "step=1{if $multi_shipping}&multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default full-width-mobile text-center" style="margin-left: 0">
+          <i class="icon icon-chevron-left"></i>
+          {l s='Back to Address'}
+        </a>
+      {/if}
+    {else}
+      <a href="{$link->getPageLink('order', true, NULL, "{if $multi_shipping}multi-shipping={$multi_shipping}{/if}")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default full-width-mobile text-center" style="margin-left: 0">
+        <i class="icon icon-chevron-left"></i>
+        {l s='Back to Address'}
+      </a>
+    {/if}
+
   </p>
 </form>
 {else}

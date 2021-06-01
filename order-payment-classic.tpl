@@ -234,7 +234,7 @@
   {/if}
   {if !$opc}
   <p class="cart_navigation clearfix">
-    <a href="{$link->getPageLink('order', true, NULL, "step=2")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default">
+    <a href="{$link->getPageLink('order', true, NULL, "step=2")|escape:'html':'UTF-8'}" title="{l s='Previous'}" class="btn btn-lg btn-default full-width-mobile text-center" style="margin-left: 0">
       <i class="icon icon-chevron-left"></i>
       {l s='Back to Shipping'}
     </a>
