@@ -347,7 +347,7 @@
                                 <div id="box-cart-bottom" class="box-cart-bottom no-print">
                                     {* Quanities *}
                                     <div class="quantities-container">
-                                        {if ($display_qties == 1 && !$PS_CATALOG_MODE && $PS_STOCK_MANAGEMENT && $product->available_for_order)}
+                                        {if ($display_qties == 1 && !$PS_CATALOG_MODE && $PS_STOCK_MANAGEMENT && $product->available_for_order && !$product->is_virtual)}
                                             <span id="pQuantityAvailable"{if $product->quantity <= 0} style="display: none;"{/if}>
                                                 <span id="quantityAvailable">{$product->quantity|intval}</span>
                                                 <span {if $product->quantity > 1} style="display: none;"{/if} id="quantityAvailableTxt">{l s='Item'}</span>
@@ -356,7 +356,7 @@
                                         {/if}
 
                                         {* Availability *}
-                                        <span id="availability_statut"{if !$PS_STOCK_MANAGEMENT || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none;"{/if}>
+                                        <span id="availability_statut"{if !$PS_STOCK_MANAGEMENT || !$product->available_for_order || $PS_CATALOG_MODE || $product->is_virtual} style="display: none;"{/if}>
                                             <span id="availability_value" class="label{if $product->quantity <= 0} label-warning{else} label-success{/if}">
                                                 {if $product->quantity <= 0}
                                                     {if $allow_oosp}
@@ -371,7 +371,7 @@
                                         </span>
 
                                         {* Few Left Warning *}
-                                        {if $PS_STOCK_MANAGEMENT}
+                                        {if $PS_STOCK_MANAGEMENT && !$product->is_virtual}
                                             <span class="label label-warning" id="last_quantities"{if ($product->quantity > $last_qties || $product->quantity <= 0) || $allow_oosp || !$product->available_for_order || $PS_CATALOG_MODE} style="display: none"{/if} >
                                                 &nbsp;{l s='Only a Few Left!'}
                                             </span>
@@ -382,12 +382,12 @@
                                         {/if}
 
                                         {* Available By Date *}
-                                        <p id="availability_date" style="margin-top: 2px; {if ($product->quantity > 0) || !$product->available_for_order || $PS_CATALOG_MODE || !isset($product->available_date) || $product->available_date < ($smarty.now|date_format:'%Y-%m-%d')}display: none;{/if}">
+                                        <p id="availability_date" style="margin-top: 2px; {if ($product->quantity > 0) || !$product->available_for_order || $PS_CATALOG_MODE || !isset($product->available_date) || $product->available_date < ($smarty.now|date_format:'%Y-%m-%d') || $product->is_virtual}display: none;{/if}">
                                             <span id="availability_date_label">{l s='Available by '}</span>
                                             <span id="availability_date_value">{if Validate::isDate($product->available_date)}{dateFormat date=$product->available_date full=false}{/if}</span>
                                         </p>
 
-                                        <div id="oosHook"{if $product->quantity > 0} style="display: none;"{/if}>
+                                        <div id="oosHook"{if $product->quantity > 0 || $product->is_virtual} style="display: none;"{/if}>
                                             {$HOOK_PRODUCT_OOS}
                                         </div>
                                     </div>
