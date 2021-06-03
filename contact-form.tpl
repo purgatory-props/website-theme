@@ -16,7 +16,7 @@
 
 {if isset($confirmation)}
   <div class="alert alert-success">{l s='Your message has been successfully sent to our team.'}</div>
-  <nav>
+  <!--<nav>
     <ul class="pager">
       <li class="previous">
         <a href="{if isset($force_ssl) && $force_ssl}{$base_dir_ssl}{else}{$base_dir}{/if}" class="textlink-nostyle">
@@ -24,10 +24,10 @@
         </a>
       </li>
     </ul>
-  </nav>
+  </nav>-->
 {elseif isset($alreadySent)}
   <div class="alert alert-warning">{l s='Your message has already been sent.'}</div>
-  <nav>
+  <!--<nav>
     <ul class="pager">
       <li class="previous">
         <a href="{if isset($force_ssl) && $force_ssl}{$base_dir_ssl}{else}{$base_dir}{/if}" class="textlink-nostyle">
@@ -35,7 +35,7 @@
         </a>
       </li>
     </ul>
-  </nav>
+  </nav>-->
 {else}
   {include file="$tpl_dir./errors.tpl"}
 
@@ -137,7 +137,7 @@
       </div>
 
       <div class="submit">
-        <button type="submit" name="submitMessage" id="submitMessage" class="btn btn-lg btn-success">
+        <button type="submit" name="submitMessage" id="submitMessage" class="btn btn-lg btn-success full-width-mobile">
           <span>{l s='Send'} <i class="icon icon-chevron-right"></i></span>
         </button>
       </div>

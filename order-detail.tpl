@@ -128,21 +128,18 @@
                                         <span class="price">{displayWtPriceWithCurrency price=$order->getTotalProductsWithoutTaxes() currency=$currency}</span>
                                     </td>
                                 </tr>
-                                {if $priceDisplay && $use_tax}
-                                    <tr class="small">
-                                        <td class="total-label" colspan="{if $return_allowed}4{else}3{/if}">
-                                            <strong>{l s='Taxes'}</strong>
-                                        </td>
-                                        <td colspan="{if $order->hasProductReturned()}1{else}1{/if}">
-                                            {assign var=taxPrice value=$order->getTotalProductsWithTaxes() - $order->getTotalProductsWithoutTaxes()}
-                                            <span class="price">{displayWtPriceWithCurrency price=$taxPrice currency=$currency}</span>
-                                        </td>
-                                    </tr>
-                                {/if}
+                                <tr class="small">
+                                    <td class="total-label" colspan="{if $return_allowed}4{else}3{/if}">
+                                        <strong>{l s='Shipping'}</strong>
+                                    </td>
+                                    <td colspan="{if $order->hasProductReturned()}1{else}1{/if}">
+                                        <span class="price-shipping">{displayWtPriceWithCurrency price=$order->total_shipping currency=$currency}</span>
+                                    </td>
+                                </tr>
                                 {if $order->total_discounts > 0}
-                                    <tr class="small">
+                                    <tr class="small text-success">
                                         <td class="total-label" colspan="{if $return_allowed}4{else}3{/if}">
-                                            <strong>{l s='Vouchers'}</strong>
+                                            <strong>{l s='Promo Codes'}</strong>
                                         </td>
                                         <td colspan="{if $order->hasProductReturned()}1{else}1{/if}">
                                             <span class="price-discount">{displayWtPriceWithCurrency price=$order->total_discounts currency=$currency convert=1}</span>
@@ -159,14 +156,17 @@
                                         </td>
                                     </tr>
                                 {/if}
-                                <tr class="small">
-                                    <td class="total-label" colspan="{if $return_allowed}4{else}3{/if}">
-                                        <strong>{l s='Shipping & Handling'}</strong>
-                                    </td>
-                                    <td colspan="{if $order->hasProductReturned()}1{else}1{/if}">
-                                        <span class="price-shipping">{displayWtPriceWithCurrency price=$order->total_shipping currency=$currency}</span>
-                                    </td>
-                                </tr>
+                                {if $priceDisplay && $use_tax}
+                                    <tr class="small">
+                                        <td class="total-label" colspan="{if $return_allowed}4{else}3{/if}">
+                                            <strong>{l s='Tax'}</strong>
+                                        </td>
+                                        <td colspan="{if $order->hasProductReturned()}1{else}1{/if}">
+                                            {assign var=taxPrice value=$order->getTotalProductsWithTaxes() - $order->getTotalProductsWithoutTaxes()}
+                                            <span class="price">{displayWtPriceWithCurrency price=$taxPrice currency=$currency}</span>
+                                        </td>
+                                    </tr>
+                                {/if}
                                 <tr class="totalprice color-accent">
                                     <td class="total-label" colspan="{if $return_allowed}4{else}3{/if}">
                                         <strong>{l s='Total'}</strong>
@@ -363,7 +363,7 @@
                                 {/foreach}
 
                                 {foreach from=$discounts item=discount}
-                                    <tr>
+                                    <tr class="text-success">
                                         <td>{$discount.name|escape:'html':'UTF-8'}</td>
                                         <td><span class="order_qte_span editable">1</span></td>
                                         <td>{if $discount.value != 0.00}-{/if}{convertPriceWithCurrency price=$discount.value currency=$currency}</td>
@@ -522,7 +522,7 @@
         {* Messages *}
         {if !$is_guest}
             {if count($messages)}
-                <h2 class="page-heading order-details-title no-print">{l s='Messages'}</h2>
+                <h2 id="messages" class="page-heading order-details-title no-print">{l s='Messages'}</h2>
                 <div class="table_block table-responsive no-print">
                     <table class="detail_step_by_step table table-bordered order-details-table">
                     <thead>
@@ -531,25 +531,25 @@
                         <th>{l s='Message'}</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {foreach from=$messages item=message name="messageList"}
-                        <tr>
-                        <td>
-                            <strong>
-                                {if isset($message.elastname) && $message.elastname}
-                                    {$message.efirstname|escape:'html':'UTF-8'} {$message.elastname|escape:'html':'UTF-8'}
-                                {elseif $message.clastname}
-                                    {$message.cfirstname|escape:'html':'UTF-8'} {$message.clastname|escape:'html':'UTF-8'}
-                                {else}
-                                    {$shop_name|escape:'html':'UTF-8'}
-                                {/if}
-                            </strong>
-                            <br>
-                            <span class="time small">{dateFormat date=$message.date_add full=1}</span>
-                        </td>
-                        <td>{$message.message|escape:'html':'UTF-8'|nl2br}</td>
-                        </tr>
-                    {/foreach}
+                    <tbody class="no-even-rows">
+                        {foreach from=$messages item=message name="messageList"}
+                            <tr {if (isset($message.elastname) && $message.elastname) || (!$message.cfirstname)}class="other-color"{/if}>
+                                <td>
+                                    <strong>
+                                        {if isset($message.elastname) && $message.elastname}
+                                            {$shop_name|escape:'html':'UTF-8'}{*{$message.efirstname|escape:'html':'UTF-8'} {$message.elastname|escape:'html':'UTF-8'}*}
+                                        {elseif $message.clastname}
+                                            {$message.cfirstname|escape:'html':'UTF-8'} {$message.clastname|escape:'html':'UTF-8'}
+                                        {else}
+                                            {$shop_name|escape:'html':'UTF-8'}
+                                        {/if}
+                                    </strong>
+                                    <br>
+                                    <span class="time small">{dateFormat date=$message.date_add full=1}</span>
+                                </td>
+                                <td>{$message.message|escape:'html':'UTF-8'|nl2br}</td>
+                            </tr>
+                        {/foreach}
                     </tbody>
                     </table>
                 </div>
@@ -590,7 +590,7 @@
                 <div class="submit">
                     <input type="hidden" name="id_order" value="{$order->id|intval}">
                     <input type="submit" class="unvisible" name="submitMessage" value="{l s='Send'}">
-                    <button type="submit" name="submitMessage" class="btn btn-lg btn-success" style="margin-left: 0"><span>{l s='Send'} <i class="icon icon-chevron-right"></i></span></button>
+                    <button type="submit" name="submitMessage" class="btn btn-lg btn-success full-width-mobile" style="margin-left: 0"><span>{l s='Send'} <i class="icon icon-chevron-right"></i></span></button>
                 </div>
             </form>
         {else}

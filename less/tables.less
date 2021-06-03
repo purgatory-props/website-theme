@@ -68,8 +68,16 @@
         tr {
             border-right: 1px solid rgb(184, 184, 184);
 
-            &:nth-of-type(even) {
+            &.other-color {
                 background-color: @color-dark-3;
+            }
+        }
+
+        &:not(.no-even-rows) {
+            tr {
+                &:nth-of-type(even) {
+                    background-color: @color-dark-3;
+                }
             }
         }
     }
