@@ -43,8 +43,8 @@
                 {foreach from=$qnas item=qna}
                     <div class="product-question">
                         <div class="question-title">
-                            <span class="icon icon-angle-up expand-icon"></span>
-                            <span class="icon icon-angle-down collapse-icon"></span>
+                            <span class="icon icon-angle-up collapse-icon"></span>
+                            <span class="icon icon-angle-down expand-icon"></span>
                             <span class="title">{$qna.question|escape:'htmlall'}</span>
                         </div>
                         <div class="question-answer">

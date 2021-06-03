@@ -269,7 +269,7 @@
                                         </div>
 
                                         {if $packItems|@count && $productPrice < $product->getNoPackPrice()}
-                                            <p class="pack_price">{l s='Instead of'} <span style="text-decoration: line-through;">{convertPrice price=$product->getNoPackPrice()}</span></p>
+                                            <p class="pack_price" style="margin-top: 0">{l s='Instead of'} <span style="text-decoration: line-through;">{convertPrice price=$product->getNoPackPrice()}</span></p>
                                         {/if}
                                         {if $product->ecotax != 0}
                                             <p class="price-ecotax">{l s='Including'} <span id="ecotax_price_display">{if $priceDisplay == 2}{$ecotax_tax_exc|convertAndFormatPrice}{else}{$ecotax_tax_inc|convertAndFormatPrice}{/if}</span> {l s='for ecotax'}
