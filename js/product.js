@@ -857,6 +857,9 @@ function GoToProductTab(tabId) {
   $(el).click();
 }
 
+$(document).on('click', 'input[name="product-tabs"]', function(){
+  //window.location.hash = $(this).attr('id');
+});
 
 
 function addProductNotification(notification, isError) {
@@ -944,5 +947,10 @@ $(function() {
     } else {
       refreshProductImages(0);
     }
+  }
+
+  var hash = window.location.hash;
+  if (hash) {
+    GoToProductTab(hash.replace('#', ''));
   }
 });
