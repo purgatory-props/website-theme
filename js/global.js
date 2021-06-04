@@ -18,3 +18,10 @@ $(document).ready(function() {
         window.location.search = $.param(params);
     });
 });
+
+// To prevent alert popup that seems to happen if you click too fast
+var oldAlert = window.alert;
+window.alert = function(msg) {
+    console.error(msg);
+    //oldAlert(msg);
+};

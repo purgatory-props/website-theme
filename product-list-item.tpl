@@ -11,7 +11,7 @@
                 />
 
         <div class="product-title">
-            <h3 itemprop="name">{$product.name}</h3>
+            <h2 itemprop="name">{$product.name}</h2>
         </div>
 
         <div class="product-price">
