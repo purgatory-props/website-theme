@@ -45,6 +45,10 @@
 
 {hook h='actionModifyProductForExtraFunctionality' product=$product}
 
+{if isset($product->force_oos) && $product->force_oos}
+    {assign var='allow_oosp' value=false}
+{/if}
+
 
 <div id="product-notifications-desktop" class="no-mobile">
 </div>

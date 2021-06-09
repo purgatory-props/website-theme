@@ -1,6 +1,6 @@
 {assign var='forbiddenPages' value=['index', 'pagenotfound', 'sitemap', 'authentication', 'order']}
 
-{if !in_array($page_name, $forbiddenPages)}
+{if !in_array($page_name, $forbiddenPages) && (!isset($no_breadcrumbs) || !$no_breadcrumbs)}
 
 {if isset($smarty.capture.path)}{assign var='path' value=$smarty.capture.path}{/if}
 
