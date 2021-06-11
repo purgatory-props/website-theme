@@ -7,7 +7,7 @@
 {/if}
 
 
-<div class="order-detail-container">
+<div class="order-detail-container" style="padding-top: 0">
     {if !$is_guest}
         {capture name=path}
             <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='Your Account'}</a>
