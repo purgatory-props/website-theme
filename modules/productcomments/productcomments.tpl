@@ -74,7 +74,7 @@
             </a>
         {/if}
     {/if}
-    {if !$is_logged}
+    {if !$is_logged && !$allow_guests}
         <div>
             <a class="textlink" href="{$link->getPageLink('authentication', true)|escape:'html':'UTF-8'}">{l s='Sign-In or Create an Account to Write a Review'}</a>
         </div>
