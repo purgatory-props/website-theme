@@ -2,11 +2,9 @@
     {capture name=path}{l s='Search'}{/capture}
 
     <h1 {if isset($instant_search) && $instant_search}id="instant_search_results"{/if}class="page-heading {if !isset($instant_search) || (isset($instant_search) && !$instant_search)} product-listing{/if}">
-        {l s='Search'}&nbsp;
+        {l s='Search'}
         {if $nbProducts > 0}
-            <span class="lighter">
-                "{if isset($search_query) && $search_query}{$search_query|escape:'html':'UTF-8'}{elseif $search_tag}{$search_tag|escape:'html':'UTF-8'}{elseif $ref}{$ref|escape:'html':'UTF-8'}{/if}"
-            </span>
+            <span class="lighter">"{if isset($search_query) && $search_query}{$search_query|escape:'html':'UTF-8'}{elseif $search_tag}{$search_tag|escape:'html':'UTF-8'}{elseif $ref}{$ref|escape:'html':'UTF-8'}{/if}"</span>
         {/if}
         {if isset($instant_search) && $instant_search}
             <a href="#" class="js-close-instant-search pull-right textlink-nostyle">
@@ -14,7 +12,7 @@
             </a>
         {else}
             {if isset($search_tag) || isset($search_query)}
-                <div class="pull-right">
+                <div class="pull-right small">
                     <span class="heading-counter badge">
                         {if $nbProducts == 1}{l s='%d Results Found' sprintf=$nbProducts|intval}{else}{l s='%d Results Found' sprintf=$nbProducts|intval}{/if}
                     </span>
