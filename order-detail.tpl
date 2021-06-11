@@ -31,8 +31,14 @@
                 </form>
             {/if}
 
-            <div class="order-reference color-accent"><h2>{l s='Order %s' sprintf=$order->getUniqReference()}</h2></div>
-            <div class="order-date">{l s='Placed on'} {dateFormat date=$order->date_add full=0}</div>
+            <div class="order-reference">
+                <h1 class="color-accent" style="display: inline-block; vertical-align: middle">{l s='Order %s' sprintf=$order->getUniqReference()}</h1>
+                {if count($order_history)}
+                    {assign var=currentState value=$order_history[0]}
+                    <span style="display: inline-block; vertical-align: middle; padding: 5px;{if isset($currentState.color) && $currentState.color} background-color:{$currentState.color|escape:'html':'UTF-8'}; border-color:{$currentState.color|escape:'html':'UTF-8'};{/if}" class="label{if isset($currentState.color) && Tools::getBrightness($currentState.color) > 128} dark{/if}">{$currentState.ostate_name|escape:'html':'UTF-8'}</span>
+                {/if}
+            </div>
+            <div class="order-date">{l s='Placed on'} <b>{dateFormat date=$order->date_add full=0}</b></div>
 
             <div class="order-payment">
                 <div>{l s='Payment Method'}: <span class="payment-method">{$order->payment|escape:'html':'UTF-8'}</span></div>
