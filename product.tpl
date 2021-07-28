@@ -224,7 +224,7 @@
                 {else if isset($product->discontinued) && $product->discontinued}
                     <h2 class="label-danger">{l s='Discontinued'}
                 {else if isset($product->is_service) && $product->is_service}
-                    <!-- Service Starting Price and Contact Button -->
+                    {* Service Starting Price and Contact Button *}
                     <div class="service-price-container" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                         {l s='Starting at'} <span id="our_price_display" class="price service-price accent-color">{convertPrice price=$productPrice|floatval}</span>
                         <meta itemprop="price" content="{$productPrice}">
@@ -237,6 +237,13 @@
                             </button>
                         </a>
                     </div>
+                {else if isset($product->enable_sold_elsewhere) && $product->enable_sold_elsewhere}
+                    {* Link to External Retailer *}
+                    <a href="{$product->sold_elsewhere_link}" target="_blank">
+                        <button class="btn btn-block btn-lg btn-success">
+                           {$product->sold_elsewhere_text}
+                        </button>
+                    </a>
                 {else}
                     <!-- Add to Cart Button and Quantity if Available -->
                     {if ($product->show_price && !isset($restricted_country_mode)) || isset($groups) || $product->reference || (isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS)}
