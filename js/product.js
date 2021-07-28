@@ -27,15 +27,30 @@ function changeBigPictureForProduct(e) {
     if (productImageContainer == null)
         return;
 
-    if (e.target == null || !e.target.hasAttribute('data-image'))
+    if (e.target == null || (!e.target.hasAttribute('data-image') && !e.target.hasAttribute('data-embed')))
         return;
 
-    productImageContainer.setAttribute('src', e.target.getAttribute('data-image'));
+    if (e.target.hasAttribute('data-image'))
+    {
+      // Show an image
+      productImageContainer.setAttribute('src', e.target.getAttribute('data-image'));
 
-    // Set link to full image
-    var productImageLink = document.getElementById('fullImageLink');
-    if (e.target.hasAttribute('data-fullImage') && productImageLink != null) {
+      // Set link to full image
+      var productImageLink = document.getElementById('fullImageLink');
+      if (e.target.hasAttribute('data-fullImage') && productImageLink != null) {
         productImageLink.setAttribute('href', e.target.getAttribute('data-fullImage'));
+      }
+
+      $('#productImageContainer').show();
+      $('#productVideoContainer').html('').hide();
+    }
+    else if (e.target.hasAttribute('data-embed'))
+    {
+      // Show a video
+      $('#productVideoContainer').html(atob(e.target.getAttribute('data-embed')));
+
+      $('#productImageContainer').hide();
+      $('#productVideoContainer').show();
     }
 
     $('.thumbnail.shown').removeClass('shown');

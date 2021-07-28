@@ -49,6 +49,10 @@
     {assign var='allow_oosp' value=false}
 {/if}
 
+{* Add Videos to the Product Images *}
+{capture name="newProductImages"}{hook h='actionAddVideosToImages' product=$product images=$images height=$largeDefaultHeight width=$largeDefaultWidth capture=true}{/capture}
+{assign var="images" value=unserialize($smarty.capture.newProductImages)}
+
 
 <div id="product-notifications-desktop" class="no-mobile">
 </div>
@@ -62,6 +66,7 @@
         {/if}
 
         <div class="product-header-left">
+
             <div class="product-image-block clearfix">
                 <!-- Labels -->
                 <div class="product-labels">
@@ -84,30 +89,33 @@
                 </div>
 
                 {if $have_image}
-                    <a href="{$link->getImageLink($product->link_rewrite, $cover.id_image, '', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
-                        id="fullImageLink"
-                        class="fullImageLink"
-                        target="_blank"
-                        title="{l s='View Full Image'}"
-                    >
-                            <div class="magnify-image">
-                                <div class="magnify-image-container center" style="width: {$largeDefaultWidth|intval}px; height: 100%">
-                                    <i class="fa fa-search center"></i>
+                    <div id="productImageContainer">
+                        <a href="{$link->getImageLink($product->link_rewrite, $cover.id_image, '', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
+                            id="fullImageLink"
+                            class="fullImageLink"
+                            target="_blank"
+                            title="{l s='View Full Image'}"
+                        >
+                                <div class="magnify-image">
+                                    <div class="magnify-image-container center" style="width: {$largeDefaultWidth|intval}px; height: 100%">
+                                        <i class="fa fa-search center"></i>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!--[if IE 9]></video><![endif]-->
-                            <img class="img-responsive center-block product-image center"
-                                itemprop="image"
-                                src="{$link->getImageLink($product->link_rewrite, $cover.id_image, 'large', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
-                                title="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
-                                alt="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
-                                width="{$largeDefaultWidth|intval}"
-                                height="{$largeDefaultWidth|intval}"
-                                id="productImage"
-                            >
-                    </a>
-
+                                <!--[if IE 9]></video><![endif]-->
+                                <img class="img-responsive center-block product-image center"
+                                    itemprop="image"
+                                    src="{$link->getImageLink($product->link_rewrite, $cover.id_image, 'large', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
+                                    title="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
+                                    alt="{if !empty($cover.legend)}{$cover.legend|escape:'html':'UTF-8'}{else}{$product->name|escape:'html':'UTF-8'}{/if}"
+                                    width="{$largeDefaultWidth|intval}"
+                                    height="{$largeDefaultWidth|intval}"
+                                    id="productImage"
+                                >
+                        </a>
+                    </div>
+                    <div id="productVideoContainer" style="display:none">
+                    </div>
                 {else}
                     {* Coming Soon Product Image *}
                     <a class="fullImageLink" style="cursor: default">
@@ -138,30 +146,44 @@
                                     {assign var=imageTitle value=$product->name|escape:'html':'UTF-8'}
                                 {/if}
 
-                                {assign var=imageURL value=$link->getImageLink($product->link_rewrite, $imageIds, 'large', null, ImageManager::retinaSupport())}
-                                {assign var=imageFullURL value=$link->getImageLink($product->link_rewrite, $imageIds, '', null, ImageManager::retinaSupport())}
+                                {if !$image.is_video}
+                                    {assign var=imageURL value=$link->getImageLink($product->link_rewrite, $imageIds, 'large', null, ImageManager::retinaSupport())}
+                                    {assign var=imageFullURL value=$link->getImageLink($product->link_rewrite, $imageIds, '', null, ImageManager::retinaSupport())}
+                                {else}
+                                    {assign var=imageURL value=$image.thumbnail}
+                                {/if}
 
                                 <li data-slide-num="{$smarty.foreach.thumbnails.iteration|intval}"  style="display: inline-block">
-                                    <a data-image="{$imageURL}"
+                                    <a
+                                    {if !$image.is_video}
+                                        data-image="{$imageURL}"
                                         data-fullImage="{$imageFullURL}"
-                                        class="thumbnail thumbnail-link fancybox{if $image.id_image == $cover.id_image} shown{/if}"
+                                    {else}
+                                        data-embed="{$image.embed}"
+                                    {/if}
+                                        class="thumbnail thumbnail-link fancybox{if $image.id_image == $cover.id_image} shown{/if}{if $image.is_video} video-thumbnail{/if}"
                                         title="{$imageTitle|escape:'htmlall':'UTF-8'}"
                                         onclick="changeBigPictureForProduct(event); return false;"
                                         id="thumbnail_{$image.id_image|intval}"
                                     >
-                                        <img src="{$link->getImageLink($product->link_rewrite, $imageIds, 'cart', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}"
+                                        <img src="{if !$image.is_video}{$link->getImageLink($product->link_rewrite, $imageIds, 'cart', null, ImageManager::retinaSupport())|escape:'html':'UTF-8'}{else}{$imageURL}{/if}"
+                                        {if !$image.is_video}
                                             data-image="{$imageURL}"
                                             data-fullImage="{$imageFullURL}"
+                                        {else}
+                                            data-embed="{$image.embed}"
+                                        {/if}
                                             alt="{$imageTitle}"
                                             title="{$imageTitle}"
-                                            itemprop="image"
+                                            itemprop={if !$image.is_video}"image"{else}"video"{/if}
                                             width="{$cartDefaultWidth|intval}"
                                             height="{$cartDefaultHeight|intval}"
                                             onclick="return false;"
                                         >
                                     </a>
-
-                                    <img src="{$imageURL}" class="image-preload" > {* Preload full image so it loads fast when selected *}
+                                    {if !$image.is_video}
+                                        <img src="{$imageURL}" class="image-preload" > {* Preload image (not thumbnail) so it loads fast when selected *}
+                                    {/if}
                                 </li>
                             {/foreach}
                         {/if}
