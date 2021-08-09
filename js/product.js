@@ -55,7 +55,7 @@ function changeBigPictureForProduct(e) {
 
     $('.thumbnail.shown').removeClass('shown');
 
-    $(e.target).addClass('shown');
+    $(e.currentTarget).addClass('shown');
 
     return false;
 }
