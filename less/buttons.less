@@ -65,3 +65,18 @@ button.btn {
     }
 }
 
+
+.btn {
+    &:disabled {
+        border-color: @color-btn-disabled !important;
+        color: @color-btn-disabled !important;
+
+        &:hover {
+            background-color: transparent !important;
+            border-color: @color-btn-disabled !important;
+            color: @color-btn-disabled !important;
+
+            cursor: default !important;
+        }
+    }
+}

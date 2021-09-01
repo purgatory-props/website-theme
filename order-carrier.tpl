@@ -348,10 +348,10 @@
       <div class="box">
         <div class="checkbox">
           <label for="cgv">
-            <input type="checkbox" name="cgv" id="cgv" value="1" {if $checkedTOS}checked="checked"{/if}>
-            <span class="label-text">{l s='I agree to the terms of service and will adhere to them unconditionally.'}</span>
+            <input type="checkbox" name="cgv" id="cgv" value="1" {if $checkedTOS}checked="checked"{/if} autocomplete="off">
+            <span class="label-text">{l s='I agree to the '} <a href="#" id="tac-open" class="link text-link">Terms and Conditions</a>.</span>
           </label>
-          <a href="{$link_conditions|escape:'html':'UTF-8'}" class="iframe" rel="nofollow">{l s='(Read the Terms of Service)'}</a>
+          <iframe src="{$link_conditions|escape:'html':'UTF-8'}" style="width:100%; height: 150px; outline: none; border: none; display: none; margin-top: 10px" id="tac-iframe"></iframe>
         </div>
       </div>
     {/if}
@@ -363,7 +363,7 @@
     <input type="hidden" name="step" value="3">
     <input type="hidden" name="back" value="{$back}">
     {if isset($virtual_cart) && $virtual_cart || (isset($delivery_option_list) && !empty($delivery_option_list))}
-      <button type="submit" name="processCarrier" class="btn btn-lg btn-success pull-right standard-checkout full-width-mobile text-center" style="margin-right: 0">
+      <button id="proceed-btn" type="submit" name="processCarrier" class="btn btn-lg btn-success pull-right standard-checkout full-width-mobile text-center" style="margin-right: 0" disabled>
         <span>
           {l s='Proceed to Payment'}
           <i class="icon icon-chevron-right right"></i>

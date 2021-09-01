@@ -1,6 +1,7 @@
             </main>
         </div>
 
+{if !isset($content_only) || !$content_only}
         <footer>
             <div class="footer-wrapper wrapper center clearfix">
                 {if isset($HOOK_FOOTER)}
@@ -12,6 +13,7 @@
                 </div>
             </div>
         </footer>
+{/if}
 
         {include file="$tpl_dir./global.tpl"}
     </body>
