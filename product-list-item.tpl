@@ -11,7 +11,10 @@
                 />
 
         <div class="product-title">
-            <h2 itemprop="name">{$product.name}</h2>
+            {if isset($product.id_manufacturer)}
+                <div class="product-brand" style="margin-top: 5px">{Manufacturer::getNameById((int) $product.id_manufacturer)}</div>
+            {/if}
+            <h2 itemprop="name" {if isset($product.id_manufacturer)}style="margin-top:0"{/if}>{$product.name}</h2>
         </div>
 
         <div class="product-price">

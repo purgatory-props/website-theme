@@ -47,7 +47,7 @@
                     </div>
 
                     <section class="category-products">
-                        {if $showSubcategories}<h2 class="section-title">{l s='Products'}</h2>{/if}
+                        {if $showSubcategories}<h2 class="section-title" style="margin-top:0;margin-bottom:0">{l s='Products'}</h2>{/if}
                         {include file="./product-list.tpl" products=$products}
                     </section>
 

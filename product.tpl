@@ -194,6 +194,9 @@
         </div>
 
         <div class="product-header-right">
+            {if isset($product->id_manufacturer)}
+                <div class="product-brand">{Manufacturer::getNameById((int) $product->id_manufacturer)}</div>
+            {/if}
             <h1 itemprop="name" class="spooky-font no-margin">{$product->name|escape:'html':'UTF-8'}</h1>
             <p class="sku" {if empty($product->reference) || !$product->reference} style="display: none;"{/if}>
                 <meta itemprop="sku"{if !empty($product->reference) && $product->reference} content="{$product->reference}"{/if}>
@@ -451,7 +454,7 @@
 
                                 {* Volume Discounts *}
                                 {if !empty($quantity_discounts) && $product->show_price}
-                                    <section id="product-volume-discounts" class="page-product-box">
+                                    <section id="product-volume-discounts" class="page-product-box" >
                                         <div id="quantityDiscount" class="table-small">
                                             <table class="table-product-discounts table table-condensed table-bordered table-hover">
                                                 <thead>
@@ -523,7 +526,7 @@
                 <input name="product-tabs" type="radio" id="{$tabID}" checked="checked" class="tab-switch" autocomplete="off"/>
                 <label for="{$tabID}" class="tab-label noselect">{l s='Details'}</label>
 
-                <div class="product-tab description-tab">
+                <div class="product-tab description-tab" style="padding-top: 0">
                     {$product->description}
                 </div>
                 {assign var=hasTabBefore value=true}

@@ -21,7 +21,7 @@
     {$step_num = 5}
   {/if}
 
-  <ul id="order_step" class="nav nav-pills nav-justified">
+  <ul id="order_step" class="nav nav-pills nav-justified" {if isset($empty)}style="display: none"{/if}>
 
     <li class="{if $step_num > 1}completed{elseif $step_num == 1}active{/if}">
       {if $current_step=='payment' || $current_step=='shipping' || $current_step=='address' || $current_step=='login'}
