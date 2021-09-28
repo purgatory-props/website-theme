@@ -65,7 +65,7 @@
             <div class="alert alert-warning">{$confirmation}</div>
         {/if}
 
-        <div class="product-header-left">
+        <div class="product-header-left" style="max-width: {$largeDefaultWidth|intval}px">
 
             <div class="product-image-block clearfix">
                 <!-- Labels -->
@@ -528,6 +528,10 @@
 
                 <div class="product-tab description-tab" style="padding-top: 0">
                     {$product->description}
+
+                    <div class="product-flags">
+                        {hook h='displayProductFlags' product=$product bottom=true}
+                    </div>
                 </div>
                 {assign var=hasTabBefore value=true}
             {/if}
