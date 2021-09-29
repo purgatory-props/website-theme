@@ -235,6 +235,27 @@
                 font-weight: bold;
                 font-size: 1.5em;
             }
+
+            .sc-totals-left {
+                float: left;
+                width: 50%;
+            }
+            .sc-totals-right {
+                float: right;
+                width: 50%;
+            }
+
+
+            @media @responsive-second-size {
+                .sc-product-price {
+                    margin-left: 10px;
+                }
+
+                .sc-totals-left, .sc-totals-right {
+                    float: none;
+                    width: 100%;
+                }
+            }
         }
 
 
