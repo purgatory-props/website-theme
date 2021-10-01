@@ -122,7 +122,7 @@
         {if $priceDisplay}
           <div class="totals-item">
             <label>{l s='Item Total'}</label>
-            <div class="totals-value" id="cart-item-total">{displayPrice price=$total_products}</div>
+            <div class="totals-value" id="total_product">{displayPrice price=$total_products}</div>
           </div>
         {/if}
 
@@ -148,7 +148,7 @@
         {if $total_discounts > 0}
           <div class="totals-item text-success">
             <label>{l s='Discounts'}</label>
-            <div class="totals-value" id="cart-discount-total">
+            <div class="totals-value" id="total_discount">
               {if $use_taxes && $priceDisplay == 0}
                 {assign var='total_discounts_negative' value=$total_discounts * -1}
               {else}
@@ -163,14 +163,14 @@
         {if $use_taxes && $show_taxes && $total_tax != 0 }
           <div class="totals-item">
             <label>{l s='Tax'}</label>
-            <div class="totals-value" id="cart-tax-total">{displayPrice price=$total_tax}</div>
+            <div class="totals-value" id="total_tax">{displayPrice price=$total_tax}</div>
           </div>
         {/if}
 
         {* Subtotal *}
         <div class="totals-item color-accent cart-subtotal">
           <label>{l s='Subtotal'}</label>
-          <div class="totals-value" id="cart-subtotal">{displayPrice price=$total_price}</div>
+          <div class="totals-value" id="total_price">{displayPrice price=$total_price}</div>
         </div>
       </div>
 

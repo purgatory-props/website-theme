@@ -467,7 +467,8 @@ $(document).ready(function() {
       ((customizationId !== 0) ? '&id_customization=' + customizationId : '') +
       '&qty=' + qty +
       '&token=' + static_token +
-      '&allow_refresh=1',
+      '&allow_refresh=1' +
+      '&skipshipping=true',
       success: function(jsonData) {
         if (jsonData.hasError) {
           PrestaShop.showError(jsonData.errors);
@@ -544,7 +545,8 @@ $(document).ready(function() {
         ((customizationId !== 0) ? '&id_customization=' + customizationId : '') +
         '&qty=' + qty +
         '&token=' + static_token +
-        '&allow_refresh=1',
+        '&allow_refresh=1' +
+        '&skipshipping=true',
         success: function(jsonData) {
           if (jsonData.hasError) {
             PrestaShop.showError(jsonData.errors);
